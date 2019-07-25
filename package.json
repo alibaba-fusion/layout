@@ -1,0 +1,43 @@
+{
+  "name": "@alifd/layout",
+  "version": "0.1.17",
+  "description": "Layout of PC ",
+  "files": [
+    "demo/",
+    "lib/",
+    "build/"
+  ],
+  "main": "lib/index.js",
+  "stylePath": "style.js",
+  "scripts": {
+    "start": "ice-scripts dev",
+    "build": "ice-scripts build",
+    "prepublishOnly": "npm run build"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ice",
+    "react",
+    "component"
+  ],
+  "dependencies": {
+    "prop-types": "^15.5.8"
+  },
+  "devDependencies": {
+    "@alifd/adaptor-generate": "^0.2.1",
+    "ice-plugin-component": "^0.1.1",
+    "ice-plugin-fusion": "^0.1.4",
+    "ice-scripts": "^2.0.0",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
+  },
+  "peerDependencies": {
+    "react": "^16.3.0"
+  },
+  "componentConfig": {
+    "name": "layout",
+    "title": "layout",
+    "categories": []
+  },
+  "homepage": "https://unpkg.com/@alifd/layout@0.1.17/build/index.html"
+}
