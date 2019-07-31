@@ -182,19 +182,45 @@ function filterInnerStyle(style) {
   return obj.filterUndefinedValue(props);
 }
 
-function getGridChildProps(props) {
+function getGridChildProps(props, device) {
   const {
     row = 'initial',
     col = 'initial',
     rowSpan = 1,
     colSpan = 1,
+    tabletColSpan = 1,
+    phoneColSpan = 1,
     justifySelf,
     alignSelf,
   } = props;
 
+  let newColSpan = colSpan;
+
+  ['tablet', 'phone'].forEach(deviceKey => {
+    if (deviceKey === device) {
+      const key = `${deviceKey}ColSpan`;
+      if ((key in props) && props[key]) {
+        newColSpan = props[key];
+      } else {
+        switch (deviceKey) {
+          case 'tablet':
+            newColSpan = colSpan > 5 ? 8 : colSpan > 2 ? 4 : 2;
+            break;
+          case 'phone':
+            newColSpan = colSpan > 2 ? 4 : 2;
+            break;
+        }
+      }
+    }
+  });
+
   return obj.filterUndefinedValue({
-    gridRow: `${row} / span ${rowSpan}`,
-    gridColumn: `${col} / span ${colSpan}`,
+    gridRowStart: row,
+    gridRowEnd: `span ${rowSpan}`,
+    gridColumnStart: col,
+    gridColumnEnd: `span ${newColSpan}`,
+    // gridRow: `${row} / span ${rowSpan}`,
+    // gridColumn: `${col} / span ${colSpan}`,
     justifySelf,
     alignSelf
   });
@@ -213,12 +239,15 @@ function getBoxChildProps(props) {
 }
 
 export default ({
+  device,
   display,
   gap,
   direction,
   dense,
   rowSpan,
   colSpan,
+  tabletColSpan,
+  phoneColSpan,
   row,
   col,
   rows,
@@ -294,9 +323,11 @@ export default ({
           rowSpan,
           col,
           colSpan,
+          tabletColSpan,
+          phoneColSpan,
           justifySelf,
           alignSelf,
-        }),
+        }, device),
         ...style,
       }
       break;

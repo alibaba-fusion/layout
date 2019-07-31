@@ -75,9 +75,11 @@ Layout of PC
 | alignSelf                | (自身的)与主轴垂直方向的对齐方式<br><br>**可选值**:<br>'start', 'end', 'center', 'stretch'                                                  | Enum      | start         |
 | autoRowsHeight       | (子元素的) 高度，仅在 direction 为 column 时生效。设置后                                                                                                                                        | String/Number   | auto         |
 | row            | (作为子元素)从行的第几个线条算起(最小为1)                                                                                                                                       | String/Number     | initial         |
-| col            | (作为子元素)从列的第几个线条算起(最小为1                                                                                                                                       | String/Number     | initial         |
+| col            | (作为子元素)从列的第几个线条算起(最小为1)                                                                                                                                       | String/Number     | initial         |
 | rowSpan            | 在纵向占据了几个格子                                                                                                                                       | Number    | 1         |
 | colSpan            | 在横向占据了几个格子                                                                                                                                      | Number    | 1         |
+| tabletColSpan            | 在tablet模式下横向占据了几个格子                                                                                                                                      | Number    | 1         |
+| phoneColSpan            | 在phone模式下横向占据了几个格子                                                                                                                                      | Number    | 1         |
 | width                | 宽度                                                                                                                                         | String/Number   | auto         |
 | minWidth             | 最小宽度                                                                                                                                       | String/Number   | none         |
 | maxWidth             | 最大宽度                                                                                                                                       | String/Number   | none         |

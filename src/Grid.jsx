@@ -22,7 +22,9 @@ class Grid extends PureComponent {
     // 占据几个的位置，默认为 1
     rowSpan: PropTypes.number,
     colSpan: PropTypes.number,
-
+    tabletColSpan: PropTypes.number,
+    phoneColSpan: PropTypes.number,
+    device: PropTypes.oneOf(['phone', 'tablet', 'desktop']),
     margin: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
     padding: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -53,6 +55,7 @@ class Grid extends PureComponent {
   static defaultProps = {
     // gap: 0,
     // direction: 'row',
+    device: 'desktop',
     dense: false,
     justify: 'stretch',
     align: 'stretch',
@@ -85,7 +88,7 @@ class Grid extends PureComponent {
     // overflow: 'visible'
   };
 
-  createChildren(children) {
+  createChildren(children, device) {
     const array = React.Children.toArray(children);
     if (!children) {
       return null;
@@ -95,7 +98,7 @@ class Grid extends PureComponent {
       if (React.isValidElement(child)) {
         return React.cloneElement(child, {
           style: {
-            ...getGridChildProps(child.props),
+            ...getGridChildProps(child.props, device),
             ...(child.props.style || {}),
           }
         });
@@ -114,10 +117,13 @@ class Grid extends PureComponent {
 
   render() {
     const {
+      device,
       gap,
       dense,
       rowSpan,
       colSpan,
+      tabletColSpan,
+      phoneColSpan,
       row,
       col,
       rows,
@@ -157,10 +163,13 @@ class Grid extends PureComponent {
     } = this.props;
 
     const styleProps = {
+      device,
       gap,
       dense,
       rowSpan,
       colSpan,
+      tabletColSpan,
+      phoneColSpan,
       row,
       col,
       rows,
@@ -196,7 +205,7 @@ class Grid extends PureComponent {
     const styleSheet = this.createStyle(style, styleProps);
 
     return <View style={styleSheet} className={className} {...others}>
-      {this.createChildren(children)}
+      {this.createChildren(children, device)}
     </View>
 
   }

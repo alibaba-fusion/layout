@@ -56,7 +56,51 @@ class GridDemo extends React.Component {
                   <Box lineWidth={1} lineStyle={'solid'} />
               </Grid>
             </div>
-            
+
+            <div className="list" style={{display: 'flex'}}>
+              <div className="list-item" style={{display: 'inline-block', width: '100%'}}>
+                <Grid columns={12} gap={10} device="desktop">
+                  <Box className="mygrid grid-12" colSpan={12}>12</Box>
+                  <Box className="mygrid grid-6" colSpan={6}>6</Box>
+                  <Box className="mygrid grid-6" colSpan={6}>6</Box>
+                  <Box className="mygrid grid-4" colSpan={4}>4</Box>
+                  <Box className="mygrid grid-4" colSpan={4}>4</Box>
+                  <Box className="mygrid grid-4" colSpan={4}>4</Box>
+                  <Box className="mygrid grid-3" colSpan={3}>3</Box>
+                  <Box className="mygrid grid-3" colSpan={3}>3</Box>
+                  <Box className="mygrid grid-3" colSpan={3}>3</Box>
+                  <Box className="mygrid grid-3" colSpan={3}>3</Box>
+                </Grid>
+              </div>
+              <div className="list-item" style={{display: 'inline-block', width: '100%', margin: '0 20px 20px'}}>
+                <Grid columns={8} gap={10} device="tablet">
+                  <Box className="mygrid grid-12" colSpan={12}>12</Box>
+                  <Box className="mygrid grid-6" colSpan={6}>6</Box>
+                  <Box className="mygrid grid-6" colSpan={6}>6</Box>
+                  <Box className="mygrid grid-4" colSpan={4}>4</Box>
+                  <Box className="mygrid grid-4" colSpan={4}>4</Box>
+                  <Box className="mygrid grid-4" colSpan={4} tabletColSpan={8}>4 tabletColSpan=8</Box>
+                  <Box className="mygrid grid-3" colSpan={3}>3</Box>
+                  <Box className="mygrid grid-3" colSpan={3}>3</Box>
+                  <Box className="mygrid grid-3" colSpan={3}>3</Box>
+                  <Box className="mygrid grid-3" colSpan={3}>3</Box>
+                </Grid>
+              </div>
+              <div className="list-item" style={{display: 'inline-block', width: '100%'}}>
+                <Grid columns={4} gap={10} device="phone">
+                  <Box className="mygrid grid-12" colSpan={12}>12</Box>
+                  <Box className="mygrid grid-6" colSpan={6}>6</Box>
+                  <Box className="mygrid grid-6" colSpan={6}>6</Box>
+                  <Box className="mygrid grid-4" colSpan={4}>4</Box>
+                  <Box className="mygrid grid-4" colSpan={4}>4</Box>
+                  <Box className="mygrid grid-4" colSpan={4}>4</Box>
+                  <Box className="mygrid grid-3" colSpan={3}>3</Box>
+                  <Box className="mygrid grid-3" colSpan={3}>3</Box>
+                  <Box className="mygrid grid-3" colSpan={3}>3</Box>
+                  <Box className="mygrid grid-3" colSpan={3} phoneColSpan={2}>3 phoneColSpan=2</Box>
+                </Grid>
+              </div>
+            </div>
         </div>
         );
     }
@@ -78,5 +122,23 @@ ReactDOM.render(<GridDemo />, mountNode);
   width: 100%;
   height: 100%;
   background: 'red';
+}
+.mygrid {
+  display: block;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+}
+.grid-12 {
+  background: red;
+}
+.grid-6 {
+  background: purple;
+}
+.grid-4 {
+  background: orange;
+}
+.grid-3 {
+  background: green;
 }
 ````
