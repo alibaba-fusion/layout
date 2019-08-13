@@ -44,6 +44,14 @@ class GridDemo extends React.Component {
             </div>
 
             <div className="list-item">
+              <Grid height={200} gap={10}>
+                  <Box lineWidth={1} lineStyle={'solid'} />
+                  <Box lineWidth={1} lineStyle={'solid'} />
+                  <Box lineWidth={1} lineStyle={'solid'} />
+              </Grid>
+            </div>
+
+            <div className="list-item">
               <Grid columns={2} gap={10} autoRowsHeight={50}>
                   <Box lineWidth={1} lineStyle={'solid'} />
                   <Box lineWidth={1} lineStyle={'solid'} />
@@ -59,7 +67,7 @@ class GridDemo extends React.Component {
 
             <div className="list" style={{display: 'flex'}}>
               <div className="list-item" style={{display: 'inline-block', width: '100%'}}>
-                <Grid columns={12} gap={10} device="desktop">
+                <Grid gap={10} device="desktop">
                   <Box className="mygrid grid-12" colSpan={12}>12</Box>
                   <Box className="mygrid grid-6" colSpan={6}>6</Box>
                   <Box className="mygrid grid-6" colSpan={6}>6</Box>
@@ -73,7 +81,7 @@ class GridDemo extends React.Component {
                 </Grid>
               </div>
               <div className="list-item" style={{display: 'inline-block', width: '100%', margin: '0 20px 20px'}}>
-                <Grid columns={8} gap={10} device="tablet">
+                <Grid gap={10} device="tablet">
                   <Box className="mygrid grid-12" colSpan={12}>12</Box>
                   <Box className="mygrid grid-6" colSpan={6}>6</Box>
                   <Box className="mygrid grid-6" colSpan={6}>6</Box>
@@ -87,7 +95,7 @@ class GridDemo extends React.Component {
                 </Grid>
               </div>
               <div className="list-item" style={{display: 'inline-block', width: '100%'}}>
-                <Grid columns={4} gap={10} device="phone">
+                <Grid gap={10} device="phone">
                   <Box className="mygrid grid-12" colSpan={12}>12</Box>
                   <Box className="mygrid grid-6" colSpan={6}>6</Box>
                   <Box className="mygrid grid-6" colSpan={6}>6</Box>

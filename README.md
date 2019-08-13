@@ -66,6 +66,7 @@ Layout of PC
 | -------------------- | ------------ | ----------------- | ------------------ |
 | rows                 | 有几行                                                                                                                                         | String/Number   | 1         |
 | columns              | 有几列                                                                                                                                         | String/Number   | 1         |
+| device             | 当前所处设备<br><br>**可选值**:<br>'phone', 'tablet', 'desktop' <br><br>当设置device后，默认columns分别为 4, 8, 12                                                      | Enum      |          |
 | gap                  | 间距                                                                                                                                 | Array/Number   | 0         |
 | direction            | 布局方向<br><br>**可选值**:<br>'row', 'column'                                                                                                    | Enum      | column         |
 | dense             | 是否为密集模式    | Boolean         | false     |
