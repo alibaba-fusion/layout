@@ -55,7 +55,6 @@ class Grid extends PureComponent {
   static defaultProps = {
     // gap: 0,
     // direction: 'row',
-    device: 'desktop',
     dense: false,
     justify: 'stretch',
     align: 'stretch',

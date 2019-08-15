@@ -306,13 +306,30 @@ export default ({
     overflow
   };
 
+  let deviceColumns = 'auto';
+
+  switch (device) {
+    case 'phone':
+      deviceColumns = 4;
+      break;
+    case 'tablet':
+      deviceColumns = 8;
+      break;
+    case 'desktop':
+      deviceColumns = 12;
+      break;
+    default:
+      break;
+  }
+  const newColumns = !isNaN(columns) ? columns : deviceColumns;
+
   switch (display) {
     case 'grid':
       style = {
         // parent
         ...getGridGap(gap),
         gridTemplateRows: getTemplateCount(rows),
-        gridTemplateColumns: getTemplateCount(columns),
+        gridTemplateColumns: getTemplateCount(newColumns),
         gridAutoFlow: `${direction}${dense && ` dense`}`,
         justifyItems: justify,
         alignItems: align,

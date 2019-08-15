@@ -48,6 +48,8 @@ class Box extends PureComponent {
     className: PropTypes.string,
     children: PropTypes.any,
     Component: PropTypes.string,
+    tabletColSpan: PropTypes.number,
+    phoneColSpan: PropTypes.number,
     overflow: PropTypes.oneOf(['visible', 'hidden', 'scroll', 'auto', 'inherit'])
   };
 
@@ -191,6 +193,8 @@ class Box extends PureComponent {
       children,
       Component,
       overflow,
+      tabletColSpan,
+      phoneColSpan,
       ...others
     } = this.props;
 
