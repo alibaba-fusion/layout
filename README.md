@@ -32,8 +32,9 @@ Layout of PC
 | right                | 距离非static的父节点的右侧距离                                                                                                                         | String/Number   | auto         |
 | bottom               | 距离非static的父节点的底部距离                                                                                                                         | String/Number   | auto         |
 | opacity              | 透明度                                                                                                                                        | Number    | 1         |
-| Component            | 默认渲染的html节点                                                                                                                                | String    | div         |
+| Component            | 默认渲染的html节点标签值                                                                                                                                | String    | div         |
 | overflow             | 自身的overflow类型<br><br>**可选值**:<br>'visible', 'hidden', 'scroll', 'auto', 'inherit'                                                          | Enum      | visible         |
+| children             | 子节点    | React.Node         | -     |
 
 ## Layout
 > Layout Layout.Header Layout.Footer Layout.Aside Layout.Main API 继承自Box
@@ -41,6 +42,8 @@ Layout of PC
 | 参数                  | 说明          | 类型              | 默认值              |
 | -------------------- | ------------ | ----------------- | ------------------ |
 | hasSider             | 直接子节点中是否有Aside    | Boolean         | false     |
+| children             | 子节点    | React.Node         | -     |
+
 
 ## Text
 
@@ -59,6 +62,7 @@ Layout of PC
 | textAlign             | 字体对齐方式<br><br>**可选值**:<br>'auto', 'left', 'right', 'center', 'justify'     | Enum         | left |
 | opacity             | 透明度    | Number         |   1   |
 | style             | 自定义样式    | Object         |      |
+| children             | 子节点    | React.Node         | -     |
 
 ## Grid
 
@@ -101,3 +105,4 @@ Layout of PC
 | opacity              | 透明度                                                                                                                                        | Number    | 1         |
 | Component            | 默认渲染的html节点                                                                                                                                | String    | div         |
 | overflow             | 自身的overflow类型<br><br>**可选值**:<br>'visible', 'hidden', 'scroll', 'auto', 'inherit'                                                          | Enum      | visible         |
+| children             | 子节点    | React.Node         | -     |
