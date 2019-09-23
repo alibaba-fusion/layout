@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import createStyle from './create-style';
 
-class Image extends PureComponent {
+class Image extends Component {
   static displayName = 'Image';
 
   static propTypes = {

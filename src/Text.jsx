@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Text extends PureComponent {
+class Text extends Component {
   static propTypes = {
     color: PropTypes.string,
     fontFamily: PropTypes.string,

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import createStyle, {
   getMargin,
@@ -10,7 +10,7 @@ import createStyle, {
   getBoxChildProps,
 } from './create-style';
 
-class Box extends PureComponent {
+class Box extends Component {
   static displayName = 'Box';
 
   static propTypes = {

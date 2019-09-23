@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import createStyle, { getGridChildProps } from './create-style';
 
-class Grid extends PureComponent {
+class Grid extends Component {
   static displayName = 'Grid';
 
   static propTypes = {
