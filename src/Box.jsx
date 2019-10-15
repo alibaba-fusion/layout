@@ -132,6 +132,10 @@ class Box extends Component {
   }
 
   createStyle(style = {}, props) {
+    // https://github.com/facebook/react/issues/9166
+    // prefix 针对display: flex 返回了display: ['flex', '-o-flex']
+    // react-dom出于安全考虑不支持style中接受 ' ; 等字符
+    // 因此display: flex的兼容性需要走css样式
     return {
       ...createStyle({ display: 'flex', ...props }),
       ...style

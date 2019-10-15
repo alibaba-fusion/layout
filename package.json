@@ -1,6 +1,6 @@
 {
   "name": "@alifd/layout",
-  "version": "0.1.20",
+  "version": "0.2.0-beta",
   "description": "Layout of PC ",
   "files": [
     "demo/",
@@ -21,7 +21,8 @@
     "component"
   ],
   "dependencies": {
-    "prop-types": "^15.5.8"
+    "prop-types": "^15.5.8",
+    "styled-components": "^4.4.0"
   },
   "devDependencies": {
     "@alifd/adaptor-generate": "^0.2.1",
@@ -39,5 +40,5 @@
     "title": "layout",
     "categories": []
   },
-  "homepage": "https://unpkg.com/@alifd/layout@0.1.20/build/index.html"
+  "homepage": "https://unpkg.com/@alifd/layout@0.2.0-beta/build/index.html"
 }

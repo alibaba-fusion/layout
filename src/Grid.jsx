@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import createStyle, { getGridChildProps } from './create-style';
+import styled from 'styled-components';
+import { toCamel } from './util';
 
 class Grid extends Component {
   static displayName = 'Grid';
@@ -203,9 +205,19 @@ class Grid extends Component {
 
     const styleSheet = this.createStyle(style, styleProps);
 
-    return <View style={styleSheet} className={className} {...others}>
+    let gapStyle = '';
+    ['grid-gap', 'grid-column-gap', 'grid-row-gap'].forEach((current, index) => {
+      const value = styleSheet[toCamel(current)];
+      if (value) {
+        gapStyle += `${current}: ${value};`
+      }
+    })
+    console.log(gapStyle);
+    const ViewStyled = gapStyle ? styled(View)`${gapStyle}` : View;
+
+    return <ViewStyled style={styleSheet} className={className} {...others}>
       {this.createChildren(children, device)}
-    </View>
+    </ViewStyled>
 
   }
 }

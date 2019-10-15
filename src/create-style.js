@@ -1,5 +1,10 @@
 // import { prefix } from 'inline-style-prefixer';
 import { obj } from './util';
+import postcssJs from 'postcss-js';
+import autoprefixer from 'autoprefixer';
+import postcssGapProperties from 'postcss-gap-properties';
+
+const prefixer = postcssJs.sync([ autoprefixer, postcssGapProperties ]);
 
 function getRadius(corner) {
   if (!Array.isArray(corner)) {
@@ -368,8 +373,14 @@ export default ({
       break;
   }
 
-  // return prefix(style);
-  return obj.filterUndefinedValue(style);
+  // https://github.com/facebook/react/issues/9166
+  // prefix 针对display: flex 返回了display: ['flex', '-o-flex']
+  // react-dom出于安全考虑不支持style中接受 ' ; 等字符
+  // 因此display: flex的兼容性需要走css样式
+  // const prefixed = prefix(style);
+  const prefixed = prefixer(style);
+
+  return obj.filterUndefinedValue(prefixed);
 };
 
 export {
