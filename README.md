@@ -18,7 +18,7 @@
 - **初衷**：愿布局不需写 css 样式
 - **定位**：页面内容区的布局解决方案
 
-> 详细介绍：https://www.yuque.com/fusion-design/layout/yzx8g4
+> 详细介绍：https://www.yuque.com/fusion-design/layout/yzx8g4 （需先加入 [Fusion Design](https://www.yuque.com/g/fusion-design/layout/collaborator/join?token=7bTjikyxDTAh3WwS) 语雀知识库）
 
 ## 使用指引
 
