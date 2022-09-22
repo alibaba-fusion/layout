@@ -1,0 +1,15 @@
+export const PAGE = 'FDPage';
+export const PAGE_HEADER = 'FDPageHeader';
+export const PAGE_FOOTER = 'FDPageFooter';
+export const PAGE_NAV = 'FDPageNav';
+export const PAGE_ASIDE = 'FDPageAside';
+export const PAGE_CONTENT = 'FDPageContent';
+export const SECTION = 'FDSection';
+export const BLOCK = 'FDBlock';
+export const CELL = 'FDCell';
+export const ROW = 'FDRow';
+export const COL = 'FDCol';
+export const GRID = 'FDGrid';
+export const P = 'FDP';
+export const FIXED_POINT = 'FDFixedPoint';
+export const FIXED_CONTAINER = 'FDFixedContainer';
