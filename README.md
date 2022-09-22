@@ -11,7 +11,6 @@
   <img src="https://img.shields.io/npm/l/@alifd/layout.svg">
 </p>
 
-
 用于搭建、源码，嵌套特定组件的布局体系，目标是不写任何布局 CSS 代码。
 
 ## 设计理念
@@ -27,6 +26,68 @@
 
 - 页面布局：会用到 `Page` `Page.Header` `Page.Footer` `Page.Content` `Page.Aside` `Page.Nav` 六类组件。
 - 局部局部：会用到 `Section` `Block`, `Row`, `Col`, `Cell`, `P`, `Text` 等
+
+```jsx
+import { Page, Section, Block, Row, Col, Cell, P, Text, Space } from '@alifd/layout';
+
+export default function App() {
+  return (
+    <Page>
+      <Page.Header></Page.Header>
+      <Page.Content>
+        <Section>
+          <Block>
+            <Row>
+              <Cell>
+                <P>
+                  <Text>文本</Text>
+                  <Text>文本</Text>
+                </P>
+              </Cell>
+              <Cell>
+                <P>
+                  <Text>文本</Text>
+                  <Text>文本</Text>
+                </P>
+              </Cell>
+            </Row>
+            <Space />
+            <Col>
+              <Cell>
+                <P>
+                  <Text>文本</Text>
+                  <Text>文本</Text>
+                </P>
+              </Cell>
+              <Cell>
+                <P>
+                  <Text>文本</Text>
+                  <Text>文本</Text>
+                </P>
+              </Cell>
+            </Col>
+          </Block>
+        </Section>
+      </Page.Content>
+      <Page.Footer></Page.Footer>
+    </Page>
+  );
+}
+```
+
+## 开发
+
+1. 启动 demo
+
+```bash
+npm run start
+```
+
+2. 启动低代码预览
+
+```bash
+npm run lowcode:dev
+```
 
 ## API
 
