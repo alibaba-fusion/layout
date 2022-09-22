@@ -1,0 +1,295 @@
+@import 'variable.scss';
+
+#{$biz-css-prefix}bg {
+  @each $bgType in $backgroundTypes {
+    &--#{$bgType} {
+      background: var(--color-#{$bgType});
+    }
+  }
+}
+
+#{$biz-css-prefix}page {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 100vh;
+  margin: 0 auto;
+
+  .next-tabs-pure,
+  .next-tabs-text {
+    #{$biz-css-prefix}page-tab {
+      background: #fff;
+      border-bottom: none;
+      padding-left: var(--page-padding-lr);
+      padding-right: var(--page-padding-lr);
+    }
+  }
+
+  &--with-tab {
+    display: flex;
+    flex-direction: column;
+
+    & > .next-tabs {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      & > .next-tabs-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        & > .next-tabs-tabpane.active {
+          flex: 1;
+        }
+
+        & > .next-tabs-tabpane.active,
+        & > .next-tabs-tabpane.hidden {
+          display: flex;
+
+          #{$biz-css-prefix}page-content {
+            display: flex;
+            flex: 1 1 auto;
+
+            & > #{$biz-css-prefix}page-main {
+              flex: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-main > #{$biz-css-prefix}tab.next-tabs .next-tabs-content {
+    padding: 0;
+
+    #{$biz-css-prefix}page-content {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &-content {
+    margin: 0 auto;
+    gap: var(--page-section-gap);
+  }
+
+  &-min-height-helper {
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  &-content--center-mode {
+    padding-left: var(--page-padding-lr);
+    padding-right: var(--page-padding-lr);
+
+    #{$biz-css-prefix}page-content {
+      max-width: var(--page-max-content-width);
+    }
+  }
+
+  &-content {
+    display: grid;
+    width: 100%;
+
+    &#{$biz-css-prefix}page-content-no-padding {
+      padding: 0;
+    }
+
+    #{$biz-css-prefix}page-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
+      align-items: flex-start;
+      gap: var(--page-section-gap);
+      flex: 1;
+
+      & > * {
+        width: 100%;
+        //flex: 1 1 auto;
+      }
+    }
+
+    #{$biz-css-prefix}page-nav {
+      //padding-left: var(--page-padding-lr);
+
+      &-inner {
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: var(--page-block-gap);
+
+        & > * {
+          max-width: 100%;
+        }
+      }
+    }
+
+    #{$biz-css-prefix}page-aside {
+      &-inner {
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        flex: 0 0 auto;
+        gap: var(--page-block-gap);
+
+        & > * {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+#{$biz-css-prefix}page--not-tab#{$biz-css-prefix}page--headless {
+  #{$biz-css-prefix}page-content {
+    padding-top: 0;
+  }
+}
+
+#{$biz-css-prefix}page--not-tab#{$biz-css-prefix}page--footless {
+  #{$biz-css-prefix}page-content {
+    padding-bottom: 0;
+  }
+
+  #{$biz-css-prefix}page-main > *:last-child {
+    padding-bottom: var(--page-padding-tb);
+  }
+}
+
+#{$biz-css-prefix}page--not-tab {
+  .next-tabs-nav-container {
+    max-width: var(--page-max-content-width);
+    margin: 0 auto;
+  }
+}
+
+#{$biz-css-prefix}page-content--single-col {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#{$biz-css-prefix}page--with-tab {
+  .next-tabs-nav-container {
+    max-width: var(--page-max-content-width);
+    margin: 0 auto;
+  }
+}
+
+#{$biz-css-prefix}page--not-tab {
+  #{$biz-css-prefix}page-min-height-helper {
+    flex: 1;
+
+    &:first-child {
+      #{$biz-css-prefix}page-main > *:first-child {
+        padding-top: var(--page-padding-tb);
+      }
+    }
+
+    &:first-child {
+      #{$biz-css-prefix}page-main > *:last-child {
+        padding-bottom: var(-page-padding-tb);
+      }
+    }
+  }
+}
+
+#{$biz-css-prefix}page--not-tab {
+  #{$biz-css-prefix}-page-min-height-helper {
+    #{$biz-css-prefix}page-aside,
+    #{$biz-css-prefix}page-nav {
+      padding-top: 0;
+    }
+
+    #{$biz-css-prefix}page-aside,
+    #{$biz-css-prefix}page-nav {
+      padding-bottom: 0;
+    }
+  }
+}
+
+#{$biz-css-prefix}page-tab-content {
+  padding-top: var(--page-section-gap);
+}
+
+// nav, first-section, aside 顶部采用页面内边距
+#{$biz-css-prefix}page--headless#{$biz-css-prefix}page--not-tab {
+  #{$biz-css-prefix}page-content {
+    #{$biz-css-prefix}page-nav,
+    #{$biz-css-prefix}page-main > *:first-child,
+    #{$biz-css-prefix}page-aside {
+      padding-top: var(--page-padding-tb);
+    }
+  }
+}
+
+// nav, first-section, aside 底部采用页面内边距
+#{$biz-css-prefix}page--footless {
+  #{$biz-css-prefix}page-content {
+    #{$biz-css-prefix}page-nav,
+    #{$biz-css-prefix}page-main > *:last-child,
+    #{$biz-css-prefix}page-aside {
+      padding-bottom: var(--page-padding-tb);
+    }
+  }
+}
+
+#{$biz-css-prefix}page-content {
+  #{$biz-css-prefix}page-main:last-child {
+    & > * {
+      // padding-right: var(--page-padding-lr);
+    }
+  }
+
+  #{$biz-css-prefix}page-main:first-child {
+    & > * {
+      // padding-left: var(--page-padding-lr);
+    }
+  }
+}
+
+#{$biz-css-prefix}page--no-padding {
+  #{$biz-css-prefix}header,
+  #{$biz-css-prefix}page-aside,
+  #{$biz-css-prefix}page-nav {
+    padding-top: 0 !important;
+  }
+
+  #{$biz-css-prefix}footer,
+  #{$biz-css-prefix}page-aside,
+  #{$biz-css-prefix}page-nav {
+    padding-bottom: 0 !important;
+  }
+}
+
+#{$biz-css-prefix}page--no-padding#{$biz-css-prefix}page--headless {
+  #{$biz-css-prefix}page-main > *:first-child {
+    padding-top: 0 !important;
+  }
+}
+
+#{$biz-css-prefix}page--no-padding#{$biz-css-prefix}page--footless {
+  #{$biz-css-prefix}page-main > *:last-child {
+    padding-bottom: 0 !important;
+  }
+}
+
+#{$biz-css-prefix}page--no-padding #{$biz-css-prefix}page-content--center-mode {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#{$biz-css-prefix}page--no-padding {
+  .next-tabs-pure,
+  .next-tabs-text {
+    #{$biz-css-prefix}page-tab {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}

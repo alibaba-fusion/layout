@@ -1,0 +1,27 @@
+@import 'variable';
+
+#{$biz-css-prefix}space {
+  $space: &;
+  $hoz: #{$space}--hoz;
+  $ver: #{$space}--ver;
+
+  &--hoz {
+    display: block;
+  }
+  &--ver {
+    display: inline-block;
+  }
+
+  @each $size in $sizes {
+    &--#{$size} {
+      @at-root {
+        &#{$hoz} {
+          height: var(--page-space-#{$size}-size);
+        }
+        &#{$ver} {
+          width: var(--page-space-#{$size}-size);
+        }
+      }
+    }
+  }
+}

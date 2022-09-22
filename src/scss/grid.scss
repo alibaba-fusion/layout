@@ -1,0 +1,34 @@
+@import 'variable';
+
+#{$biz-css-prefix}grid {
+  display: grid;
+  gap: var(--page-grid-gap);
+
+  &-align--left {
+    justify-items: start;
+  }
+  &-valign--middle,
+  &-align--center {
+    justify-items: center;
+  }
+  &-align--right {
+    justify-items: end;
+  }
+  &-align--stretch {
+    justify-items: stretch;
+  }
+
+  &-valign--top {
+    align-items: start;
+  }
+  &-valign--center,
+  &-valign--middle {
+    align-items: center;
+  }
+  &-valign--bottom {
+    align-items: end;
+  }
+  &-valign--stretch {
+    align-items: stretch;
+  }
+}
