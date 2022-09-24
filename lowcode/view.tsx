@@ -102,7 +102,7 @@ const PageView = (props) => {
       initSingletonDivider();
 
       // 增加快捷选择父节点的按钮
-      window.parent?.AliLowCodeEngine?.designerCabin?.addBuiltinComponentAction({
+      window.parent?.AliLowCodeEngine?.material?.addBuiltinComponentAction({
         name: 'to Parent',
         content: {
           icon: (

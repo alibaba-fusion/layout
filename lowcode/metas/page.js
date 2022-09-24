@@ -93,7 +93,7 @@ module.exports = {
           });
           // 要拖入到的节点是根节点 && 根节点不是NextPage && 当前根节点下没有 NextPage  => 才允许被拖入
           if (
-            dropTargetNode.isRoot() &&
+            dropTargetNode.isRoot &&
             dropTargetNode.componentName !== PAGE &&
             targetNodeNextPageNum === 0
           ) {

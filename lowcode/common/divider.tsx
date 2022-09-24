@@ -288,7 +288,7 @@ const getSelectedNode = ({ selection, project }) => {
 };
 
 const getPageRootDOMNode = () => {
-  return (window.parent as any).AliLowCodeEngine.designer.currentDocument.getRoot().getDOMNode();
+  return (window.parent as any).AliLowCodeEngine.project.currentDocument.root.getDOMNode();
 };
 
 const createDividerWrapperNode = (dividerId: string) => {
