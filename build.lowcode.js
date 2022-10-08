@@ -4,7 +4,7 @@ const { library } = require('./build.json');
 const baseRenderUrl =
   process && process.argv && process.argv.includes('start')
     ? '.'
-    : `https://unpkg.alibaba-inc.com/${name}@${version}`;
+    : `https://unpkg.com/${name}@${version}`;
 
 module.exports = {
   alias: {
