@@ -10,9 +10,10 @@ import {
   ForwardRefExoticComponent,
   useMemo,
 } from 'react';
+import { isString } from 'lodash-es';
 import classNames from 'classnames';
 import Context from './common/context';
-import { wrapUnit, isString, getGapVal, isValidGap } from './utils';
+import { wrapUnit, getGapVal, isValidGap } from './utils';
 import Block from './block';
 import Row from './row';
 import Col from './col';
@@ -136,6 +137,7 @@ function adjustColWidth(blockNodes: ReactElement[], totalSpan: number, maxColNum
 /**
  * 章节
  * @param props
+ * @param ref
  */
 const Section: ForwardRefRenderFunction<HTMLDivElement, SectionProps> = (props, ref) => {
   const {

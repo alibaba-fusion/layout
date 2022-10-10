@@ -109,7 +109,7 @@ npm run lowcode:dev
 | children           | 子元素                                      | ReactNode                                         | -            |
 | onBreakPointChange | 断点变更回调                                | (curBreakPoint, oldBreakPoint, breakPoints)=>void |              |
 
-```
+```ts
 interface BreakPoint {
   /**
    *  断点宽度(包含)

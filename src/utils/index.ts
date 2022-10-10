@@ -1,3 +1,4 @@
+import { isNumber, isString } from 'lodash-es';
 import { BreakPoint, BreakPoints } from '../types';
 import { DEFAULT_BREAK_POINTS } from '../common/constant';
 
@@ -46,26 +47,6 @@ export function getMaxNumberOfColumns(breakPoints: BreakPoints = DEFAULT_BREAK_P
   const bp = breakPoints.find((breakPoint) => breakPoint?.width === maxWidth);
 
   return bp?.numberOfColumns || 12;
-}
-
-/**
- * 是否为数字
- * @param num
- */
-export function isNumber(num: any): num is number {
-  if (num === '' || num === null || Array.isArray(num)) {
-    return false;
-  }
-
-  return (typeof num === 'number' && !isNaN(num)) || !isNaN(Number(num));
-}
-
-/**
- * 简单判断是否为字符串
- * @param val
- */
-export function isString(val: any): boolean {
-  return typeof val === 'string';
 }
 
 /**

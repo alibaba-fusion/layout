@@ -8,10 +8,9 @@ import {
 } from 'react';
 import classNames from 'classnames';
 import Context from './common/context';
-import { isString } from './utils';
+import { isString } from 'lodash-es';
 import Row from './row';
 import Cell from './cell';
-// import Col from './col';
 import P from './p';
 import Text from './text';
 import { BlockProps, LayoutContextProps, TypeMark } from './types';

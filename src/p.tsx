@@ -12,11 +12,12 @@ import {
   cloneElement,
   ReactNode,
 } from 'react';
+import { isString } from 'lodash-es';
 import classNames from 'classnames';
 import Context from './common/context';
 import Text from './text';
 import { BaseSize, LayoutContextProps, ParagraphProps, TypeMark } from './types';
-import { isString, wrapUnit } from './utils';
+import { wrapUnit } from './utils';
 
 const getChildren = (children: any, type: ParagraphProps['type'] = 'body2') => {
   return Children.map(children, (child: ReactNode) => {
