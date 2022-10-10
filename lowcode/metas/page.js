@@ -643,7 +643,7 @@ module.exports = {
       {
         name: 'modifyRemoveCondition',
         initial: () => {
-          window.parent.AliLowCodeEngine.designerCabin.modifyBuiltinComponentAction(
+          window.parent.AliLowCodeEngine.material.modifyBuiltinComponentAction(
             'remove',
             (action) => {
               const oldCondition = Object.prototype.hasOwnProperty.call(action, 'condition')

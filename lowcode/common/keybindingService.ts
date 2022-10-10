@@ -12,13 +12,13 @@ export interface IKeyBinding {
 
 class KeybindingService {
   hotkey: any;
-  designer: any;
+  project: any;
   keybindingMap: IKeyBinding[];
 
   constructor() {
     const engine = (window.parent as any).AliLowCodeEngine;
     this.hotkey = engine.hotkey;
-    this.designer = engine.designer;
+    this.project = engine.project;
     this.keybindingMap = [];
   }
   bind(kb: IKeyBinding) {
@@ -58,8 +58,8 @@ class KeybindingService {
     targetKb.cb.apply(null, [node, ...rest]);
   }
   private getSelectedNode() {
-    const selectedNodeId = this.designer.currentDocument.selection.selected[0];
-    return selectedNodeId ? this.designer.currentDocument.nodesMap.get(selectedNodeId) : null;
+    const selectedNodeId = this.project.currentDocument.selection.selected[0];
+    return selectedNodeId ? this.project.currentDocument.nodesMap.get(selectedNodeId) : null;
   }
   private isValidNode(node: any, kb: IKeyBinding) {
     return kb.components === '*' || kb.components.includes(node.componentName);

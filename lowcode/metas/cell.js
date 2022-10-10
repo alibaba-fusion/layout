@@ -21,7 +21,7 @@ const codeStyle = {
   textAlign: 'center',
 };
 
-window.parent?.AliLowCodeEngine?.designerCabin?.addBuiltinComponentAction?.({
+window.parent?.AliLowCodeEngine?.material?.addBuiltinComponentAction?.({
   name: 'change to Grid',
   content: {
     icon: (
@@ -43,7 +43,7 @@ window.parent?.AliLowCodeEngine?.designerCabin?.addBuiltinComponentAction?.({
   important: true,
 });
 
-window.parent?.AliLowCodeEngine?.designerCabin?.addBuiltinComponentAction?.({
+window.parent?.AliLowCodeEngine?.material?.addBuiltinComponentAction?.({
   name: 'change to FixedContainer',
   content: {
     icon: (

@@ -76,7 +76,7 @@ module.exports = {
        */
       onNodeAdd: (draggedNode, currentNode) => {
         if (!draggedNode || draggedNode.componentName !== CELL) {
-          const { dropLocation } = draggedNode.document.designer;
+          const { dropLocation } = draggedNode.document.canvas;
           if (!dropLocation) {
             // 没有 dropLocation 一般是 slot, slot 元素不用特殊处理 不做任何包裹
             return;

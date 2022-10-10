@@ -36,7 +36,7 @@ export const changeCellToGrid = (node: any) => {
 };
 
 export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: any, preAppend = false) => {
-  const { currentDocument } = (window.parent as any).AliLowCodeEngine.designer;
+  const { currentDocument } = (window.parent as any).AliLowCodeEngine.project;
   const selectedIds = currentDocument.selection.selected;
 
   let nodeList = [node];
