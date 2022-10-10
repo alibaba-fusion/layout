@@ -4,7 +4,7 @@ const { library } = require('./build.json');
 const baseRenderUrl =
   process && process.argv && process.argv.includes('start')
     ? '.'
-    : `https://unpkg.alibaba-inc.com/${name}@${version}`;
+    : `https://unpkg.com/${name}@${version}`;
 
 module.exports = {
   alias: {
@@ -17,13 +17,13 @@ module.exports = {
         library,
         staticResources: {
           engineCoreCssUrl:
-            'https://g.alicdn.com/ali-lowcode/ali-lowcode-engine/1.0.79/engine-core.css',
+            'https://alifd.alicdn.com/npm/@alilc/lowcode-engine@1.0.14/dist/css/engine-core.css',
           engineExtCssUrl:
-            'https://g.alicdn.com/ali-lowcode/lowcode-engine-ext/1.0.19/engine-ext.css',
+            'https://alifd.alicdn.com/npm/@alilc/lowcode-engine-ext@1.0.5-beta.10/dist/js/engine-ext.css',
           engineCoreJsUrl:
-            'https://g.alicdn.com/ali-lowcode/ali-lowcode-engine/1.0.79/engine-core.js',
+            'https://alifd.alicdn.com/npm/@alilc/lowcode-engine@1.0.14/dist/js/engine-core.js',
           engineExtJsUrl:
-            'https://g.alicdn.com/ali-lowcode/lowcode-engine-ext/1.0.19/engine-ext.js',
+            'https://alifd.alicdn.com/npm/@alilc/lowcode-engine-ext@1.0.5-beta.10/dist/js/engine-ext.js',
         },
         extraAssets: [
           'https://g.alicdn.com/code/npm/@ali/ali-lowcode-materials/1.2.4/assets.json',
