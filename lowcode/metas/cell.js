@@ -242,7 +242,8 @@ module.exports = {
           return;
         }
 
-        const { dropLocation, currentDocument } = draggedNode.document.designer;
+        const { currentDocument } = draggedNode.document.project;
+        const { dropLocation } = draggedNode.document.canvas;
 
         if (
           dropLocation?.target === currentNode ||

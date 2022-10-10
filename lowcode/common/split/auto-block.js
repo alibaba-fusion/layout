@@ -222,7 +222,7 @@ export const updateSpan = ({
 
   const adjustColSpan = (afterFlaten) => {
     afterFlaten.forEach((item) => {
-      currentSection.document.getNode(item.id).setPropValue('span', item.span);
+      currentSection.document.getNodeById(item.id).setPropValue('span', item.span);
     });
   };
 
