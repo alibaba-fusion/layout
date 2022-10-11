@@ -1,5 +1,5 @@
 {
   "library": "AlifdLayout",
   "libraryTarget": "umd",
-  "plugins": ["build-plugin-component", "build-plugin-fusion"]
+  "plugins": ["build-plugin-jsx-plus", "build-plugin-component", "build-plugin-fusion"]
 }

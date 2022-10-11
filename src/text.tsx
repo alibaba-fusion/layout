@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { FC, useContext } from 'react';
+import { createElement, FC, useContext } from 'react';
 import classNames from 'classnames';
-import { textTypeMap } from './util';
+import { TextTypeMap } from './util';
 import Context from './common/context';
 import { TextProps, LayoutContextProps, TypeMark } from './types';
 
@@ -15,7 +15,7 @@ const Text: ITextComponent = (props) => {
     className,
     type,
     style,
-    component,
+    component = 'span',
     strong,
     underline,
     delete: deleteProp,
@@ -30,7 +30,7 @@ const Text: ITextComponent = (props) => {
 
   let { children } = props;
   // @ts-ignore
-  const newType = textTypeMap[type] || type;
+  const newType = TextTypeMap[type] || type;
 
   const cls = classNames(className, {
     [`${prefix}text`]: true,
@@ -48,8 +48,6 @@ const Text: ITextComponent = (props) => {
 
     children = newChildren;
   }
-
-  const Tag = component;
 
   if (strong) {
     children = <strong>{children}</strong>;
@@ -78,10 +76,14 @@ const Text: ITextComponent = (props) => {
     ...style,
   };
 
-  return (
-    <Tag {...others} style={newStyle} className={cls}>
-      {children}
-    </Tag>
+  return createElement(
+    component,
+    {
+      ...others,
+      style: newStyle,
+      className: cls,
+    },
+    children,
   );
 };
 

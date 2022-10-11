@@ -47,11 +47,15 @@ const PageAside: IPageAside = (props: PageAsideProps) => {
     ...style,
   };
 
-  return children ? (
+  if (!children) {
+    return null;
+  }
+
+  return (
     <aside className={asideCls} style={newStyle} {...others}>
       <div className={asideInnerCls}>{newChildren}</div>
     </aside>
-  ) : null;
+  );
 };
 
 PageAside.displayName = 'Aside';

@@ -1,4 +1,4 @@
-import { CSSProperties, ElementType, HTMLAttributes, ReactNode } from 'react';
+import { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 
 export type BaseSize = 'small' | 'medium' | 'large';
 
@@ -344,7 +344,7 @@ export interface TextProps extends BaseProps {
   /**
    * 设置标签类型
    */
-  component?: ElementType;
+  component?: string;
   /**
    * 自定义颜色
    */

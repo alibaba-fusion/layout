@@ -44,11 +44,15 @@ const PageNav: IPageNav = (props: PageNavProps) => {
     ...style,
   };
 
-  return children ? (
+  if (!children) {
+    return null;
+  }
+
+  return (
     <nav className={navCls} style={newStyle} {...others}>
       <div className={navInnerCls}>{newChildren}</div>
     </nav>
-  ) : null;
+  );
 };
 
 PageNav.displayName = 'Nav';

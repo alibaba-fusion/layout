@@ -17,11 +17,11 @@ import Tab from '@alifd/next/lib/tab';
 import ResizeObserver from 'resize-observer-polyfill';
 import Context from '../common/context';
 import { DEFAULT_BREAK_POINTS } from '../common/constant';
-import useCombinedRefs from '../utils/hooks/useCombineRef';
+import useCombinedRefs from '../hooks/use-combine-ref';
 import { getCurBreakPoint, getMaxNumberOfColumns, isValidGap, wrapUnit } from '../utils';
 import PageContent, { PageContentProps } from './content';
 import { BaseBgMode, BaseGap, BaseProps, BreakPoint, BreakPoints } from '../types';
-import useGuid from '../utils/hooks/use-guid';
+import useGuid from '../hooks/use-guid';
 
 interface ContentProps extends BaseBgMode {
   style?: CSSProperties;

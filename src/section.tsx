@@ -10,7 +10,7 @@ import {
   ForwardRefExoticComponent,
   useMemo,
 } from 'react';
-import { isString } from 'lodash-es';
+import { isString, isNil } from 'lodash-es';
 import classNames from 'classnames';
 import Context from './common/context';
 import { wrapUnit, getGapVal, isValidGap } from './utils';
@@ -48,19 +48,27 @@ function getValidChildren(
 function wrapBlock(children: ReactNode, maxNumberOfColumns: number) {
   let tmp: any[] = [];
   const ret: any[] = [];
-  const validChildList = Children.toArray(children).filter((child) => !!child);
+  const validChildList = Children.toArray(children).filter((child) => !isNil(child));
 
   validChildList.forEach((child: any, index) => {
     if (child?.type === Block || child?.type?._typeMark === 'Block') {
       if (tmp.length > 0) {
-        ret.push(<Block span={maxNumberOfColumns}>{tmp}</Block>);
+        ret.push(
+          <Block key={`cs-${index}`} span={maxNumberOfColumns}>
+            {tmp}
+          </Block>,
+        );
         tmp = [];
       }
 
       ret.push(child);
 
       if (tmp.length > 0) {
-        ret.push(<Block span={maxNumberOfColumns}>{[...tmp]}</Block>);
+        ret.push(
+          <Block key={`cs-${index}`} span={maxNumberOfColumns}>
+            {[...tmp]}
+          </Block>,
+        );
         tmp = [];
       }
     } else {
@@ -68,7 +76,11 @@ function wrapBlock(children: ReactNode, maxNumberOfColumns: number) {
     }
 
     if (index === validChildList.length - 1 && tmp.length > 0) {
-      ret.push(<Block span={maxNumberOfColumns}>{[...tmp]}</Block>);
+      ret.push(
+        <Block key={`cs-${index}`} span={maxNumberOfColumns}>
+          {[...tmp]}
+        </Block>,
+      );
       tmp = [];
     }
   });
@@ -158,10 +170,6 @@ const Section: ForwardRefRenderFunction<HTMLDivElement, SectionProps> = (props, 
   } = useContext<LayoutContextProps>(Context);
   const clsPrefix = `${prefix}section`;
   const hasHead = title || extra;
-
-  // 此处定义的是 blockGap
-  const gap = getGapVal(blockGapContext, blockGapProp);
-
   // classNames
   const sectionCls = classNames(clsPrefix, className);
   const blockWrapperCls = `${clsPrefix}-block-wrapper`;
@@ -170,14 +178,19 @@ const Section: ForwardRefRenderFunction<HTMLDivElement, SectionProps> = (props, 
   });
   const innerContainerWithoutHead = classNames(`${clsPrefix}-inner-without-head`);
 
-  const blockWrapperStyle = {
-    ...(isValidGap(gap)
-      ? {
-          gridColumnGap: wrapUnit(gap),
-          gridRowGap: wrapUnit(gap),
-        }
-      : null),
-  };
+  // 此处定义的是 blockGap
+  const gap = getGapVal(blockGapContext, blockGapProp);
+
+  const blockWrapperStyle = useMemo(() => {
+    return {
+      ...(isValidGap(gap)
+        ? {
+            gridColumnGap: wrapUnit(gap),
+            gridRowGap: wrapUnit(gap),
+          }
+        : null),
+    };
+  }, [gap]);
 
   const newChildren = useMemo(
     () => getValidChildren(children, numberOfColumns, maxNumberOfColumns),
@@ -191,22 +204,18 @@ const Section: ForwardRefRenderFunction<HTMLDivElement, SectionProps> = (props, 
         <div className={innerContainerWithHead}>
           <Col align="stretch">
             <Row autoFit className={`${clsPrefix}-head`} verAlign="middle">
-              {title ? (
-                <Cell className={`${clsPrefix}-title`} align={titleAlign}>
-                  {isString(title) ? <P type="h5">{title}</P> : title}
-                </Cell>
-              ) : null}
-              {extra ? (
-                <Cell align="right" autoFit className={`${clsPrefix}-extra`}>
-                  {isString(extra) ? (
-                    <P align="right" type="body2">
-                      {extra}
-                    </P>
-                  ) : (
-                    extra
-                  )}
-                </Cell>
-              ) : null}
+              <Cell x-if={title} className={`${clsPrefix}-title`} align={titleAlign}>
+                {isString(title) ? <P type="h5">{title}</P> : title}
+              </Cell>
+              <Cell x-if={extra} align="right" autoFit className={`${clsPrefix}-extra`}>
+                {isString(extra) ? (
+                  <P align="right" type="body2">
+                    {extra} - 123
+                  </P>
+                ) : (
+                  extra
+                )}
+              </Cell>
             </Row>
             <Cell>
               <div className={blockWrapperCls} style={blockWrapperStyle}>

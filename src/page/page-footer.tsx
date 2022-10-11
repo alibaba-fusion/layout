@@ -28,11 +28,15 @@ const PageFooter: IPageFooter = (props: PageFooterProps) => {
     [`${prefix}bg--${mode}`]: !!mode,
   });
 
-  return children ? (
+  if (!children) {
+    return null;
+  }
+
+  return (
     <footer {...others} className={footerCls}>
       <div className={`${prefix}page-footer-inner`}>{children}</div>
     </footer>
-  ) : null;
+  );
 };
 
 PageFooter.displayName = 'Footer';

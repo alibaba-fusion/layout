@@ -29,11 +29,15 @@ const PageHeader: IPageHeader = (props: PageHeaderProps) => {
     [`${prefix}bg--${mode}`]: !!mode,
   });
 
-  return children ? (
+  if (!children) {
+    return null;
+  }
+
+  return (
     <header {...others} className={headerCls}>
       <div className={`${prefix}page-header-inner`}>{children}</div>
     </header>
-  ) : null;
+  );
 };
 
 PageHeader.displayName = 'Header';

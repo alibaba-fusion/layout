@@ -78,29 +78,25 @@ const Block: ForwardRefRenderFunction<any, BlockProps> = (props, ref: ForwardedR
     return (
       <div {...others} className={blockCls} ref={ref}>
         <Row autoFit verAlign="middle" className={headCls}>
-          {title ? (
-            <Cell className={`${clsPrefix}-title`} align={titleAlign}>
-              {isString(title) ? (
-                <P>
-                  <Text type="h6">{title}</Text>
-                </P>
-              ) : (
-                title
-              )}
-            </Cell>
-          ) : null}
+          <Cell x-if={title} className={`${clsPrefix}-title`} align={titleAlign}>
+            {isString(title) ? (
+              <P>
+                <Text type="h6">{title}</Text>
+              </P>
+            ) : (
+              title
+            )}
+          </Cell>
 
-          {extra ? (
-            <Cell autoFit className={`${clsPrefix}-extra`} align="right">
-              {isString(extra) ? (
-                <P>
-                  <Text>{extra}</Text>
-                </P>
-              ) : (
-                extra
-              )}
-            </Cell>
-          ) : null}
+          <Cell x-if={extra} autoFit className={`${clsPrefix}-extra`} align="right">
+            {isString(extra) ? (
+              <P>
+                <Text>{extra}</Text>
+              </P>
+            ) : (
+              extra
+            )}
+          </Cell>
         </Row>
 
         <Cell
