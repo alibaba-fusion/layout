@@ -214,24 +214,27 @@ interface BreakPoint {
 
 行
 
-| 参数     | 含义                                                      | 类型      | 默认值 |
-| -------- | --------------------------------------------------------- | --------- | ------ |
-| width    | 指定宽度                                                  | Number    | -      |
-| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效）        | Boolean   | -      |
-| gap      | 自定义元素间间距                                          | Number    | -      |
-| verAlign | 垂直对齐方式， 可选值：top/middle/bottom/stretch/baseline | Enum      | -      |
-| children | 子元素                                                    | ReactNode | -      |
+| 参数     | 含义                                                      | 类型          | 默认值 |
+| -------- | --------------------------------------------------------- | ------------- | ------ |
+| width    | 指定宽度                                                  | Number/String | -      |
+| height   | 指定高度                                                  | Number/String | -      |
+| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效）        | Boolean       | -      |
+| gap      | 自定义元素间间距                                          | Number        | -      |
+| verAlign | 垂直对齐方式， 可选值：top/middle/bottom/stretch/baseline | Enum          | -      |
+| children | 子元素                                                    | ReactNode     | -      |
 
 ### Col
 
 列
 
-| 参数     | 含义                                               | 类型      | 默认值 |
-| -------- | -------------------------------------------------- | --------- | ------ |
-| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效） | Boolean   | -      |
-| gap      | 自定义元素间间距                                   | Number    | -      |
-| align    | 水平对齐方式， 可选值：left/center/right/stretch   | Enum      | -      |
-| children | 子元素                                             | ReactNode | -      |
+| 参数     | 含义                                               | 类型          | 默认值 |
+| -------- | -------------------------------------------------- | ------------- | ------ |
+| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效） | Boolean       | -      |
+| width    | 指定宽度                                           | Number/String | -      |
+| height   | 指定高度                                           | Number/String | -      |
+| gap      | 自定义元素间间距                                   | Number        | -      |
+| align    | 水平对齐方式， 可选值：left/center/right/stretch   | Enum          | -      |
+| children | 子元素                                             | ReactNode     | -      |
 
 ### Grid
 
@@ -252,15 +255,16 @@ interface BreakPoint {
 
 单元格，其内容默认为 flex 纵向布局
 
-| 参数     | 含义                                                                                 | 类型      | 默认值 |
-| -------- | ------------------------------------------------------------------------------------ | --------- | ------ |
-| width    | 指定宽度                                                                             | Number    | -      |
-| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效）                                   | Boolean   | -      |
-| gap      | 自定义内部元素的行解析                                                               | Number    | 0      |
-| align    | 内容水平对齐方式， 可选值: left/center/right                                         | Enum      | -      |
-| verAlign | 内容垂直对齐方式， 可选值: top/middle/bottom/space-between/space-around/space-evenly | Enum      | -      |
-| block    | 使用 `block` 布局                                                                    | Boolean   | -      |
-| children | 子元素                                                                               | ReactNode | -      |
+| 参数     | 含义                                                                                 | 类型          | 默认值 |
+| -------- | ------------------------------------------------------------------------------------ | ------------- | ------ |
+| width    | 指定宽度                                                                             | Number/String | -      |
+| height   | 指定高度                                                                             | Number/String | -      |
+| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效）                                   | Boolean       | -      |
+| gap      | 自定义内部元素的行解析                                                               | Number        | 0      |
+| align    | 内容水平对齐方式， 可选值: left/center/right                                         | Enum          | -      |
+| verAlign | 内容垂直对齐方式， 可选值: top/middle/bottom/space-between/space-around/space-evenly | Enum          | -      |
+| block    | 使用 `block` 布局                                                                    | Boolean       | -      |
+| children | 子元素                                                                               | ReactNode     | -      |
 
 ### Space
 
