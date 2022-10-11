@@ -380,9 +380,9 @@ export interface ParagraphProps extends BaseProps {
    */
   spacing?: true | BaseSize;
   /**
-   * 添加子元素垂直间距
+   * 子元素间具有垂直间距
    */
-  verMargin?: boolean;
+  hasVerSpacing?: boolean;
   /**
    * 段前间距尺寸（在父容器中的第一个段落无效）
    */

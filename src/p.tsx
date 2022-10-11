@@ -59,7 +59,7 @@ const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props
     align,
     verAlign,
     spacing: spacingProp,
-    verMargin,
+    hasVerSpacing,
     children,
     style,
     ...others
@@ -88,7 +88,7 @@ const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props
         [`${clsPrefix}-spacing--${align}`]: spacing && align,
         [`${clsPrefix}-spacing--${spacing}`]:
           ['small', 'medium', 'large'].indexOf(spacing as BaseSize) > -1,
-        [`${clsPrefix}-margin`]: verMargin,
+        [`${clsPrefix}-margin`]: hasVerSpacing,
         [`${clsPrefix}--${type}`]: type,
       })}
       style={newStyle}
@@ -105,7 +105,7 @@ RefParagraph.typeMark = 'P';
 
 RefParagraph.defaultProps = {
   spacing: 'medium',
-  verMargin: true,
+  hasVerSpacing: true,
   verAlign: 'middle',
 };
 

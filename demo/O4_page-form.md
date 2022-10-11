@@ -74,7 +74,7 @@ class App extends Component {
                 </Cell>
               </Grid>
               <Row verAlign="middle">
-                <P verMargin={0}>
+                <P hasVerSpacing={false}>
                   <Button type="primary">查询</Button>
                   <Button>导出</Button>
                 </P>
@@ -161,7 +161,7 @@ class App extends Component {
                   </Row>
                 </Cell>
               </Grid>
-              <P align="right" verMargin={0}>
+              <P align="right" hasVerSpacing={false}>
                 <Button type="primary">查询</Button>
                 <Button>导出</Button>
                 <Button text>

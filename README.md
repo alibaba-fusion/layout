@@ -284,15 +284,15 @@ interface BreakPoint {
 
 段落
 
-| 参数         | 说明                                                                       | 类型      | 默认值     |
-| ------------ | -------------------------------------------------------------------------- | --------- | ---------- |
-| align        | 水平方向对齐模式 left/center/right/space-between/space-around/space-evenly | Enum      | 'left'     |
-| verAlign     | 垂直方向对齐模式 top/middle/bottom/baseline                                | Enum      | 'baseline' |
-| spacing      | 子元素间保持水平间距, 可选： small/medium/large/false                      | Enum      | medium     |
-| verMargin    | 除 Text 节点外子元素间保持垂直外边距                                       | Boolean   | true       |
-| beforeMargin | 段前外边距距（第一个子元素无效）                                           | Number    | 0          |
-| afterMargin  | 段尾外边距（最后一个子元素无效）                                           | Number    | 0          |
-| children     | 子元素                                                                     | ReactNode | -          |
+| 参数          | 说明                                                                       | 类型      | 默认值     |
+| ------------- | -------------------------------------------------------------------------- | --------- | ---------- |
+| align         | 水平方向对齐模式 left/center/right/space-between/space-around/space-evenly | Enum      | 'left'     |
+| verAlign      | 垂直方向对齐模式 top/middle/bottom/baseline                                | Enum      | 'baseline' |
+| spacing       | 子元素间保持水平间距, 可选： small/medium/large/false                      | Enum      | medium     |
+| hasVerSpacing | 除 `文本` 节点外子元素间保持垂直间距                                       | Boolean   | true       |
+| beforeMargin  | 段前外边距（作为第一个子元素时无效）                                       | Number    | 0          |
+| afterMargin   | 段后外边距（作为最后一个子元素时无效）                                     | Number    | 0          |
+| children      | 子元素                                                                     | ReactNode | -          |
 
 #### Text
 
