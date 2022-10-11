@@ -23,6 +23,7 @@ const Cell: ForwardRefRenderFunction<HTMLDivElement, CellProps> = (props, ref) =
     children,
     verAlign,
     width,
+    height,
     block,
     direction,
     align,
@@ -47,10 +48,11 @@ const Cell: ForwardRefRenderFunction<HTMLDivElement, CellProps> = (props, ref) =
           }
         : null),
       ...(width ? { width: wrapUnit(width) } : null),
+      ...(height ? { height: wrapUnit(height) } : null),
       ...(isValidGap(gap) ? { gap: wrapUnit(gap) } : null),
       ...style,
     }),
-    [block, direction, verAlign, width, gap, style],
+    [block, direction, verAlign, width, height, gap, style],
   );
 
   return (

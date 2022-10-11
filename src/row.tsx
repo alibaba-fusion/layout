@@ -19,8 +19,18 @@ type IRow = ForwardRefExoticComponent<RowProps> & TypeMark;
 /**
  * 行拆分布局 （子元素如果不是 Row、Col 或 Cell, 则默认用 Cell 包裹）
  */
-const Row: ForwardRefRenderFunction<HTMLDivElement, RowProps> = (props, ref) => {
-  const { width, children, className, verAlign, style, autoFit, gap: gapProp, ...others } = props;
+const Row: ForwardRefRenderFunction<HTMLDivElement, RowProps> = (props: RowProps, ref) => {
+  const {
+    width,
+    height,
+    children,
+    className,
+    verAlign,
+    style,
+    autoFit,
+    gap: gapProp,
+    ...others
+  } = props;
   const { prefix, gridGap } = useContext<LayoutContextProps>(Context);
   const clsPrefix = `${prefix}row-flex`;
   const gap = getGapVal(gridGap, gapProp);
@@ -68,10 +78,11 @@ const Row: ForwardRefRenderFunction<HTMLDivElement, RowProps> = (props, ref) => 
       // @ts-ignore
       alignItems: VER_ALIGN_ALIAS_MAP[verAlign] || verAlign,
       ...(width ? { width: wrapUnit(width) } : null),
+      ...(height ? { height: wrapUnit(height) } : null),
       ...(gap ? { gap: wrapUnit(gap) } : null),
       ...style,
     }),
-    [verAlign, width, gap, style],
+    [verAlign, width, height, gap, style],
   );
 
   return (

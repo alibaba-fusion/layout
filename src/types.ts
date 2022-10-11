@@ -133,6 +133,10 @@ export interface CellProps extends BaseProps {
    */
   width?: number | string;
   /**
+   * 指定高度
+   */
+  height?: number | string;
+  /**
    * 是否宽度（行模式下）/ 高度（列模式下）自适应内容
    */
   autoFit?: boolean;
@@ -279,6 +283,10 @@ interface BaseRowColPropBases extends BaseProps {
    * 固定宽度
    */
   width?: number | string;
+  /**
+   *固定高度
+   */
+  height?: number | string;
   /**
    * 自定义样式
    */
