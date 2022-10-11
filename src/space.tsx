@@ -1,4 +1,4 @@
-import { createElement, useContext, FC } from 'react';
+import { createElement, useContext, FC, useMemo } from 'react';
 import classNames from 'classnames';
 import { isNumber } from 'lodash-es';
 import Context from '@/common/context';
@@ -19,11 +19,14 @@ const Space: FC<SpaceProps> = (props) => {
     [`${clsPrefix}--${direction}`]: true,
   });
 
-  const newStyle = {
-    ...style,
-    ...(isNumber(size) && direction === 'hoz' ? { height: wrapUnit(size) } : null),
-    ...(isNumber(size) && direction === 'ver' ? { width: wrapUnit(size) } : null),
-  };
+  const newStyle = useMemo(
+    () => ({
+      ...style,
+      ...(isNumber(size) && direction === 'hoz' ? { height: wrapUnit(size) } : null),
+      ...(isNumber(size) && direction === 'ver' ? { width: wrapUnit(size) } : null),
+    }),
+    [size, direction],
+  );
 
   return createElement(
     isVertical ? 'span' : 'div',

@@ -1,4 +1,4 @@
-import React, { createElement, FC, useContext } from 'react';
+import React, { createElement, useMemo, FC, useContext } from 'react';
 import classNames from 'classnames';
 import Context from '@/common/context';
 import { TEXT_TYPE_MAP } from '@/common/constant';
@@ -23,11 +23,11 @@ const Text: ITextComponent = (props) => {
     color,
     align,
     backgroundColor,
+    children,
     ...others
   } = props;
   const { prefix } = useContext<LayoutContextProps>(Context);
 
-  let { children } = props;
   // @ts-ignore
   const newType = TEXT_TYPE_MAP[type] || type;
 
@@ -36,44 +36,52 @@ const Text: ITextComponent = (props) => {
     [`${prefix}text-${newType}`]: newType,
   });
 
-  if (typeof children === 'string' && children.indexOf('\n') !== -1) {
-    const childrenList = children.split('\n');
-    const newChildren: any = [];
-    childrenList.forEach((child) => {
-      newChildren.push(child);
-      newChildren.push(<br />);
-    });
-    newChildren.pop();
+  const memorizedChildren = useMemo(() => {
+    let _children = children;
 
-    children = newChildren;
-  }
+    if (typeof _children === 'string' && _children.indexOf('\n') !== -1) {
+      const childrenList = _children.split('\n');
+      const newChildren: any = [];
+      childrenList.forEach((child) => {
+        newChildren.push(child);
+        newChildren.push(<br />);
+      });
+      newChildren.pop();
 
-  if (strong) {
-    children = <strong>{children}</strong>;
-  }
+      _children = newChildren;
+    }
 
-  if (underline) {
-    children = <u>{children}</u>;
-  }
+    if (strong) {
+      _children = <strong>{_children}</strong>;
+    }
 
-  if (deleteProp) {
-    children = <del>{children}</del>;
-  }
+    if (underline) {
+      _children = <u>{_children}</u>;
+    }
 
-  if (code) {
-    children = <code>{children}</code>;
-  }
+    if (deleteProp) {
+      _children = <del>{_children}</del>;
+    }
 
-  if (mark) {
-    children = <mark>{children}</mark>;
-  }
+    if (code) {
+      _children = <code>{_children}</code>;
+    }
 
-  const newStyle = {
-    ...(color ? { color } : null),
-    ...(backgroundColor ? { backgroundColor } : null),
-    textAlign: align,
-    ...style,
-  };
+    if (mark) {
+      _children = <mark>{_children}</mark>;
+    }
+    return _children;
+  }, [children, mark, code, deleteProp, underline, strong]);
+
+  const newStyle = useMemo(
+    () => ({
+      ...(color ? { color } : null),
+      ...(backgroundColor ? { backgroundColor } : null),
+      textAlign: align,
+      ...style,
+    }),
+    [color, backgroundColor, align, style],
+  );
 
   return createElement(
     component,
@@ -82,7 +90,7 @@ const Text: ITextComponent = (props) => {
       style: newStyle,
       className: cls,
     },
-    children,
+    memorizedChildren,
   );
 };
 

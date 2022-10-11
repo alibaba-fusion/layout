@@ -1,5 +1,9 @@
 import { createContext } from 'react';
-import { LayoutContextProps } from '@/types';
+import { last } from 'lodash-es';
+import { DEFAULT_BREAK_POINTS } from '@/common/constant';
+import { BreakPoint, LayoutContextProps } from '@/types';
+
+const lastBreakPoint = last(DEFAULT_BREAK_POINTS) as BreakPoint;
 
 // 默认的布局上下文参数
 export const defaultContext: LayoutContextProps = {
@@ -8,12 +12,8 @@ export const defaultContext: LayoutContextProps = {
   sectionGap: undefined,
   blockGap: undefined,
   gridGap: undefined,
-  maxNumberOfColumns: 12,
-  breakPoint: {
-    numberOfColumns: 12,
-    width: Infinity,
-    maxContentWidth: 1200,
-  },
+  maxNumberOfColumns: lastBreakPoint.numberOfColumns || 12,
+  breakPoint: lastBreakPoint,
 };
 
 export default createContext<LayoutContextProps>(defaultContext);

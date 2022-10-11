@@ -3,6 +3,7 @@ import React, {
   ForwardRefExoticComponent,
   ForwardRefRenderFunction,
   useContext,
+  useMemo,
 } from 'react';
 import classNames from 'classnames';
 import Context from '@/common/context';
@@ -34,35 +35,36 @@ const Grid: ForwardRefRenderFunction<HTMLDivElement, GridProps> = (props, ref) =
   } = props;
 
   const { prefix, gridGap } = useContext<LayoutContextProps>(Context);
-
   const clsPrefix = `${prefix}grid`;
-
   const rowGap = getGapVal(gridGap, rowGapProp);
   const colGap = getGapVal(gridGap, colGapProp);
 
-  let gtc = `repeat(${cols}, 1fr)`;
+  const memorizedNewStyle = useMemo(() => {
+    let gtc = `repeat(${cols}, 1fr)`;
 
-  if (cols && cols > 1) {
-    gtc = `repeat(${cols}, calc( (100% - ${colGap || `var(--page-grid-gap)`} * ${
-      cols - 1
-    })/${cols}))`;
-  } else if (minWidth && maxWidth) {
-    gtc = `repeat(auto-fill, minmax(${wrapUnit(minWidth)}, ${wrapUnit(maxWidth)}))`;
-  } else if (minWidth && !maxWidth) {
-    gtc = `repeat(auto-fit, minmax(${wrapUnit(minWidth)}, auto))`;
-  } else if (!minWidth && maxWidth) {
-    gtc = `repeat(auto-fill, minmax(auto, ${wrapUnit(maxWidth)}))`;
-  }
+    if (cols && cols > 1) {
+      gtc = `repeat(${cols}, calc( (100% - ${colGap || `var(--page-grid-gap)`} * ${
+        cols - 1
+      })/${cols}))`;
+    } else if (minWidth && maxWidth) {
+      gtc = `repeat(auto-fill, minmax(${wrapUnit(minWidth)}, ${wrapUnit(maxWidth)}))`;
+    } else if (minWidth && !maxWidth) {
+      gtc = `repeat(auto-fit, minmax(${wrapUnit(minWidth)}, auto))`;
+    } else if (!minWidth && maxWidth) {
+      gtc = `repeat(auto-fill, minmax(auto, ${wrapUnit(maxWidth)}))`;
+    }
 
-  const newStyle = {
-    display: 'grid',
-    gridTemplateColumns: gtc,
-    gridTemplateRows: `repeat(${rows}, 1fr)`,
-    ...(rowGap ? { gridRowGap: wrapUnit(rowGap) } : null),
-    ...(colGap ? { gridColumnGap: wrapUnit(colGap) } : null),
-    ...style,
-  };
+    return {
+      display: 'grid',
+      gridTemplateColumns: gtc,
+      gridTemplateRows: `repeat(${rows}, 1fr)`,
+      ...(rowGap ? { gridRowGap: wrapUnit(rowGap) } : null),
+      ...(colGap ? { gridColumnGap: wrapUnit(colGap) } : null),
+      ...style,
+    };
+  }, [cols, colGap, minWidth, maxWidth, rows, rowGap, style]);
 
+  // 优先行渲染
   const renderChildren = () => {
     return Array.from(new Array(rows)).map((_, row) => {
       return Array.from(new Array(cols)).map((__, col) => {
@@ -74,12 +76,12 @@ const Grid: ForwardRefRenderFunction<HTMLDivElement, GridProps> = (props, ref) =
   return (
     <div
       {...others}
+      ref={ref}
       className={classNames(className, clsPrefix, {
         [`${clsPrefix}-align--${align}`]: align,
         [`${clsPrefix}-valign--${verAlign}`]: verAlign,
       })}
-      style={newStyle}
-      ref={ref}
+      style={memorizedNewStyle}
     >
       {renderItem ? renderChildren() : children}
     </div>

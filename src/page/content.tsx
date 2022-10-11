@@ -33,7 +33,6 @@ export type IPageContent = ForwardRefExoticComponent<PageContentProps> & TypeMar
  * @param props
  * @param ref
  */
-
 const PageContent: ForwardRefRenderFunction<any, PageContentProps> = (
   props: PageContentProps,
   ref,

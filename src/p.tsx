@@ -10,6 +10,7 @@ import React, {
   isValidElement,
   cloneElement,
   ReactNode,
+  useMemo,
 } from 'react';
 import { isString } from 'lodash-es';
 import classNames from 'classnames';
@@ -57,7 +58,7 @@ const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props
     afterMargin,
     align,
     verAlign,
-    spacing: pspacing,
+    spacing: spacingProp,
     verMargin,
     children,
     style,
@@ -65,17 +66,21 @@ const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props
   } = props;
   const { prefix } = useContext<LayoutContextProps>(Context);
   const clsPrefix = `${prefix}p`;
-  const newStyle = {
-    marginTop: wrapUnit(beforeMargin) || 0,
-    marginBottom: wrapUnit(afterMargin) || 0,
-    ...style,
-  };
+  const spacing = spacingProp === true ? 'medium' : spacingProp;
 
-  const spacing = pspacing === true ? 'medium' : pspacing;
+  const newStyle = useMemo(
+    () => ({
+      marginTop: wrapUnit(beforeMargin) || 0,
+      marginBottom: wrapUnit(afterMargin) || 0,
+      ...style,
+    }),
+    [beforeMargin, afterMargin, style],
+  );
 
   return (
     <div
       {...others}
+      ref={ref}
       className={classNames(clsPrefix, className, {
         [`${clsPrefix}-spacing`]: spacing,
         [`${clsPrefix}-align--${align}`]: align,
@@ -87,7 +92,6 @@ const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props
         [`${clsPrefix}--${type}`]: type,
       })}
       style={newStyle}
-      ref={ref}
     >
       {getChildren(children, type)}
     </div>

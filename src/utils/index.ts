@@ -75,7 +75,7 @@ export function wrapUnit(value: number | string | undefined, unit = 'px') {
  * @param val
  */
 export function isValidGap(val: any): boolean {
-  const gapValReg = /^[-]?[0-9]*\.?[0-9]+([a-z|A-z]*)$/;
+  const gapValReg = /^-?[0-9]*\.?[0-9]+([a-z|A-z]*)$/;
   return isNumber(val) || (isString(val) && (gapValReg.test(val) || val === 'auto'));
 }
 

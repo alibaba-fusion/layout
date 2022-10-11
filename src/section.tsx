@@ -161,12 +161,14 @@ const Section: ForwardRefRenderFunction<HTMLDivElement, SectionProps> = (props, 
     noPadding,
     ...others
   } = props;
+
   const {
     prefix,
     blockGap: blockGapContext,
     breakPoint: { numberOfColumns },
     maxNumberOfColumns,
   } = useContext<LayoutContextProps>(Context);
+
   const clsPrefix = `${prefix}section`;
   const hasHead = title || extra;
   // classNames
