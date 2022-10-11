@@ -315,6 +315,9 @@ interface BreakPoint {
 
 ## CSS 变量
 
+自然布局默认引入了 Fusion 设计系统的 [Design Tokens](https://fusion.design/pc/design-tokens?type=theme&themeid=3)。
+布局可自定义 CSS Variables 如下，可基于实际情况修改：
+
 | 变量名                            | 说明                   | 默认值                 |
 | --------------------------------- | ---------------------- | ---------------------- |
 | `--color-transparent`             | 前景色                 | `transparent`          |
