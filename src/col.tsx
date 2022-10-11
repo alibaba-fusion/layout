@@ -81,6 +81,6 @@ const Col: ForwardRefRenderFunction<HTMLDivElement, ColProps> = (props, ref) => 
 const RefCol: ICol = forwardRef(Col);
 
 RefCol.displayName = 'Col';
-RefCol._typeMark = 'Col';
+RefCol.typeMark = 'Col';
 
 export default RefCol;

@@ -172,7 +172,7 @@ const Page: ForwardRefRenderFunction<any, PageProps> = (props, ref) => {
   const tmp = Children.map(children, (child) => {
     if (isValidElement(child)) {
       // @ts-ignore
-      const tm = child?.type?._typeMark;
+      const tm = child?.type?.typeMark;
 
       if (tm) {
         if (tm === 'Header') {

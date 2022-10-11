@@ -126,6 +126,6 @@ RefBlock.defaultProps = {
   mode: 'surface',
   noPadding: false,
 };
-RefBlock._typeMark = 'Block';
+RefBlock.typeMark = 'Block';
 
 export default RefBlock;

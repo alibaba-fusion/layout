@@ -20,7 +20,7 @@ export interface BaseBgMode {
 }
 
 export interface TypeMark {
-  _typeMark?: string;
+  typeMark?: string;
 }
 
 /**

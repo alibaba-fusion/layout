@@ -95,7 +95,7 @@ const Text: ITextComponent = (props) => {
 };
 
 Text.displayName = 'Text';
-Text._typeMark = 'Text';
+Text.typeMark = 'Text';
 Text.defaultProps = {
   align: 'left',
   type: 'body2',

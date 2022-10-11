@@ -91,7 +91,7 @@ const Grid: ForwardRefRenderFunction<HTMLDivElement, GridProps> = (props, ref) =
 const RefGrid: IGrid = forwardRef(Grid);
 
 RefGrid.displayName = 'Grid';
-RefGrid._typeMark = 'Grid';
+RefGrid.typeMark = 'Grid';
 RefGrid.defaultProps = {
   rows: 1,
   cols: 1,

@@ -47,6 +47,6 @@ PageHeader.defaultProps = {
   mode: 'surface',
 };
 
-PageHeader._typeMark = 'Header';
+PageHeader.typeMark = 'Header';
 
 export default PageHeader;

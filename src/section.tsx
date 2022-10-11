@@ -50,7 +50,7 @@ function wrapBlock(children: ReactNode, maxNumberOfColumns: number) {
   const validChildList = Children.toArray(children).filter((child) => !isNil(child));
 
   validChildList.forEach((child: any, index) => {
-    if (child?.type === Block || child?.type?._typeMark === 'Block') {
+    if (child?.type === Block || child?.type?.typeMark === 'Block') {
       if (tmp.length > 0) {
         ret.push(
           <Block key={`cs-${index}`} span={maxNumberOfColumns}>
@@ -243,6 +243,6 @@ const Section: ForwardRefRenderFunction<HTMLDivElement, SectionProps> = (props, 
 
 const RefSection: ISection = forwardRef(Section);
 RefSection.displayName = 'Section';
-RefSection._typeMark = 'Section';
+RefSection.typeMark = 'Section';
 
 export default RefSection;

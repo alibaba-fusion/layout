@@ -84,6 +84,6 @@ const Row: ForwardRefRenderFunction<HTMLDivElement, RowProps> = (props, ref) => 
 const RefRow: IRow = forwardRef(Row);
 
 RefRow.displayName = 'Row';
-RefRow._typeMark = 'Row';
+RefRow.typeMark = 'Row';
 
 export default RefRow;

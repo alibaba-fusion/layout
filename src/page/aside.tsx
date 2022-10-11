@@ -63,6 +63,6 @@ PageAside.defaultProps = {
   width: 200,
   mode: 'transparent',
 };
-PageAside._typeMark = 'Aside';
+PageAside.typeMark = 'Aside';
 
 export default PageAside;

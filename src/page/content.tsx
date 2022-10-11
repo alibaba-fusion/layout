@@ -49,7 +49,7 @@ const PageContent: ForwardRefRenderFunction<any, PageContentProps> = (
 
     if (isValidElement(child)) {
       // @ts-ignore
-      tm = child?.type?._typeMark;
+      tm = child?.type?.typeMark;
 
       if (tm === 'Nav') {
         navNode = child;
@@ -125,6 +125,6 @@ const PageContent: ForwardRefRenderFunction<any, PageContentProps> = (
 const RefPageContent: IPageContent = forwardRef(PageContent);
 
 RefPageContent.displayName = 'PageContent';
-RefPageContent._typeMark = 'Content';
+RefPageContent.typeMark = 'Content';
 
 export default RefPageContent;

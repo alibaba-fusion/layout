@@ -59,6 +59,6 @@ PageNav.defaultProps = {
   width: 200,
   mode: 'transparent',
 };
-PageNav._typeMark = 'Nav';
+PageNav.typeMark = 'Nav';
 
 export default PageNav;

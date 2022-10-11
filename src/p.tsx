@@ -34,7 +34,7 @@ const getChildren = (children: any, type: ParagraphProps['type'] = 'body2') => {
           </Text>,
         );
         // @ts-ignore
-      } else if (child.type._typeMark === 'Text' && !child.props.type) {
+      } else if (child.type.typeMark === 'Text' && !child.props.type) {
         return cloneElement(child, {
           type,
         });
@@ -101,7 +101,7 @@ const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props
 const RefParagraph: IParagraph = forwardRef(P);
 
 RefParagraph.displayName = 'P';
-RefParagraph._typeMark = 'P';
+RefParagraph.typeMark = 'P';
 
 RefParagraph.defaultProps = {
   spacing: 'medium',

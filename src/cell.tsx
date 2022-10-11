@@ -74,6 +74,6 @@ RefCell.defaultProps = {
   block: false,
   direction: 'ver',
 };
-RefCell._typeMark = 'Cell';
+RefCell.typeMark = 'Cell';
 
 export default RefCell;

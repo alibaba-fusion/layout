@@ -45,6 +45,6 @@ PageFooter.defaultProps = {
   fullWidth: false,
   mode: 'surface',
 };
-PageFooter._typeMark = 'Footer';
+PageFooter.typeMark = 'Footer';
 
 export default PageFooter;
