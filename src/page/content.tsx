@@ -1,16 +1,15 @@
 import React, {
-  useRef,
-  forwardRef,
-  useContext,
-  ReactNode,
-  ForwardRefRenderFunction,
-  ReactElement,
   Children,
-  isValidElement,
+  forwardRef,
   ForwardRefExoticComponent,
+  ForwardRefRenderFunction,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useContext,
+  useRef,
 } from 'react';
 import classNames from 'classnames';
-import Tab from '@alifd/next/lib/tab';
 import Context from '@/common/context';
 import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
 import { wrapUnit } from '@/utils';
@@ -38,7 +37,7 @@ const PageContent: ForwardRefRenderFunction<any, PageContentProps> = (
   ref,
 ) => {
   const { children, mode, noPadding, title, key, active, style, ...others } = props;
-  const { prefix, isTab } = useContext<LayoutContextProps>(Context);
+  const { prefix } = useContext<LayoutContextProps>(Context);
 
   const sectionWrapperRef = useRef(null);
   let navNode: any;
@@ -65,28 +64,26 @@ const PageContent: ForwardRefRenderFunction<any, PageContentProps> = (
   const asideWidth = asideNode?.props?.width || 0;
   const centerMode = !!(asideNode || navNode);
 
-  const newPrefix = isTab ? 'fd-layout-' : prefix;
   const mainCls = classNames({
-    [`${newPrefix}page-main`]: true,
+    [`${prefix}page-main`]: true,
   });
 
   const contentHelpCls = classNames({
-    [`${newPrefix}page-bg-${mode}`]: !!mode,
-    [`${newPrefix}page-min-height-helper`]: true,
-    [`${newPrefix}page-content--with-aside`]: asideNode,
-    [`${newPrefix}page-content--with-nav`]: navNode,
-    [`${newPrefix}page-content--is-tab`]: isTab,
-    [`${newPrefix}page-content--center-mode`]: navNode || asideNode,
-    [`${newPrefix}page-content--single-col`]: !navNode && !asideNode,
+    [`${prefix}page-bg-${mode}`]: !!mode,
+    [`${prefix}page-min-height-helper`]: true,
+    [`${prefix}page-content--with-aside`]: asideNode,
+    [`${prefix}page-content--with-nav`]: navNode,
+    [`${prefix}page-content--center-mode`]: navNode || asideNode,
+    [`${prefix}page-content--single-col`]: !navNode && !asideNode,
   });
 
   const contentCls = classNames({
-    [`${newPrefix}page-content`]: true,
-    [`${newPrefix}page-content-no-padding`]: noPadding,
-    [`${newPrefix}page-content--with-nav`]: navNode,
+    [`${prefix}page-content`]: true,
+    [`${prefix}page-content-no-padding`]: noPadding,
+    [`${prefix}page-content--with-nav`]: navNode,
   });
 
-  const content = (
+  return (
     <div ref={ref} className={contentHelpCls} {...others}>
       <div
         className={contentCls}
@@ -109,17 +106,6 @@ const PageContent: ForwardRefRenderFunction<any, PageContentProps> = (
       </div>
     </div>
   );
-
-  if (isTab) {
-    return (
-      // @ts-ignore
-      <Tab.Item title={title} key={key} active={active}>
-        {content}
-      </Tab.Item>
-    );
-  }
-
-  return content;
 };
 
 const RefPageContent: IPageContent = forwardRef(PageContent);

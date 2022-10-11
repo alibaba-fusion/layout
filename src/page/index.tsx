@@ -1,18 +1,17 @@
 import React, {
-  useRef,
-  useEffect,
-  useState,
-  forwardRef,
-  isValidElement,
   Children,
-  ReactNode,
   CSSProperties,
-  ReactElement,
+  forwardRef,
   ForwardRefRenderFunction,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useEffect,
   useMemo,
+  useRef,
+  useState,
 } from 'react';
 import classNames from 'classnames';
-import Tab from '@alifd/next/lib/tab';
 import ResizeObserver from 'resize-observer-polyfill';
 import Context from '@/common/context';
 import { DEFAULT_BREAK_POINTS } from '@/common/constant';
@@ -25,12 +24,6 @@ import PageContent, { PageContentProps } from './content';
 interface ContentProps extends BaseBgMode {
   style?: CSSProperties;
   noPadding?: boolean;
-}
-
-interface IPageTabsProps {
-  size?: 'medium' | 'small';
-  excessMode?: 'dropdown' | 'slide';
-  shape?: 'wrapped' | 'capsule' | 'pure' | 'text';
 }
 
 export interface PageProps extends PageContentProps, BaseBgMode, BaseProps {
@@ -50,9 +43,6 @@ export interface PageProps extends PageContentProps, BaseBgMode, BaseProps {
    * 禁用页面内边距（包含 Header, Content, Footer）
    */
   noPadding?: boolean;
-
-  isTab?: boolean; // 是否打开分页模式
-  tabProps?: IPageTabsProps[];
 
   contentProps?: ContentProps;
 
@@ -99,8 +89,6 @@ const Page: ForwardRefRenderFunction<any, PageProps> = (props, ref) => {
     mode,
     noPadding,
     contentProps,
-    isTab,
-    tabProps,
     header,
     nav,
     aside,
@@ -201,8 +189,7 @@ const Page: ForwardRefRenderFunction<any, PageProps> = (props, ref) => {
   const pageCls = classNames(className, {
     [`${prefix}page`]: true,
     [`${prefix}page--col-${curBreakPoint.numberOfColumns}`]: true,
-    [`${prefix}page--with-tab`]: !!isTab,
-    [`${prefix}page--not-tab`]: !isTab,
+    [`${prefix}page--not-tab`]: true,
     [`${prefix}page--headless`]: !headerNode,
     [`${prefix}page--footless`]: !footerNode,
     [`${prefix}page--no-padding`]: noPadding,
@@ -226,18 +213,6 @@ const Page: ForwardRefRenderFunction<any, PageProps> = (props, ref) => {
         {nonStdChildren}
       </PageContent>
     );
-
-  const content = isTab ? (
-    <Tab
-      {...tabProps}
-      navClassName={`fd-layout-page-tab`}
-      contentClassName={`${prefix}page-tab-content`}
-    >
-      {defaultContent}
-    </Tab>
-  ) : (
-    defaultContent
-  );
 
   return (
     <>
@@ -269,11 +244,10 @@ const Page: ForwardRefRenderFunction<any, PageProps> = (props, ref) => {
             blockGap,
             breakPoint: curBreakPoint,
             maxNumberOfColumns: getMaxNumberOfColumns(breakPoints),
-            isTab,
           }}
         >
           {headerNode}
-          {content}
+          {defaultContent}
           {footerNode}
         </Context.Provider>
       </div>

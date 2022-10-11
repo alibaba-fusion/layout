@@ -67,7 +67,7 @@ export interface LayoutContextProps {
    */
   maxNumberOfColumns: number;
   /**
-   * content 内部章之间的间距
+   * content 中 "章" 之间的间距
    */
   sectionGap?: BaseGap;
   /**
@@ -78,10 +78,6 @@ export interface LayoutContextProps {
    * 小布局间距（行、列、网格布局的 单元格-Cell 间距）
    */
   gridGap?: BaseGap;
-  /**
-   * 是否为 tab 模式
-   */
-  isTab?: boolean;
 }
 
 /**

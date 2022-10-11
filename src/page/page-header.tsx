@@ -17,13 +17,11 @@ export type IPageHeader = FC<PageHeaderProps> & TypeMark;
 
 const PageHeader: IPageHeader = (props: PageHeaderProps) => {
   const { className, children, mode, noBottomPadding, divider, fullWidth, ...others } = props;
-  const { prefix, isTab } = useContext<LayoutContextProps>(Context);
+  const { prefix } = useContext<LayoutContextProps>(Context);
   const clsPrefix = `${prefix}page-header`;
 
   const headerCls = classNames(className, clsPrefix, {
     [`${clsPrefix}--dividing`]: divider,
-    [`${clsPrefix}--no-margin`]: isTab,
-    [`${clsPrefix}--no-bottom-padding`]: isTab || noBottomPadding,
     [`${clsPrefix}--fullwidth`]: fullWidth,
     [`${prefix}bg--${mode}`]: !!mode,
   });
