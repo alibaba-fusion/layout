@@ -1,10 +1,14 @@
-import * as React from 'react';
-import { ForwardRefExoticComponent, forwardRef, useContext, ForwardRefRenderFunction } from 'react';
+import React, {
+  ForwardRefExoticComponent,
+  forwardRef,
+  useContext,
+  ForwardRefRenderFunction,
+} from 'react';
 import classNames from 'classnames';
-import Context from './common/context';
-import { VER_ALIGN_ALIAS_MAP } from './common/constant';
-import { isValidGap, wrapUnit } from './utils';
-import { CellProps, LayoutContextProps, TypeMark } from './types';
+import Context from '@/common/context';
+import { VER_ALIGN_ALIAS_MAP } from '@/common/constant';
+import { isValidGap, wrapUnit } from '@/utils';
+import { CellProps, LayoutContextProps, TypeMark } from '@/types';
 
 type ICell = ForwardRefExoticComponent<CellProps> & TypeMark;
 

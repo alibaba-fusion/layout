@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { forwardRef, Children, ForwardRefRenderFunction } from 'react';
+import React, { forwardRef, Children, ForwardRefRenderFunction } from 'react';
 
 /**
  * 自由容器

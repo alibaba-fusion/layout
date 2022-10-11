@@ -1,8 +1,7 @@
 /**
  * 段落
  */
-import * as React from 'react';
-import {
+import React, {
   useContext,
   forwardRef,
   Children,
@@ -14,10 +13,10 @@ import {
 } from 'react';
 import { isString } from 'lodash-es';
 import classNames from 'classnames';
-import Context from './common/context';
-import Text from './text';
-import { BaseSize, LayoutContextProps, ParagraphProps, TypeMark } from './types';
-import { wrapUnit } from './utils';
+import Context from '@/common/context';
+import { wrapUnit } from '@/utils';
+import Text from '@/text';
+import { BaseSize, LayoutContextProps, ParagraphProps, TypeMark } from '@/types';
 
 const getChildren = (children: any, type: ParagraphProps['type'] = 'body2') => {
   return Children.map(children, (child: ReactNode) => {

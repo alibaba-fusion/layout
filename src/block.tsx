@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {
+import React, {
   useContext,
   forwardRef,
   ForwardedRef,
@@ -7,13 +6,13 @@ import {
   ForwardRefRenderFunction,
 } from 'react';
 import classNames from 'classnames';
-import Context from './common/context';
 import { isString } from 'lodash-es';
-import Row from './row';
-import Cell from './cell';
-import P from './p';
-import Text from './text';
-import { BlockProps, LayoutContextProps, TypeMark } from './types';
+import Context from '@/common/context';
+import Row from '@/row';
+import Cell from '@/cell';
+import P from '@/p';
+import Text from '@/text';
+import { BlockProps, LayoutContextProps, TypeMark } from '@/types';
 
 type IBlock = ForwardRefExoticComponent<BlockProps> & TypeMark;
 

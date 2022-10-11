@@ -1,8 +1,7 @@
-import * as React from 'react';
-import { FC, ReactNode, useContext } from 'react';
+import React, { FC, ReactNode, useContext } from 'react';
 import classNames from 'classnames';
-import Context from '../common/context';
-import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '../types';
+import Context from '@/common/context';
+import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
 
 export interface PageHeaderProps extends BaseProps, BaseBgMode {
   /**

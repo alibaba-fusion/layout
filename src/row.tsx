@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {
+import React, {
   useContext,
   cloneElement,
   isValidElement,
@@ -9,10 +8,10 @@ import {
   ForwardRefRenderFunction,
 } from 'react';
 import classNames from 'classnames';
-import { VER_ALIGN_ALIAS_MAP } from './common/constant';
-import Context from './common/context';
-import { getGapVal, wrapUnit } from './utils';
-import { LayoutContextProps, RowProps, TypeMark } from './types';
+import { VER_ALIGN_ALIAS_MAP } from '@/common/constant';
+import Context from '@/common/context';
+import { getGapVal, wrapUnit } from '@/utils';
+import { LayoutContextProps, RowProps, TypeMark } from '@/types';
 
 type IRow = ForwardRefExoticComponent<RowProps> & TypeMark;
 

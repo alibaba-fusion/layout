@@ -1,9 +1,8 @@
-import * as React from 'react';
-import { createElement, FC, useContext } from 'react';
+import React, { createElement, FC, useContext } from 'react';
 import classNames from 'classnames';
-import { TextTypeMap } from './util';
-import Context from './common/context';
-import { TextProps, LayoutContextProps, TypeMark } from './types';
+import Context from '@/common/context';
+import { TEXT_TYPE_MAP } from '@/common/constant';
+import { TextProps, LayoutContextProps, TypeMark } from '@/types';
 
 export type ITextComponent = FC<TextProps> & TypeMark;
 /**
@@ -30,7 +29,7 @@ const Text: ITextComponent = (props) => {
 
   let { children } = props;
   // @ts-ignore
-  const newType = TextTypeMap[type] || type;
+  const newType = TEXT_TYPE_MAP[type] || type;
 
   const cls = classNames(className, {
     [`${prefix}text`]: true,

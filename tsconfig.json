@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "build",
     "module": "esnext",
     "target": "es6",
@@ -16,7 +17,10 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src/*.ts", "src/*.tsx"],
   "exclude": ["node_modules", "build", "public"]

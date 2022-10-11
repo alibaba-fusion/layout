@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {
+import React, {
   useRef,
   useEffect,
   useState,
@@ -15,13 +14,13 @@ import {
 import classNames from 'classnames';
 import Tab from '@alifd/next/lib/tab';
 import ResizeObserver from 'resize-observer-polyfill';
-import Context from '../common/context';
-import { DEFAULT_BREAK_POINTS } from '../common/constant';
-import useCombinedRefs from '../hooks/use-combine-ref';
-import { getCurBreakPoint, getMaxNumberOfColumns, isValidGap, wrapUnit } from '../utils';
+import Context from '@/common/context';
+import { DEFAULT_BREAK_POINTS } from '@/common/constant';
+import useCombinedRefs from '@/hooks/use-combine-ref';
+import useGuid from '@/hooks/use-guid';
+import { getCurBreakPoint, getMaxNumberOfColumns, isValidGap, wrapUnit } from '@/utils';
+import { BaseBgMode, BaseGap, BaseProps, BreakPoint, BreakPoints } from '@/types';
 import PageContent, { PageContentProps } from './content';
-import { BaseBgMode, BaseGap, BaseProps, BreakPoint, BreakPoints } from '../types';
-import useGuid from '../hooks/use-guid';
 
 interface ContentProps extends BaseBgMode {
   style?: CSSProperties;

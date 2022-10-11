@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {
+import React, {
   useRef,
   forwardRef,
   useContext,
@@ -12,9 +11,9 @@ import {
 } from 'react';
 import classNames from 'classnames';
 import Tab from '@alifd/next/lib/tab';
-import Context from '../common/context';
-import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '../types';
-import { wrapUnit } from '../utils';
+import Context from '@/common/context';
+import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
+import { wrapUnit } from '@/utils';
 
 export interface PageContentProps extends BaseProps, BaseBgMode {
   nav?: ReactElement;

@@ -1,4 +1,4 @@
-import { BreakPoints } from '../types';
+import { BreakPoints } from '@/types';
 
 // 默认断点列信息
 export const DEFAULT_BREAK_POINTS: BreakPoints = [
@@ -35,4 +35,15 @@ export const VER_ALIGN_ALIAS_MAP = {
   top: 'start',
   middle: 'center',
   bottom: 'end',
+};
+
+export const TEXT_TYPE_MAP = {
+  'body-1': 'body2',
+  'body-2': 'body1',
+  subhead: 'h6',
+  title: 'h5',
+  headline: 'h4',
+  'display-1': 'h3',
+  'display-2': 'h2',
+  'display-3': 'h1',
 };

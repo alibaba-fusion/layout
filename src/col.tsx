@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {
+import React, {
   useContext,
   cloneElement,
   forwardRef,
@@ -9,10 +8,10 @@ import {
   ForwardRefRenderFunction,
 } from 'react';
 import classNames from 'classnames';
-import { ALIGN_ALIAS_MAP } from './common/constant';
-import Context from './common/context';
-import { wrapUnit, getGapVal } from './utils';
-import { ColProps, LayoutContextProps, TypeMark } from './types';
+import { ALIGN_ALIAS_MAP } from '@/common/constant';
+import Context from '@/common/context';
+import { wrapUnit, getGapVal } from '@/utils';
+import { ColProps, LayoutContextProps, TypeMark } from '@/types';
 
 type ICol = ForwardRefExoticComponent<ColProps> & TypeMark;
 

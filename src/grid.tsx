@@ -1,9 +1,13 @@
-import * as React from 'react';
-import { forwardRef, ForwardRefExoticComponent, ForwardRefRenderFunction, useContext } from 'react';
+import React, {
+  forwardRef,
+  ForwardRefExoticComponent,
+  ForwardRefRenderFunction,
+  useContext,
+} from 'react';
 import classNames from 'classnames';
-import Context from './common/context';
-import { getGapVal, wrapUnit } from './utils';
-import { GridProps, LayoutContextProps, TypeMark } from './types';
+import Context from '@/common/context';
+import { getGapVal, wrapUnit } from '@/utils';
+import { GridProps, LayoutContextProps, TypeMark } from '@/types';
 
 type IGrid = ForwardRefExoticComponent<GridProps> & TypeMark;
 
