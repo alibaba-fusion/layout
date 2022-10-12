@@ -12,6 +12,7 @@ import React, {
   useState,
 } from 'react';
 import classNames from 'classnames';
+import isValidArray from 'is-valid-array';
 import ResizeObserver from 'resize-observer-polyfill';
 import Context from '@/common/context';
 import { DEFAULT_BREAK_POINTS } from '@/common/constant';
@@ -110,10 +111,7 @@ const Page: ForwardRefRenderFunction<any, PageProps> = (props, ref) => {
   );
 
   // 保证断点一定是有效数组
-  const breakPoints =
-    Array.isArray(breakPointsProp) && breakPointsProp.length > 0
-      ? breakPointsProp
-      : DEFAULT_BREAK_POINTS;
+  const breakPoints = isValidArray(breakPointsProp) ? breakPointsProp : DEFAULT_BREAK_POINTS;
 
   const pageRef = useRef(null);
   const combinedRef = useCombinedRefs(ref, pageRef);
