@@ -160,8 +160,6 @@ const Page: ForwardRefRenderFunction<any, PageProps> = (props, ref) => {
       // @ts-ignore
       const tm = child?.type?.typeMark;
 
-      console.log('tm', tm);
-
       if (tm) {
         if (tm === 'Header') {
           headerNode = child;
@@ -195,8 +193,6 @@ const Page: ForwardRefRenderFunction<any, PageProps> = (props, ref) => {
     [`${prefix}page--no-padding`]: noPadding,
     [`${prefix}bg--${mode}`]: !!mode,
   });
-
-  console.log('contnetNodes:', contentsNodes);
 
   const defaultContent =
     contentsNodes.length > 0 ? (
