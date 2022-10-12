@@ -160,59 +160,6 @@ module.exports = {
             },
           },
           {
-            name: 'isTab',
-            title: {
-              label: '开启分页',
-              tip: '打开后有子页面',
-            },
-            setter: {
-              componentName: 'BoolSetter',
-              initialValue: false,
-            },
-            extraProps: {
-              setValue: (target, value) => {
-                const currentNode = target.getNode();
-                if (value) {
-                  const contentSnippet = {
-                    componentName: PAGE_CONTENT,
-                    title: '页面主体',
-                    props: {
-                      isTab: true,
-                      title: '子页面',
-                      primaryKey: `key-${Math.random().toString(36).substr(-6)}`,
-                    },
-                    children: [],
-                  };
-
-                  const newTabWrapped = currentNode.document.createNode(contentSnippet);
-                  [...currentNode.children].forEach((child) => {
-                    if ([PAGE_HEADER, PAGE_FOOTER].indexOf(child.componentName) === -1) {
-                      newTabWrapped.insertBefore(child);
-                    }
-                  });
-                  currentNode.insertBefore(newTabWrapped);
-                } else {
-                  // 单页模式
-                  // 去掉 Tab， 只保留第一层
-                  const firstTabItemContent = currentNode.children.find(
-                    (n) => n.componentName === PAGE_CONTENT,
-                  );
-
-                  [...firstTabItemContent.children].forEach((n) => {
-                    currentNode.insertBefore(n);
-                  });
-
-                  // 删除所有 PAGE_CONTENT
-                  [...currentNode.children].forEach((n) => {
-                    if (n.componentName === PAGE_CONTENT) {
-                      n.remove();
-                    }
-                  });
-                }
-              },
-            },
-          },
-          {
             name: '!items',
             condition: (target) => {
               return !!target.getProps().getPropValue('isTab');
