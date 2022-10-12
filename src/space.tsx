@@ -1,6 +1,6 @@
 import { createElement, useContext, FC, useMemo } from 'react';
 import classNames from 'classnames';
-import { isNumber } from 'lodash-es';
+import { isNumber, isString } from 'lodash-es';
 import Context from '@/common/context';
 import { isPresetSize, wrapUnit } from '@/utils';
 import { LayoutContextProps, SpaceProps } from '@/types';
@@ -19,14 +19,15 @@ const Space: FC<SpaceProps> = (props) => {
     [`${clsPrefix}--${direction}`]: true,
   });
 
-  const newStyle = useMemo(
-    () => ({
+  const newStyle = useMemo(() => {
+    const isCustomSize = isNumber(size) || (isString(size) && size !== '' && !isPresetSize(size));
+
+    return {
       ...style,
-      ...(isNumber(size) && direction === 'hoz' ? { height: wrapUnit(size) } : null),
-      ...(isNumber(size) && direction === 'ver' ? { width: wrapUnit(size) } : null),
-    }),
-    [size, direction],
-  );
+      ...(isCustomSize && direction === 'hoz' ? { height: wrapUnit(size) } : null),
+      ...(isCustomSize && direction === 'ver' ? { width: wrapUnit(size) } : null),
+    };
+  }, [size, style, direction]);
 
   return createElement(
     isVertical ? 'span' : 'div',

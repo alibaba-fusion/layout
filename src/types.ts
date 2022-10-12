@@ -386,7 +386,7 @@ export interface ParagraphProps extends BaseProps {
   /**
    * 子元素间水平间距
    */
-  spacing?: true | BaseSize;
+  spacing?: BaseSize | string | number;
   /**
    * 子元素间具有垂直间距
    */
@@ -412,7 +412,7 @@ export interface SpaceProps extends BaseProps {
   /**
    * 尺寸
    */
-  size?: BaseSize | number;
+  size?: BaseSize | string | number;
   /**
    * 布局方向
    */

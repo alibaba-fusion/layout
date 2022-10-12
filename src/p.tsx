@@ -12,10 +12,10 @@ import React, {
   ReactNode,
   useMemo,
 } from 'react';
-import { isString } from 'lodash-es';
+import { isNumber, isString } from 'lodash-es';
 import classNames from 'classnames';
 import Context from '@/common/context';
-import { wrapUnit } from '@/utils';
+import { isPresetSize, wrapUnit } from '@/utils';
 import Text from '@/text';
 import { BaseSize, LayoutContextProps, ParagraphProps, TypeMark } from '@/types';
 
@@ -66,15 +66,24 @@ const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props
   } = props;
   const { prefix } = useContext<LayoutContextProps>(Context);
   const clsPrefix = `${prefix}p`;
-  const spacing = spacingProp === true ? 'medium' : spacingProp;
+  const isCustomSize =
+    isNumber(spacingProp) ||
+    (isString(spacingProp) && spacingProp !== '' && !isPresetSize(spacingProp));
+  const spacing = isCustomSize ? 'medium' : spacingProp;
 
   const newStyle = useMemo(
     () => ({
       marginTop: wrapUnit(beforeMargin) || 0,
       marginBottom: wrapUnit(afterMargin) || 0,
+      // 如果 spacingProp 为数值类型，则默认修改当前段落下的间隙值
+      ...(isCustomSize
+        ? {
+            '--page-p-medium-spacing': wrapUnit(spacingProp),
+          }
+        : null),
       ...style,
     }),
-    [beforeMargin, afterMargin, style],
+    [beforeMargin, afterMargin, isCustomSize, style],
   );
 
   return (
