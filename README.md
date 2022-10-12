@@ -6,12 +6,14 @@
   </a>
 </p>
 <p align="center">
-  <img src="https://img.shields.io/npm/v/@alifd/layout.svg">
-  <img src="https://img.shields.io/npm/dm/@alifd/layout.svg">
-  <img src="https://img.shields.io/npm/l/@alifd/layout.svg">
+  <img src="https://img.shields.io/npm/v/@alifd/layout.svg?style=flat-square">
+  <img src="https://img.shields.io/npm/dm/@alifd/layout?style=flat-square">
+  <img src="https://img.shields.io/npm/l/@alifd/layout.svg?style=flat-square">
 </p>
 
 用于搭建、源码，嵌套特定组件的布局体系，目标是不写任何布局 CSS 代码。
+
+[🔗 预览 Demo](https://unpkg.com/@alifd/layout@1.0.4/build/index.html)
 
 ## 设计理念
 
@@ -100,8 +102,6 @@ npm run lowcode:dev
 | prefix             | CSS 类名前缀                                | string                                            | `fd-layout-` |
 | minHeight          | 页面的最小高度，例如 `calc(100vh - 52px)`   | Number/String                                     | -            |
 | noPadding          | 禁用页面内边距,包含 Header, Content, Footer | Boolean                                           | `false`      |
-| isTab              | 是否开启分页布局                            | Boolean                                           | `false`      |
-| tabProps           | 放到 Tab 组件上的一些默认值                 | Object                                            | -            |
 | sectionGap         | Header、Footer、Nav、Aside 和章节之间间隙   | Number                                            | -            |
 | blockGap           | Section 中栅格布局间隙                      | Number                                            | -            |
 | gridGap            | 小布局间隙（包含行、列、网格布局）          | Number                                            | -            |
@@ -154,12 +154,10 @@ interface BreakPoint {
 
 内容
 
-| 参数      | 含义                                             | 类型          | 默认值 |
-| --------- | ------------------------------------------------ | ------------- | ------ |
-| minHeight | 页面的最小高度，例如 calc(100vh - 52px)          | Number/String | -      |
-| title     | 开启分页布局后生效，作为子页面(Tab.Item)的 title | String        | -      |
-| key       | 开启分页布局后生效，作为子页面(Tab.Item)的 key   | String        | -      |
-| children  | 子元素                                           | ReactNode     | -      |
+| 参数      | 含义                                    | 类型          | 默认值 |
+| --------- | --------------------------------------- | ------------- | ------ |
+| minHeight | 页面的最小高度，例如 calc(100vh - 52px) | Number/String | -      |
+| children  | 子元素                                  | ReactNode     | -      |
 
 #### Page.Aside
 

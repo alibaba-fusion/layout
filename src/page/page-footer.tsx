@@ -39,12 +39,12 @@ const PageFooter: IPageFooter = (props: PageFooterProps) => {
 };
 
 PageFooter.displayName = 'Footer';
+PageFooter.typeMark = 'Footer';
 PageFooter.defaultProps = {
   noTopPadding: false,
   divider: false,
   fullWidth: false,
   mode: 'surface',
 };
-PageFooter.typeMark = 'Footer';
 
 export default PageFooter;

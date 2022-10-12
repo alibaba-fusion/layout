@@ -205,7 +205,7 @@ const Section: ForwardRefRenderFunction<HTMLDivElement, SectionProps> = (props, 
         <div className={innerContainerWithHead}>
           <Col align="stretch">
             <Row autoFit className={`${clsPrefix}-head`} verAlign="middle">
-              <Cell x-if={title} className={`${clsPrefix}-title`} align={titleAlign}>
+              <Cell className={`${clsPrefix}-title`} align={titleAlign}>
                 {isString(title) ? <P type="h5">{title}</P> : title}
               </Cell>
               <Cell x-if={extra} align="right" autoFit className={`${clsPrefix}-extra`}>

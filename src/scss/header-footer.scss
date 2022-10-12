@@ -19,7 +19,7 @@
 
     &--fixed {
       position: fixed;
-      width: 100vw;
+      width: 100%;
       left: 0;
       top: 0;
       z-index: var(--elevation-4);
@@ -37,7 +37,7 @@
 
     &--fixed {
       position: fixed;
-      width: 100vw;
+      width: 100%;
       left: 0;
       bottom: 0;
       z-index: var(--elevation-4);

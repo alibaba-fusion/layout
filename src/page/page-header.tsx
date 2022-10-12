@@ -38,13 +38,12 @@ const PageHeader: IPageHeader = (props: PageHeaderProps) => {
 };
 
 PageHeader.displayName = 'Header';
+PageHeader.typeMark = 'Header';
 PageHeader.defaultProps = {
   noBottomPadding: false,
   divider: false,
   fullWidth: false,
   mode: 'surface',
 };
-
-PageHeader.typeMark = 'Header';
 
 export default PageHeader;

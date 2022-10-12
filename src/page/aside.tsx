@@ -59,10 +59,10 @@ const PageAside: IPageAside = (props: PageAsideProps) => {
 };
 
 PageAside.displayName = 'Aside';
+PageAside.typeMark = 'Aside';
 PageAside.defaultProps = {
   width: 200,
   mode: 'transparent',
 };
-PageAside.typeMark = 'Aside';
 
 export default PageAside;

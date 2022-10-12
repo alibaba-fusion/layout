@@ -160,6 +160,8 @@ const Page: ForwardRefRenderFunction<any, PageProps> = (props, ref) => {
       // @ts-ignore
       const tm = child?.type?.typeMark;
 
+      console.log('tm', tm);
+
       if (tm) {
         if (tm === 'Header') {
           headerNode = child;
@@ -194,20 +196,21 @@ const Page: ForwardRefRenderFunction<any, PageProps> = (props, ref) => {
     [`${prefix}bg--${mode}`]: !!mode,
   });
 
+  console.log('contnetNodes:', contentsNodes);
+
   const defaultContent =
     contentsNodes.length > 0 ? (
       contentsNodes
     ) : (
       <PageContent
-        title={'默认页面'}
         // @ts-ignore
         ref={contentRef}
-        nav={navNode}
-        aside={asideNode}
         noPadding={noPadding}
         // @ts-ignore
         {...contentProps}
       >
+        {navNode}
+        {asideNode}
         {nonStdChildren}
       </PageContent>
     );

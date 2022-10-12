@@ -55,10 +55,10 @@ const PageNav: IPageNav = (props: PageNavProps) => {
 };
 
 PageNav.displayName = 'Nav';
+PageNav.typeMark = 'Nav';
 PageNav.defaultProps = {
   width: 200,
   mode: 'transparent',
 };
-PageNav.typeMark = 'Nav';
 
 export default PageNav;

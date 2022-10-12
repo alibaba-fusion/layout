@@ -4,7 +4,6 @@ import React, {
   ForwardRefExoticComponent,
   ForwardRefRenderFunction,
   isValidElement,
-  ReactElement,
   ReactNode,
   useContext,
   useRef,
@@ -15,14 +14,9 @@ import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
 import { wrapUnit } from '@/utils';
 
 export interface PageContentProps extends BaseProps, BaseBgMode {
-  nav?: ReactElement;
-  aside?: ReactElement;
   children?: ReactNode;
-  title?: ReactNode;
   minHeight?: number | string; // string 指的是 calc(100vh - 52px) 这种，而不是 30px
   noPadding?: boolean;
-  active?: boolean;
-  key?: string;
 }
 
 export type IPageContent = ForwardRefExoticComponent<PageContentProps> & TypeMark;
@@ -36,7 +30,7 @@ const PageContent: ForwardRefRenderFunction<any, PageContentProps> = (
   props: PageContentProps,
   ref,
 ) => {
-  const { children, mode, noPadding, title, key, active, style, ...others } = props;
+  const { children, mode, noPadding, style, ...others } = props;
   const { prefix } = useContext<LayoutContextProps>(Context);
 
   const sectionWrapperRef = useRef(null);
@@ -110,7 +104,7 @@ const PageContent: ForwardRefRenderFunction<any, PageContentProps> = (
 
 const RefPageContent: IPageContent = forwardRef(PageContent);
 
-RefPageContent.displayName = 'PageContent';
+RefPageContent.displayName = 'Content';
 RefPageContent.typeMark = 'Content';
 
 export default RefPageContent;

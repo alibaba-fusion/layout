@@ -77,7 +77,7 @@ const Block: ForwardRefRenderFunction<any, BlockProps> = (props, ref: ForwardedR
     return (
       <div {...others} className={blockCls} ref={ref}>
         <Row autoFit verAlign="middle" className={headCls}>
-          <Cell x-if={title} className={`${clsPrefix}-title`} align={titleAlign}>
+          <Cell className={`${clsPrefix}-title`} align={titleAlign}>
             {isString(title) ? (
               <P>
                 <Text type="h6">{title}</Text>
