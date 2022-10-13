@@ -1,4 +1,4 @@
-# 自然布局(@alifd/layout)
+# 自然布局
 
 <p align="center">
   <a href="https://fusion.design/">
@@ -13,21 +13,24 @@
 
 用于搭建、源码，嵌套特定组件的布局体系，目标是不写任何布局 CSS 代码。
 
-[🔗 预览 Demo](https://unpkg.com/@alifd/layout@1.0.4/build/index.html)
+[🔗 预览 Demo](https://unpkg.com/@alifd/layout/build/index.html)
+[🔗 阿里低代码搭建 Demo](https://unpkg.com/@alifd/layout/build/lowcode/index.html)
 
-## 设计理念
+**设计理念**
 
 - **初衷**：愿布局不需写 css 样式
 - **定位**：页面内容区的布局解决方案
 
 > 详细介绍：https://www.yuque.com/fusion-design/layout/yzx8g4 （需先加入 [Fusion Design](https://www.yuque.com/g/fusion-design/layout/collaborator/join?token=7bTjikyxDTAh3WwS) 语雀知识库）
 
-## 使用指引
+## 使用
 
 自然布局提供的能力分为「页面布局」、「局部布局」两种。
 
 - 页面布局：会用到 `Page` `Page.Header` `Page.Footer` `Page.Content` `Page.Aside` `Page.Nav` 六类组件。
-- 局部局部：会用到 `Section` `Block`, `Row`, `Col`, `Cell`, `P`, `Text` 等
+- 局部局部：会用到 `Section` `Block`, `Row`, `Col`, `Cell`, `P`, `Text`, `Space`
+
+布局示例：
 
 ```jsx
 import { Page, Section, Block, Row, Col, Cell, P, Text, Space } from '@alifd/layout';
@@ -35,7 +38,7 @@ import { Page, Section, Block, Row, Col, Cell, P, Text, Space } from '@alifd/lay
 export default function App() {
   return (
     <Page>
-      <Page.Header></Page.Header>
+      <Page.Header>Header</Page.Header>
       <Page.Content>
         <Section>
           <Block>
@@ -71,7 +74,7 @@ export default function App() {
           </Block>
         </Section>
       </Page.Content>
-      <Page.Footer></Page.Footer>
+      <Page.Footer>Footer</Page.Footer>
     </Page>
   );
 }
@@ -79,7 +82,7 @@ export default function App() {
 
 ## 开发
 
-1. 启动 demo
+1. 调试和预览 demo
 
 ```bash
 npm run start
