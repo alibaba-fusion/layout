@@ -5,7 +5,7 @@ export type BaseSize = 'small' | 'medium' | 'large';
 /**
  * 基础属性
  */
-export type BaseProps = Omit<HTMLAttributes<HTMLElement>, 'title'>;
+export type BaseProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'>;
 
 /**
  * 基础的小布局简写配置
