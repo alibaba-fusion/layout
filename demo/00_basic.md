@@ -9,7 +9,6 @@ order: 1
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Breadcrumb, Button, Divider, Balloon, Icon, Progress, Slider } from '@alifd/next';
-
 import { Page, Section, Block, Row, Col, Cell, P, Text } from '@alifd/layout';
 
 import '@alifd/theme-3/variables.css';

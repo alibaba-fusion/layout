@@ -22,7 +22,6 @@ import {
   Calendar,
   Timeline,
 } from '@alifd/next';
-
 import { Page, Section, Block, Row, Col, Cell, P, Text } from '@alifd/layout';
 
 import '@alifd/theme-3/variables.css';
