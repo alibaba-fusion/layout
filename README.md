@@ -80,6 +80,39 @@ export default function App() {
 }
 ```
 
+### 进一步封装 Block 和 Text。
+
+由于 `Section > Block` 具有强关联性（依赖 `Block` 对子元素宽度做计算并调整）。如果业务上需要进一步封装 `Block`，需要对 `Block` 增加类型标记，一遍 Section 能识别其 `span` 等属性。
+
+同理 `P > Text` 也具有类似强相关性，对于 `Text` 的组件封装，如果希望在 `P` 中表现和 `Text` 近似，也需要标记 `typeMark`.
+
+示例：
+
+```jsx
+import { Page, Section, Block } from '@alifd/layout';
+
+function NewBlock(props) {
+  const { children, ...others } = props;
+  // 加入新业组件逻辑
+  return <Block {...others}>{children}</Block>;
+}
+
+// 标记 NewBlock 可以视为 Block 作为 Section 的子元素
+NewBlock.typeMark = 'Block';
+
+// 页面渲染可以使用 NewBlock
+function App() {
+  return (
+    <Page>
+      <Section>
+        <Block span={2}>block</Block>
+        <NewBlock span={10}>new block</NewBlock>
+      </Section>
+    </Page>
+  );
+}
+```
+
 ## 开发
 
 1. 调试和预览 demo
