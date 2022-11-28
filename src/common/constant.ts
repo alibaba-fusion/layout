@@ -1,4 +1,4 @@
-import { BreakPoints } from '@/types';
+import { BreakPoints } from '../types';
 
 // 默认断点列信息
 export const DEFAULT_BREAK_POINTS: BreakPoints = [

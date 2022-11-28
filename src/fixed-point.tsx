@@ -1,7 +1,8 @@
 import React, { useContext, forwardRef, ForwardRefRenderFunction } from 'react';
 import classNames from 'classnames';
+
 import Context from '@/common/context';
-import { LayoutContextProps } from '@/types';
+import { LayoutContextProps } from './types';
 
 /**
  * 自由节点

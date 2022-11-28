@@ -8,12 +8,13 @@ import React, {
   ForwardRefRenderFunction,
   useMemo,
 } from 'react';
+import { isNumber, isString } from 'lodash-es';
 import classNames from 'classnames';
+
 import { ALIGN_ALIAS_MAP } from '@/common/constant';
 import Context from '@/common/context';
 import { wrapUnit, getGapVal } from '@/utils';
-import { ColProps, LayoutContextProps, TypeMark } from '@/types';
-import { isNumber, isString } from 'lodash-es';
+import { ColProps, LayoutContextProps, TypeMark } from './types';
 
 type ICol = ForwardRefExoticComponent<ColProps> & TypeMark;
 

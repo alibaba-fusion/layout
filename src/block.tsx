@@ -7,12 +7,13 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import { isString } from 'lodash-es';
+
 import Context from '@/common/context';
 import Row from '@/row';
 import Cell from '@/cell';
 import P from '@/p';
 import Text from '@/text';
-import { BlockProps, LayoutContextProps, TypeMark } from '@/types';
+import { BlockProps, LayoutContextProps, TypeMark } from './types';
 
 type IBlock = ForwardRefExoticComponent<BlockProps> & TypeMark;
 

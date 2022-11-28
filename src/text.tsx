@@ -1,8 +1,9 @@
 import React, { createElement, useMemo, FC, useContext } from 'react';
 import classNames from 'classnames';
+
 import Context from '@/common/context';
 import { TEXT_TYPE_MAP } from '@/common/constant';
-import { TextProps, LayoutContextProps, TypeMark } from '@/types';
+import { TextProps, LayoutContextProps, TypeMark } from './types';
 
 export type ITextComponent = FC<TextProps> & TypeMark;
 /**

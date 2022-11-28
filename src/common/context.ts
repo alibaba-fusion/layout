@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import { last } from 'lodash-es';
 import { DEFAULT_BREAK_POINTS } from '@/common/constant';
-import { BreakPoint, LayoutContextProps } from '@/types';
+import { BreakPoint, LayoutContextProps } from '../types';
 
 const lastBreakPoint = last(DEFAULT_BREAK_POINTS) as BreakPoint;
 

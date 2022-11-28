@@ -9,10 +9,11 @@ import React, {
   useMemo,
 } from 'react';
 import classNames from 'classnames';
+
 import { VER_ALIGN_ALIAS_MAP } from '@/common/constant';
 import Context from '@/common/context';
 import { getGapVal, wrapUnit } from '@/utils';
-import { LayoutContextProps, RowProps, TypeMark } from '@/types';
+import { LayoutContextProps, RowProps, TypeMark } from './types';
 
 type IRow = ForwardRefExoticComponent<RowProps> & TypeMark;
 

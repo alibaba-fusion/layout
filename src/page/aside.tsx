@@ -1,9 +1,10 @@
 import React, { FC, ReactNode, useContext, cloneElement, Children, isValidElement } from 'react';
 import classNames from 'classnames';
+
 import Context from '@/common/context';
 import Block from '@/block';
 import { wrapUnit } from '@/utils';
-import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
+import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '../types';
 
 export interface PageAsideProps extends BaseProps, BaseBgMode {
   width: number | string;

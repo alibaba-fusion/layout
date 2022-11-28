@@ -14,10 +14,11 @@ import React, {
 } from 'react';
 import { isNumber, isString } from 'lodash-es';
 import classNames from 'classnames';
+
 import Context from '@/common/context';
 import { isPresetSize, wrapUnit } from '@/utils';
 import Text from '@/text';
-import { BaseSize, LayoutContextProps, ParagraphProps, TypeMark } from '@/types';
+import { BaseSize, LayoutContextProps, ParagraphProps, TypeMark } from './types';
 
 const getChildren = (children: any, type: ParagraphProps['type'] = 'body2') => {
   return Children.map(children, (child: ReactNode) => {

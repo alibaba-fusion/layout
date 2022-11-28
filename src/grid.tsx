@@ -6,9 +6,10 @@ import React, {
   useMemo,
 } from 'react';
 import classNames from 'classnames';
+
 import Context from '@/common/context';
 import { getGapVal, wrapUnit } from '@/utils';
-import { GridProps, LayoutContextProps, TypeMark } from '@/types';
+import { GridProps, LayoutContextProps, TypeMark } from './types';
 
 type IGrid = ForwardRefExoticComponent<GridProps> & TypeMark;
 

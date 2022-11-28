@@ -9,8 +9,9 @@ import React, {
   useRef,
 } from 'react';
 import classNames from 'classnames';
+
 import Context from '@/common/context';
-import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
+import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '../types';
 import { wrapUnit } from '@/utils';
 
 export interface PageContentProps extends BaseProps, BaseBgMode {

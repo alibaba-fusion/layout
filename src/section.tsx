@@ -11,6 +11,7 @@ import React, {
 } from 'react';
 import { isString, isNil } from 'lodash-es';
 import classNames from 'classnames';
+
 import Context from '@/common/context';
 import { wrapUnit, getGapVal, isValidGap } from '@/utils';
 import Block from '@/block';
@@ -18,7 +19,7 @@ import Row from '@/row';
 import Col from '@/col';
 import Cell from '@/cell';
 import P from '@/p';
-import { SectionProps, LayoutContextProps, TypeMark } from '@/types';
+import { SectionProps, LayoutContextProps, TypeMark } from './types';
 
 type ISection = ForwardRefExoticComponent<SectionProps> & TypeMark;
 

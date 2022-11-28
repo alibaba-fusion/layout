@@ -1,9 +1,10 @@
 import { createElement, useContext, FC, useMemo } from 'react';
 import classNames from 'classnames';
 import { isNumber, isString } from 'lodash-es';
+
 import Context from '@/common/context';
 import { isPresetSize, wrapUnit } from '@/utils';
-import { LayoutContextProps, SpaceProps } from '@/types';
+import { LayoutContextProps, SpaceProps } from './types';
 
 /**
  * 间距

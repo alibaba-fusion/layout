@@ -14,13 +14,14 @@ import React, {
 import classNames from 'classnames';
 import isValidArray from 'is-valid-array';
 import ResizeObserver from 'resize-observer-polyfill';
+
+import { getCurBreakPoint, getMaxNumberOfColumns, isValidGap, wrapUnit } from '@/utils';
 import Context from '@/common/context';
 import { DEFAULT_BREAK_POINTS } from '@/common/constant';
 import useCombinedRefs from '@/hooks/use-combine-ref';
 import useGuid from '@/hooks/use-guid';
-import { getCurBreakPoint, getMaxNumberOfColumns, isValidGap, wrapUnit } from '@/utils';
-import { BaseBgMode, BaseGap, BaseProps, BreakPoint, BreakPoints } from '@/types';
 import PageContent, { PageContentProps } from './content';
+import { BaseBgMode, BaseGap, BaseProps, BreakPoint, BreakPoints } from '../types';
 
 interface ContentProps extends BaseBgMode {
   style?: CSSProperties;

@@ -7,10 +7,11 @@ import React, {
   useMemo,
 } from 'react';
 import classNames from 'classnames';
+
 import Context from '@/common/context';
 import { VER_ALIGN_ALIAS_MAP } from '@/common/constant';
 import { isValidGap, wrapUnit } from '@/utils';
-import { CellProps, LayoutContextProps, TypeMark } from '@/types';
+import { CellProps, LayoutContextProps, TypeMark } from './types';
 
 type ICell = ForwardRefExoticComponent<CellProps> & TypeMark;
 
