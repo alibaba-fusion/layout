@@ -208,15 +208,17 @@ const Section: ForwardRefRenderFunction<HTMLDivElement, SectionProps> = (props, 
               <Cell className={`${clsPrefix}-title`} align={titleAlign}>
                 {isString(title) ? <P type="h5">{title}</P> : title}
               </Cell>
-              <Cell x-if={extra} align="right" autoFit className={`${clsPrefix}-extra`}>
-                {isString(extra) ? (
-                  <P align="right" type="body2">
-                    {extra}
-                  </P>
-                ) : (
-                  extra
-                )}
-              </Cell>
+              {extra ? (
+                <Cell align="right" autoFit className={`${clsPrefix}-extra`}>
+                  {isString(extra) ? (
+                    <P align="right" type="body2">
+                      {extra}
+                    </P>
+                  ) : (
+                    extra
+                  )}
+                </Cell>
+              ) : null}
             </Row>
             <Cell>
               <div className={blockWrapperCls} style={blockWrapperStyle}>

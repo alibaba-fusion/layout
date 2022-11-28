@@ -87,15 +87,17 @@ const Block: ForwardRefRenderFunction<any, BlockProps> = (props, ref: ForwardedR
             )}
           </Cell>
 
-          <Cell x-if={extra} autoFit className={`${clsPrefix}-extra`} align="right">
-            {isString(extra) ? (
-              <P>
-                <Text>{extra}</Text>
-              </P>
-            ) : (
-              extra
-            )}
-          </Cell>
+          {extra ? (
+            <Cell autoFit className={`${clsPrefix}-extra`} align="right">
+              {isString(extra) ? (
+                <P>
+                  <Text>{extra}</Text>
+                </P>
+              ) : (
+                extra
+              )}
+            </Cell>
+          ) : null}
         </Row>
 
         <Cell
