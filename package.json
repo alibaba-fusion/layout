@@ -1,6 +1,6 @@
 {
   "name": "@alifd/layout",
-  "version": "2.0.0-beta.3",
+  "version": "2.0.0",
   "description": "基于 Fusion 设计系统的自然布局体系",
   "files": [
     "demo/",
@@ -76,13 +76,13 @@
     "name": "Layout",
     "title": "自然布局",
     "category": "Information",
-    "materialSchema": "https://unpkg.alibaba-inc.com/@alifd/layout@2.0.0-beta.3/build/lowcode/assets-daily.json"
+    "materialSchema": "https://unpkg.alibaba-inc.com/@alifd/layout@2.0.0-beta.4/build/lowcode/assets-daily.json"
   },
   "publishConfig": {
     "access": "public"
   },
   "license": "MIT",
-  "homepage": "https://unpkg.com/@alifd/layout@2.0.0-beta.3/build/index.html",
+  "homepage": "https://unpkg.com/@alifd/layout@2.0.0-beta.4/build/index.html",
   "bugs": "https://gitlab.alibaba-inc.com/fusion-design/layout/issues",
   "husky": {
     "hooks": {
