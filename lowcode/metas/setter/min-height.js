@@ -2,10 +2,9 @@ module.exports = [
   {
     name: '!heightType',
     title: '高度类型',
-    initialValue: '',
-    defaultValue: '',
     setter: {
       componentName: 'RadioGroupSetter',
+      initialValue: '',
       props: {
         options: [
           {
@@ -42,7 +41,6 @@ module.exports = [
     name: 'style.minHeight',
     title: '最小高度',
     defaultValue: '',
-    initialValue: '',
     setter: {
       componentName: 'NumberSetter',
       props: {
