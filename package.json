@@ -82,12 +82,13 @@
     "access": "public"
   },
   "license": "MIT",
-  "homepage": "https://unpkg.com/@alifd/layout@2.0.0-beta.4/build/index.html",
+  "homepage": "https://unpkg.com/@alifd/layout@2.0.0/build/index.html",
   "bugs": "https://gitlab.alibaba-inc.com/fusion-design/layout/issues",
   "husky": {
     "hooks": {
       "pre-commit": "f2elint commit-file-scan",
       "commit-msg": "f2elint commit-msg-scan"
     }
-  }
+  },
+  "repository": "https://github.com/alibaba-fusion/layout.git"
 }
