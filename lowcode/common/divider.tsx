@@ -97,10 +97,10 @@ export const Divider = (props: IDividerProps) => {
   }, []);
 
   useEffect(() => {
-    const { selection } = engine.current;
-    if (!selection) return;
+    const { project } = engine.current;
+    if (!project) return;
 
-    selection.onSelectionChange(onSelectionChange);
+    project.currentDocument.onChangeSelection(onSelectionChange);
   }, []);
 
   /*
@@ -282,8 +282,8 @@ const getSplitDimension = (componentName: string) => {
   return dimension;
 };
 
-const getSelectedNode = ({ selection, project }) => {
-  const selectedId = selection.selected[0];
+const getSelectedNode = ({ project }) => {
+  const selectedId = project.currentDocument?.selection.selected[0];
   return selectedId ? project.currentDocument.nodesMap.get(selectedId) : null;
 };
 
