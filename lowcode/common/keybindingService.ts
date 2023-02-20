@@ -60,8 +60,7 @@ class KeybindingService {
     targetKb.cb.apply(null, [node, ...rest]);
   }
   private getSelectedNode() {
-    const selectedNodeId = this.project.currentDocument?.selection.selected[0];
-    return selectedNodeId ? this.project.currentDocument?.nodesMap.get(selectedNodeId) : null;
+    return this.project.currentDocument?.selection.getNodes()[0];
   }
   private isValidNode(node: any, kb: IKeyBinding) {
     return kb.components === '*' || kb.components.includes(node.componentName);
