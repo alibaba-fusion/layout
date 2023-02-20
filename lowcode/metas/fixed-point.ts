@@ -1,6 +1,6 @@
 const { FIXED_POINT } = require('../names');
 
-module.exports = {
+export default {
   componentName: FIXED_POINT,
   title: '自由节点',
   category: '布局容器类',

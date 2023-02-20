@@ -1,3 +1,5 @@
+import { IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+
 module.exports = [
   {
     name: 'style.width',
@@ -24,14 +26,14 @@ module.exports = [
       },
     },
     extraProps: {
-      getValue: (target) => {
-        return typeof target.getNode().getPropValue('style.width') === 'number' ? 'fixed' : '';
+      getValue: (target: IPublicModelSettingPropEntry) => {
+        return typeof target.node?.getPropValue('style.width') === 'number' ? 'fixed' : '';
       },
-      setValue: (target, value) => {
+      setValue: (target: IPublicModelSettingPropEntry, value) => {
         if (value === 'fixed') {
-          target.getNode().setPropValue('style.width', parseInt(target.getNode().getRect().width));
+          target.node?.setPropValue('style.width', parseInt(String(target.node?.getRect()?.width)));
         } else if (value === '') {
-          target.getNode().setPropValue('style.width', '');
+          target.node?.setPropValue('style.width', '');
         }
       },
     },
@@ -47,6 +49,6 @@ module.exports = [
         units: 'px',
       },
     },
-    condition: (target) => typeof target.getNode().getPropValue('style.width') === 'number',
+    condition: (target: IPublicModelSettingPropEntry) => typeof target.node?.getPropValue('style.width') === 'number',
   },
 ];

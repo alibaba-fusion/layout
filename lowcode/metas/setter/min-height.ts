@@ -1,3 +1,5 @@
+import { IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+
 module.exports = [
   {
     name: '!heightType',
@@ -19,20 +21,20 @@ module.exports = [
       },
     },
     extraProps: {
-      getValue: (target) => {
-        if (target.getNode().getPropValue('style.minHeight')) {
+      getValue: (target: IPublicModelSettingPropEntry) => {
+        if (target.node?.getPropValue('style.minHeight')) {
           return 'min';
         } else {
           return 'auto';
         }
       },
-      setValue: (target, value) => {
+      setValue: (target: IPublicModelSettingPropEntry, value) => {
         if (value === 'min') {
           target
-            .getNode()
-            .setPropValue('style.minHeight', parseInt(target.getNode().getRect().height));
+            .node
+            ?.setPropValue('style.minHeight', parseInt(String(target.node?.getRect()?.height)));
         } else if (value === 'auto') {
-          target.getNode().setPropValue('style.minHeight', null);
+          target.node?.setPropValue('style.minHeight', null);
         }
       },
     },
@@ -48,10 +50,10 @@ module.exports = [
         step: 2,
       },
     },
-    condition: (target) => {
+    condition: (target: IPublicModelSettingPropEntry) => {
       return (
-        target.getNode().getPropValue('!heightType') === 'min' ||
-        !!target.getNode().getPropValue('style.minHeight')
+        target.node?.getPropValue('!heightType') === 'min' ||
+        !!target.node?.getPropValue('style.minHeight')
       );
     },
   },

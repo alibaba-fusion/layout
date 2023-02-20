@@ -40,6 +40,9 @@
     "component"
   ],
   "dependencies": {
+    "@alifd/next": "^1.x",
+    "@alilc/lowcode-engine": "^1.1.1",
+    "@alilc/lowcode-types": "^1.1.1",
     "classnames": "^2.3.2",
     "is-valid-array": "^1.0.1",
     "lodash-es": "^4.17.21",

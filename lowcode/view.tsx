@@ -9,6 +9,7 @@ import { SECTION, BLOCK, CELL } from './names';
 import { createBlockSnippet, createSectionSnippet } from './default-schema';
 import * as ProLayout from '../src';
 import './index.scss';
+import { IPublicModelNode } from '@alilc/lowcode-types';
 
 let pageLoaded = false;
 
@@ -71,9 +72,10 @@ function addNewSection(_leaf) {
   });
 }
 
-const addNewBlock = (_leaf) => {
+const addNewBlock = (_leaf: IPublicModelNode) => {
+  const children = _leaf?.schema?.children;
   const prevBlockSchema =
-    [...(_leaf?.schema?.children || [])].reverse().find((n) => n.componentName === BLOCK) ||
+    [...((Array.isArray(children) ? children : []) || [])].reverse().find((n) => typeof n === 'object' && (n as any).componentName === BLOCK) ||
     createBlockSnippet();
   const prevBlockProps = { ...prevBlockSchema.props };
   delete prevBlockProps.operation;
@@ -84,9 +86,9 @@ const addNewBlock = (_leaf) => {
     span: 12,
   };
 
-  const newNode = _leaf.document.createNode(blockSchema);
-  _leaf.insertAfter(newNode);
-  newNode.select();
+  const newNode = _leaf.document?.createNode(blockSchema);
+  newNode && _leaf.insertAfter(newNode);
+  newNode && newNode.select();
 };
 
 const PageView = (props) => {
@@ -280,10 +282,8 @@ const FixedPointView = (props) => {
   // 第一次拖拽 x/y=0
   const onDragStart = () => {
     // hack engine for mousemove
-    // enableMouseEventPropagationInCanvas.current = (window.parent as any).AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas;
-    (
-      window.parent as any
-    ).AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = true;
+    // enableMouseEventPropagationInCanvas.current = window.parent.AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas;
+    window.parent.AliLowCodeEngine.config.set('enableMouseEventPropagationInCanvas', true);
 
     // disable move
     movehook.current = _leaf.componentMeta.getMetadata().experimental.callbacks.onMoveHook;
@@ -291,7 +291,7 @@ const FixedPointView = (props) => {
     setDraging(true);
   };
   const onDragEnd = (e, uiData) => {
-    // (window.parent as any).AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = enableMouseEventPropagationInCanvas.current;
+    // window.parent.AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = enableMouseEventPropagationInCanvas.current;
     _leaf.componentMeta.getMetadata().experimental.callbacks.onMoveHook = movehook.current;
 
     _leaf.setPropValue('left', uiData.x + left);
@@ -344,31 +344,39 @@ const FixedPointView = (props) => {
   );
 };
 
-const FixedContainerView = (props) => {
+interface IFixedContainerViewProps {
+  _leaf: IPublicModelNode;
+  children: any;
+  items: any;
+}
+
+const FixedContainerView = (props: IFixedContainerViewProps) => {
   const { _leaf, children, items = [], ...others } = props;
 
   // hack engine for mousedown
-  _leaf.parent.isRGLContainer = true;
+  if (_leaf.parent) {
+    _leaf.parent.isRGLContainer = true;
+  }
 
   // const enableMouseEventPropagationInCanvas = useRef();
-  const movehook = useRef();
+  const movehook: any = useRef();
   const [isDraging, setDraging] = useState(false);
 
   // 第一次拖拽 x/y=0
   const onDragStart = () => {
     // hack engine for mousemove
-    // enableMouseEventPropagationInCanvas.current = (window.parent as any).AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas;
-    (
-      window.parent as any
-    ).AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = true;
+    // enableMouseEventPropagationInCanvas.current = window.parent.AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas;
+    window.parent.AliLowCodeEngine.config.set('enableMouseEventPropagationInCanvas', true);
 
     // disable move
-    movehook.current = _leaf.componentMeta.getMetadata().experimental.callbacks.onMoveHook;
+    movehook.current = _leaf?.componentMeta?.getMetadata().experimental?.callbacks?.onMoveHook;
+    // TODO: 不一定能设置上
     _leaf.componentMeta.getMetadata().experimental.callbacks.onMoveHook = () => false;
     setDraging(true);
   };
   const onDragEnd = (uiData, idx) => {
-    // (window.parent as any).AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = enableMouseEventPropagationInCanvas.current;
+    // window.parent.AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = enableMouseEventPropagationInCanvas.current;
+    // // TODO: 不一定能设置上
     _leaf.componentMeta.getMetadata().experimental.callbacks.onMoveHook = movehook.current;
 
     // 有节点增加

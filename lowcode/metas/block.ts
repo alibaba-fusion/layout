@@ -1,3 +1,5 @@
+import { IPublicModelNode } from "@alilc/lowcode-types";
+
 const { updateSpan } = require('../common/split/auto-block');
 const BLOCK_RESIZE_MAP = require('../common/split/block-resize-map');
 const { CELL, ROW, COL, SECTION, BLOCK } = require('../names');
@@ -22,7 +24,7 @@ const getAcc = (arr, index) => {
   return 0;
 };
 
-module.exports = {
+export default {
   componentName: BLOCK,
   title: '区块',
   category: '容器',
@@ -198,9 +200,9 @@ module.exports = {
     },
   },
   experimental: {
-    getResizingHandlers: (node) => {
-      const directionMap = [];
-      const flatenGroupMap = node.parent.lastFlatenMap;
+    getResizingHandlers: (node: IPublicModelNode) => {
+      const directionMap: string[] = [];
+      const flatenGroupMap = node.parent?.lastFlatenMap;
 
       if (node.index < 0) {
         return [];
@@ -234,8 +236,8 @@ module.exports = {
     },
     callbacks: {
       onNodeRemove: onNodeRemoveSelfWhileNoChildren,
-      onResizeStart: (e, currentNode) => {
-        const parent = currentNode.getParent();
+      onResizeStart: (e, currentNode: IPublicModelNode) => {
+        const parent = currentNode.parent;
         if (parent) {
           const parentNode = parent.getDOMNode();
           if (parentNode) {
@@ -245,7 +247,7 @@ module.exports = {
         currentNode.lastDeltaX = 0;
         currentNode.lastGroupList = '';
       },
-      onResize: (e, currentNode) => {
+      onResize: (e, currentNode: IPublicModelNode) => {
         // 获取合法移动位移
         // 判断是否要变化
         // 更新鼠标开始位置，更新span信息

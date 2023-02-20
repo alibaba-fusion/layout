@@ -1,7 +1,7 @@
 const { CELL, P } = require('../names');
 const { onNodeRemoveSelfWhileNoChildren } = require('./enhance/callbacks');
 
-module.exports = {
+export default {
   componentName: P,
   title: '段落',
   category: '布局容器类',

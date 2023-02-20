@@ -1,10 +1,12 @@
+import { IPublicModelNode } from "@alilc/lowcode-types";
+
 const { CELL, ROW, COL } = require('../../names');
 
 /**
  * onSubtreeModified 是从叶子节点逐级冒泡, 注意做好判断
  * options.isSubDeleting 是否因为父节点删除导致被连带删除。树根节点为 false，其他分支节点、叶子节点则为 true
  */
-export const onNodeReplaceSelfWithChildrenCell = (currentNode, e) => {
+export const onNodeReplaceSelfWithChildrenCell = (currentNode: IPublicModelNode, e) => {
   const { removeNode, type, isSubDeleting } = e;
 
   // console.log(currentNode, currentNode.children.length, e)
@@ -22,17 +24,17 @@ export const onNodeReplaceSelfWithChildrenCell = (currentNode, e) => {
 
   const { children } = currentNode;
   // 只有一个子元素 Cell/Row/Col，则让子元素替代自己
-  if (children?.length === 1 && [CELL, ROW, COL].indexOf(children.get(0).componentName) > -1) {
+  if (children?.size === 1 && [CELL, ROW, COL].indexOf(children.get(0)?.componentName) > -1) {
     const child = children.get(0);
     const { parent } = currentNode;
 
-    child.setPropValue('style', currentNode.getPropValue('style'));
-    child.setPropValue('width', currentNode.getPropValue('width'));
+    child?.setPropValue('style', currentNode.getPropValue('style'));
+    child?.setPropValue('width', currentNode.getPropValue('width'));
 
-    parent.insertAfter(child, currentNode, false);
+    child && parent?.insertAfter(child, currentNode, false);
 
     currentNode.remove();
-  } else if (children?.length > 1) {
+  } else if (children?.size && children?.size > 1) {
     // 同名节点提升
     const sameNameChild = children.find((n) => n.componentName === currentNode.componentName);
     if (sameNameChild?.children) {
@@ -66,16 +68,16 @@ export const onNodeRemoveSelfWhileNoChildren = (removeNode, currentNode) => {
 };
 
 function disableDivider() {
-  const iframe = window.AliLowCodeEngine.project.simulator;
-  iframe && iframe.contentWindow.dispatchEvent(new Event('dividerDisable'));
+  const iframe = window.AliLowCodeEngine.project.simulatorHost;
+  iframe && iframe.contentWindow?.dispatchEvent(new Event('dividerDisable'));
 }
 function enableDivider() {
-  const iframe = window.AliLowCodeEngine.project.simulator;
-  iframe && iframe.contentWindow.dispatchEvent(new Event('dividerEnable'));
+  const iframe = window.AliLowCodeEngine.project.simulatorHost;
+  iframe && iframe.contentWindow?.dispatchEvent(new Event('dividerEnable'));
 }
 
 export const onDrageResize = {
-  onResizeStart(e, currentNode) {
+  onResizeStart(e, currentNode: IPublicModelNode) {
     disableDivider();
 
     currentNode.startRect = currentNode.getRect();
@@ -83,7 +85,7 @@ export const onDrageResize = {
       e.trigger === 'n' || e.trigger === 'w' ? currentNode.prevSibling : currentNode.nextSibling;
     currentNode.siblingRect = currentNode.siblingNode ? currentNode.siblingNode.getRect() : null;
   },
-  onResize(e, currentNode) {
+  onResize(e, currentNode: IPublicModelNode) {
     const { deltaY, deltaX } = e;
     const { height: startHeight, width: startWidth } = currentNode.startRect;
 

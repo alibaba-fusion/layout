@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import { splitNodeByDimension } from './split/auto-cell';
 import { CELL, ROW, COL, BLOCK } from '../names';
+import { IPublicApiProject, IPublicModelNode } from '@alilc/lowcode-types';
 
 export interface IDividerProps {
   split: (dimension: 'v' | 'h' | 'm', node: any) => void;
@@ -29,8 +30,9 @@ export const initSingletonDivider = (id?: string) => {
     ReactDOM.render(<Divider split={splitNodeByDimension} />, dividerWrapper);
   }
 };
+
 export const Divider = (props: IDividerProps) => {
-  const engine = useRef((window.parent as any).AliLowCodeEngine);
+  const engine = useRef(window.parent.AliLowCodeEngine);
   const [cuts, setCuts] = useState<Pos[]>([]);
   const [disabled, setDisabled] = useState(false);
   const computCuts = useCallback((selectedNode) => {
@@ -100,7 +102,7 @@ export const Divider = (props: IDividerProps) => {
     const { project } = engine.current;
     if (!project) return;
 
-    project.currentDocument.onChangeSelection(onSelectionChange);
+    project.currentDocument?.onChangeSelection(onSelectionChange);
   }, []);
 
   /*
@@ -282,13 +284,12 @@ const getSplitDimension = (componentName: string) => {
   return dimension;
 };
 
-const getSelectedNode = ({ project }) => {
-  const selectedId = project.currentDocument?.selection.selected[0];
-  return selectedId ? project.currentDocument.nodesMap.get(selectedId) : null;
+const getSelectedNode = ({ project }: { project: IPublicApiProject }): IPublicModelNode | undefined => {
+  return project.currentDocument?.selection.getNodes()[0];
 };
 
 const getPageRootDOMNode = () => {
-  return (window.parent as any).AliLowCodeEngine.project.currentDocument.root.getDOMNode();
+  return window.parent.AliLowCodeEngine.project.currentDocument?.root?.getDOMNode();
 };
 
 const createDividerWrapperNode = (dividerId: string) => {

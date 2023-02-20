@@ -1,3 +1,6 @@
+import { IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+import React from "react";
+
 const TooltipLabel = require('./tooltip-label');
 
 module.exports = () => [
@@ -7,12 +10,12 @@ module.exports = () => [
     defaultValue: 'column',
     initialValue: 'column',
     extraProps: {
-      setValue: (target, value) => {
-        const titleProp = target.getNode().getExtraProp('title');
+      setValue: (target: IPublicModelSettingPropEntry, value) => {
+        const titleProp = target.node?.getExtraProp('title');
         if (value === 'column') {
-          titleProp.setValue('列容器');
+          titleProp?.setValue('列容器');
         } else {
-          titleProp.setValue('行容器');
+          titleProp?.setValue('行容器');
         }
       },
     },

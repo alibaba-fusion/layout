@@ -1,3 +1,4 @@
+import { IPublicModelNode } from '@alilc/lowcode-types';
 import { createBlockSnippet } from '../../default-schema';
 import { BLOCK, SECTION } from '../../names';
 
@@ -20,7 +21,7 @@ const parseFlaten2Tree = (flaten = [], tree) => {
  * @param {Emun} direction 'e' | 'w' 表示在用哪条bar e（右） 或 w（左）
  * @returns
  */
-const handleResize = (groupArr, blockNode, offset, direction = 'e') => {
+const handleResize = (groupArr, blockNode: IPublicModelNode, offset, direction = 'e') => {
   const changeIndex = groupArr.findIndex((item) => item.id === blockNode.schema.id);
   const key = groupArr.map((item) => item.span).join(',');
   if (changeIndex < 0) {
@@ -46,7 +47,7 @@ const handleResize = (groupArr, blockNode, offset, direction = 'e') => {
  * @param {*} groupIndex 当前所处理的数组，他们有共同的组序列号
  * @returns
  */
-const handleSplit = (groupArr, blockNode, groupIndex) => {
+const handleSplit = (groupArr, blockNode: IPublicModelNode, groupIndex) => {
   const changeIndex = groupArr.findIndex((item) => item.id === blockNode.schema.id);
   const key = groupArr.map((item) => item.span).join(',');
   if (changeIndex < 0) {
@@ -59,12 +60,12 @@ const handleSplit = (groupArr, blockNode, groupIndex) => {
     const blockSnippet = createBlockSnippet({
       blockProps: originProps,
     });
-    const newNode = blockNode.document.createNode(blockSnippet);
-    blockNode.parent.insertAfter(newNode, blockNode, false);
+    const newNode = blockNode?.document?.createNode(blockSnippet);
+    newNode && blockNode.parent?.insertAfter(newNode, blockNode, false);
 
     const newNodeSchema = [blockNode, newNode].map((item) => {
       return {
-        id: item.id,
+        id: item?.id,
         groupIndex,
       };
     });
@@ -84,7 +85,7 @@ const handleSplit = (groupArr, blockNode, groupIndex) => {
  * @param {*} sectionNode 触发 删除 的节点属的Block
  * @returns
  */
-const handleDelete = (afterTreeGroup, afterFlatenGroup, blockNode, sectionNode) => {
+const handleDelete = (afterTreeGroup, afterFlatenGroup, blockNode: IPublicModelNode, sectionNode: IPublicModelNode) => {
   const treeMap = [];
   parseFlaten2Tree(sectionNode.lastFlatenMap, treeMap);
   treeMap.forEach((group) => {

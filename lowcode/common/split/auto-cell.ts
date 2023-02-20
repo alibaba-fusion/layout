@@ -6,6 +6,7 @@ import {
 } from '../../default-schema';
 import { updateSpan } from './auto-block';
 import { CELL, ROW, COL, P, BLOCK } from '../../names';
+import { IPublicModelNode } from '@alilc/lowcode-types';
 
 /**
  * 把 CELL 变成 Grid
@@ -36,7 +37,11 @@ export const changeCellToGrid = (node: any) => {
 };
 
 export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: any, preAppend = false) => {
-  const { currentDocument } = (window.parent as any).AliLowCodeEngine.project;
+  const { currentDocument } = window.parent.AliLowCodeEngine.project;
+  if (!currentDocument) {
+    return;
+  }
+
   const selectedIds = currentDocument.selection.selected;
 
   let nodeList = [node];
@@ -194,19 +199,19 @@ export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: any, preA
  * @param node
  * @returns
  */
-const createPwithChildrens = (node) => {
+const createPwithChildrens = (node: IPublicModelNode) => {
   const pSnippet = createPSnippet();
-  const pNode = node.document.createNode(pSnippet);
+  const pNode = node.document?.createNode(pSnippet);
 
-  [...node.parent.children].forEach((child) => {
+  node.parent?.children?.forEach((child) => {
     if (child.index >= node.index) {
-      pNode.insertBefore(child);
+      pNode?.insertBefore(child);
     }
   });
 
   return pNode;
 };
-export const autoPCellWithEnter = (node) => {
+export const autoPCellWithEnter = (node: IPublicModelNode) => {
   if (node?.parent?.componentName === P && node.parent?.parent?.componentName === CELL) {
     const cellWrap = node.parent.parent;
 
@@ -214,7 +219,7 @@ export const autoPCellWithEnter = (node) => {
     if (node.index > 0) {
       const insertPoint = node.parent;
       const pNode = createPwithChildrens(node);
-      cellWrap.insertAfter(pNode, insertPoint, false);
+      pNode && cellWrap.insertAfter(pNode, insertPoint, false);
     } else if (node.index === 0 && node.parent.prevSibling?.componentName === P) {
       // 第一个节点并且不是第一个P。先水平切割 CELL
       splitNodeByDimension('h', cellWrap);
@@ -222,37 +227,37 @@ export const autoPCellWithEnter = (node) => {
       const pNode = node.parent;
 
       const nextCell = cellWrap.nextSibling;
-      [...cellWrap.children].forEach((n) => {
+      cellWrap.children?.forEach((n) => {
         if (n.index >= pNode.index) {
-          nextCell.insertAfter(n);
+          nextCell?.insertAfter(n);
         }
       });
     }
   }
 };
 
-export const autoPCellWithTab = (node) => {
+export const autoPCellWithTab = (node: IPublicModelNode) => {
   if (node?.parent?.componentName === P && node.parent?.parent?.componentName === CELL) {
     const cellWrap = node.parent.parent;
     const parentP = node.parent;
     splitNodeByDimension('v', cellWrap);
 
-    const children = [...cellWrap.children];
+    const children = cellWrap.children;
     const nextCell = cellWrap.nextSibling;
     if (node.index !== 0) {
       // 不是第一个元素，要再多拆一个P
       const pNode = createPwithChildrens(node);
-      nextCell.insertAfter(pNode);
+      pNode && nextCell?.insertAfter(pNode);
 
-      children.forEach((child) => {
+      children?.forEach((child) => {
         if (child.index > parentP.index) {
-          nextCell.insertAfter(child);
+          nextCell?.insertAfter(child);
         }
       });
     } else {
-      children.forEach((child) => {
+      children?.forEach((child) => {
         if (child.index >= parentP.index) {
-          nextCell.insertAfter(child);
+          nextCell?.insertAfter(child);
         }
       });
     }
