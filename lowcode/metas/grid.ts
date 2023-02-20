@@ -1,3 +1,5 @@
+import { IPublicModelNode, IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+
 const { CELL, GRID, BLOCK, ROW, COL } = require('../names');
 const { createCellSnippet, createPSnippet } = require('../default-schema');
 const widthSetter = require('./setter/width');
@@ -8,7 +10,7 @@ const {
   onNodeReplaceSelfWithChildrenCell,
 } = require('./enhance/callbacks');
 
-module.exports = {
+export default {
   componentName: GRID,
   title: '网格容器',
   category: '容器',
@@ -30,7 +32,7 @@ module.exports = {
     component: {
       isContainer: true,
       nestingRule: {
-        childWhitelist: (node) => {
+        childWhitelist: (node: IPublicModelNode) => {
           return node.componentName !== GRID;
         },
       },
@@ -53,8 +55,8 @@ module.exports = {
         title: '宽度控制',
         type: 'group',
         display: 'block',
-        condition: (target) => {
-          return [BLOCK, ROW].indexOf(target.getNode().parent.componentName) !== -1;
+        condition: (target: IPublicModelSettingPropEntry) => {
+          return [BLOCK, ROW].indexOf(target.node?.parent?.componentName) !== -1;
         },
         items: [...widthSetter],
       },
@@ -62,8 +64,8 @@ module.exports = {
         title: '高度控制',
         type: 'group',
         display: 'block',
-        condition: (target) => {
-          return [BLOCK, COL].indexOf(target.getNode().parent.componentName) !== -1;
+        condition: (target: IPublicModelSettingPropEntry) => {
+          return [BLOCK, COL].indexOf(target.node?.parent?.componentName) !== -1;
         },
         items: [...heightSetter],
       },
@@ -110,10 +112,10 @@ module.exports = {
   },
   experimental: {
     callbacks: {
-      onNodeRemove: (removedNode, currentNode) => {
+      onNodeRemove: (removedNode: IPublicModelNode, currentNode: IPublicModelNode) => {
         onNodeRemoveSelfWhileNoChildren(removedNode, currentNode);
       },
-      onSubtreeModified: (currentNode, e) => {
+      onSubtreeModified: (currentNode: IPublicModelNode, e) => {
         onNodeReplaceSelfWithChildrenCell(currentNode, e);
       },
       /**
@@ -122,9 +124,9 @@ module.exports = {
        * @param {*} draggedNode 被拖入的组件
        * @param {*} currentNode 被拖入到 CELL
        */
-      onNodeAdd: (draggedNode, currentNode) => {
+      onNodeAdd: (draggedNode: IPublicModelNode, currentNode: IPublicModelNode) => {
         if (!draggedNode || draggedNode.componentName !== CELL) {
-          const { dropLocation } = draggedNode.document.canvas;
+          const dropLocation = draggedNode.document?.dropLocation;
           if (!dropLocation) {
             // 没有 dropLocation 一般是 slot, slot 元素不用特殊处理 不做任何包裹
             return;
@@ -133,12 +135,12 @@ module.exports = {
 
           // 自动包裹 CELL + P
           if (dropTarget === currentNode) {
-            const cellNode = currentNode.document.createNode(createCellSnippet());
-            const pNode = currentNode.document.createNode(createPSnippet());
-            cellNode.insertAfter(pNode);
+            const cellNode = currentNode.document?.createNode(createCellSnippet());
+            const pNode = currentNode.document?.createNode(createPSnippet());
+            pNode && cellNode?.insertAfter(pNode);
 
-            currentNode.insertAfter(cellNode, draggedNode, false);
-            pNode.insertAfter(draggedNode, pNode, false);
+            cellNode && currentNode.insertAfter(cellNode, draggedNode, false);
+            pNode?.insertAfter(draggedNode, pNode, false);
           }
         }
       },

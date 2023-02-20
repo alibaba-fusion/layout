@@ -1,21 +1,23 @@
-const { PAGE_ASIDE } = require('../names');
+const { PAGE_NAV, BLOCK } = require('../names');
 
-module.exports = {
-  componentName: PAGE_ASIDE,
-  title: '页面右侧',
+export default {
+  componentName: PAGE_NAV,
+  title: '页面左侧',
   npm: {
     package: '@alifd/layout',
     version: '^0.1.0',
     exportName: 'Page',
     main: 'lib/index.js',
     destructuring: true,
-    subName: 'Aside',
+    subName: 'Nav',
   },
   props: [],
   configure: {
     component: {
       isContainer: true,
-      nestingRule: {},
+      nestingRule: {
+        childWhitelist: [BLOCK],
+      },
     },
     props: [
       {
@@ -32,6 +34,10 @@ module.exports = {
         },
       },
     ],
+    supports: {
+      style: true,
+      loop: false,
+    },
   },
   experimental: {
     callbacks: {

@@ -1,11 +1,14 @@
+import { IPublicModelNode } from "@alilc/lowcode-types";
+
 const { ROW, COL } = require('../../names');
 
-export const getResizingHandlers = (node) => {
-  const directionList = [];
+export const getResizingHandlers = (node: IPublicModelNode) => {
+  const directionList: string[] = [];
   const parentNode = node.parent;
-  const parentChildrenLength = parentNode.getChildren().length;
-  const parentCN = parentNode.componentName;
-  if ((parentCN === ROW || parentCN === COL) && parentChildrenLength > 1) {
+  const parentChildrenLength = parentNode?.children?.size;
+  const parentCN = parentNode?.componentName;
+  // debugger;
+  if ((parentCN === ROW || parentCN === COL) && (parentChildrenLength && parentChildrenLength > 1)) {
     if (parentCN === COL) {
       // 列容器，只能上下拖动
       if (node.index > 0) {

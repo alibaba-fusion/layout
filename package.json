@@ -38,6 +38,8 @@
   ],
   "dependencies": {
     "@alifd/next": "^1.x",
+    "@alilc/lowcode-engine": "^1.1.1",
+    "@alilc/lowcode-types": "^1.1.1",
     "classnames": "^2.3.2",
     "resize-observer-polyfill": "^1.5.1"
   },

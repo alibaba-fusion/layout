@@ -1,3 +1,5 @@
+import { IPublicApiHotkey, IPublicApiProject } from "@alilc/lowcode-types";
+
 interface cbFunc {
   (node: any, e: KeyboardEvent): void;
 }
@@ -11,12 +13,12 @@ export interface IKeyBinding {
 }
 
 class KeybindingService {
-  hotkey: any;
-  project: any;
+  hotkey: IPublicApiHotkey;
+  project: IPublicApiProject;
   keybindingMap: IKeyBinding[];
 
   constructor() {
-    const engine = (window.parent as any).AliLowCodeEngine;
+    const engine = window.parent.AliLowCodeEngine;
     this.hotkey = engine.hotkey;
     this.project = engine.project;
     this.keybindingMap = [];
@@ -58,8 +60,8 @@ class KeybindingService {
     targetKb.cb.apply(null, [node, ...rest]);
   }
   private getSelectedNode() {
-    const selectedNodeId = this.project.currentDocument.selection.selected[0];
-    return selectedNodeId ? this.project.currentDocument.nodesMap.get(selectedNodeId) : null;
+    const selectedNodeId = this.project.currentDocument?.selection.selected[0];
+    return selectedNodeId ? this.project.currentDocument?.nodesMap.get(selectedNodeId) : null;
   }
   private isValidNode(node: any, kb: IKeyBinding) {
     return kb.components === '*' || kb.components.includes(node.componentName);

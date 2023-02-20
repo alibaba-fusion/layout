@@ -1,7 +1,7 @@
 const minHeight = require('./setter/min-height');
 const { FIXED_CONTAINER } = require('../names');
 
-module.exports = {
+export default {
   componentName: FIXED_CONTAINER,
   title: '自由容器',
   category: '布局容器类',

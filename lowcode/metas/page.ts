@@ -1,3 +1,5 @@
+import { IPublicModelNode, IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+
 const {
   PAGE,
   PAGE_HEADER,
@@ -18,7 +20,7 @@ const navAside = require('./nav-aside');
 
 const newNavAside = navAside.map((item) => {
   const newItem = { ...item };
-  newItem.condition = (target) => {
+  newItem.condition = (target: IPublicModelSettingPropEntry) => {
     const isTab = target.getProps().getPropValue('isTab');
     if (['nav', 'aside'].indexOf(newItem.name) > -1) {
       return !isTab;
@@ -34,7 +36,7 @@ const newNavAside = navAside.map((item) => {
   return newItem;
 });
 
-module.exports = {
+export default {
   componentName: PAGE,
   title: '页面',
   category: '布局容器类',
@@ -84,9 +86,9 @@ module.exports = {
       isMinimalRenderUnit: true,
       disableBehaviors: '*',
       nestingRule: {
-        parentWhitelist: (dropTargetNode) => {
+        parentWhitelist: (dropTargetNode: IPublicModelNode) => {
           let targetNodeNextPageNum = 0;
-          dropTargetNode.getChildren().forEach((item) => {
+          dropTargetNode.children?.forEach((item) => {
             if (item.componentName === PAGE) {
               targetNodeNextPageNum += 1;
             }
@@ -120,17 +122,18 @@ module.exports = {
             title: '开启页头',
             setter: 'BoolSetter',
             extraProps: {
-              getValue: (target) => {
-                const pageNode = target.getNode();
-                return !!pageNode.children.find((n) => n.componentName === PAGE_HEADER);
+              getValue: (target: IPublicModelSettingPropEntry) => {
+                const pageNode = target.node;
+                return !!pageNode?.children?.find((n) => n.componentName === PAGE_HEADER);
               },
-              setValue: (target, value) => {
-                const pageNode = target.getNode();
-                const node = pageNode.children.find((n) => n.componentName === PAGE_HEADER);
+              setValue: (target: IPublicModelSettingPropEntry, value) => {
+                const pageNode = target.node;
+                const node = pageNode?.children?.find((n) => n.componentName === PAGE_HEADER);
                 if (value && !node) {
                   const navSnippets = createHeaderSnippet();
-                  const node2 = pageNode.document.createNode(navSnippets);
-                  pageNode.insertBefore(node2, pageNode.children.get(0), false);
+                  const node2 = pageNode?.document?.createNode(navSnippets);
+                  const insertNode = pageNode?.children?.get(0);
+                  node2 && insertNode && pageNode?.insertBefore(node2, insertNode, false);
                 } else if (!value && node) {
                   node.remove();
                 }
@@ -142,17 +145,17 @@ module.exports = {
             title: '开启页尾',
             setter: 'BoolSetter',
             extraProps: {
-              getValue: (target) => {
-                const pageNode = target.getNode();
-                return !!pageNode.children.find((n) => n.componentName === PAGE_FOOTER);
+              getValue: (target: IPublicModelSettingPropEntry) => {
+                const pageNode = target.node;
+                return !!pageNode?.children?.find((n) => n.componentName === PAGE_FOOTER);
               },
-              setValue: (target, value) => {
-                const pageNode = target.getNode();
-                const node = pageNode.children.find((n) => n.componentName === PAGE_FOOTER);
+              setValue: (target: IPublicModelSettingPropEntry, value) => {
+                const pageNode = target.node;
+                const node = pageNode?.children?.find((n) => n.componentName === PAGE_FOOTER);
                 if (value && !node) {
                   const navSnippets = createFooterSnippet();
-                  const node2 = pageNode.document.createNode(navSnippets);
-                  pageNode.insertBefore(node2);
+                  const node2 = pageNode?.document?.createNode(navSnippets);
+                  node2 && pageNode?.insertBefore(node2);
                 } else if (!value && node) {
                   node.remove();
                 }
@@ -170,8 +173,8 @@ module.exports = {
               initialValue: false,
             },
             extraProps: {
-              setValue: (target, value) => {
-                const currentNode = target.getNode();
+              setValue: (target: IPublicModelSettingPropEntry, value) => {
+                const currentNode = target.node;
                 if (value) {
                   const contentSnippet = {
                     componentName: PAGE_CONTENT,
@@ -184,26 +187,26 @@ module.exports = {
                     children: [],
                   };
 
-                  const newTabWrapped = currentNode.document.createNode(contentSnippet);
-                  [...currentNode.children].forEach((child) => {
+                  const newTabWrapped = currentNode?.document?.createNode(contentSnippet);
+                  currentNode?.children?.forEach((child) => {
                     if ([PAGE_HEADER, PAGE_FOOTER].indexOf(child.componentName) === -1) {
-                      newTabWrapped.insertBefore(child);
+                      newTabWrapped?.insertBefore(child);
                     }
                   });
-                  currentNode.insertBefore(newTabWrapped);
+                  newTabWrapped && currentNode?.insertBefore(newTabWrapped);
                 } else {
                   // 单页模式
                   // 去掉 Tab， 只保留第一层
-                  const firstTabItemContent = currentNode.children.find(
+                  const firstTabItemContent = currentNode?.children?.find(
                     (n) => n.componentName === PAGE_CONTENT,
                   );
 
-                  [...firstTabItemContent.children].forEach((n) => {
-                    currentNode.insertBefore(n);
+                  firstTabItemContent?.children?.forEach((n) => {
+                    currentNode?.insertBefore(n);
                   });
 
                   // 删除所有 PAGE_CONTENT
-                  [...currentNode.children].forEach((n) => {
+                  currentNode?.children?.forEach((n) => {
                     if (n.componentName === PAGE_CONTENT) {
                       n.remove();
                     }
@@ -214,7 +217,7 @@ module.exports = {
           },
           {
             name: '!items',
-            condition: (target) => {
+            condition: (target: IPublicModelSettingPropEntry) => {
               return !!target.getProps().getPropValue('isTab');
             },
             isDynamicProp: true,
@@ -252,11 +255,11 @@ module.exports = {
             },
             extraProps: {
               display: 'plain',
-              getValue(target) {
+              getValue(target: IPublicModelSettingPropEntry) {
                 return target
-                  .getNode()
-                  .children.filter((n) => n.componentName === PAGE_CONTENT)
-                  .map((child) => {
+                  ?.node
+                  ?.children?.filter((n) => n.componentName === PAGE_CONTENT)
+                  .map((child: IPublicModelNode) => {
                     const title = child.getPropValue('title');
                     const primaryKey = child.getPropValue('primaryKey');
 
@@ -267,9 +270,11 @@ module.exports = {
                     };
                   });
               },
-              setValue(target, value) {
-                const node = target.getNode();
-                const map = {};
+              setValue(target: IPublicModelSettingPropEntry, value) {
+                const node = target.node;
+                const map: {
+                  [key: string]: any;
+                } = {};
                 if (!Array.isArray(value)) {
                   value = [];
                 }
@@ -278,7 +283,7 @@ module.exports = {
                   map[i.primaryKey] = tabitem;
                 });
 
-                node.mergeChildren(
+                node?.mergeChildren(
                   (child) => {
                     // 修改
                     if (child.componentName !== PAGE_CONTENT) {
@@ -299,8 +304,8 @@ module.exports = {
                     // 取最新 Block 作为默然值
                     const blockProps =
                       target
-                        .getNode()
-                        .children.find((n) => n.componentName === PAGE_CONTENT)
+                        .node
+                        ?.children?.find((n) => n.componentName === PAGE_CONTENT)
                         ?.children?.find((n) => n.componentName === SECTION)
                         ?.children?.find((n) => n.componentName === BLOCK)?.schema?.props || {};
 
@@ -346,14 +351,14 @@ module.exports = {
         extraProps: {
           display: 'block',
         },
-        condition: (target) => {
+        condition: (target: IPublicModelSettingPropEntry) => {
           return !!target.getProps().getPropValue('isTab');
         },
         items: [
           {
             name: 'tabProps.shape',
             title: '样式',
-            condition: (target) => {
+            condition: (target: IPublicModelSettingPropEntry) => {
               return !!target.getProps().getPropValue('isTab');
             },
             defaultValue: 'pure',
@@ -372,7 +377,7 @@ module.exports = {
           {
             name: 'tabProps.size',
             title: '尺寸',
-            condition: (target) => {
+            condition: (target: IPublicModelSettingPropEntry) => {
               return !!target.getProps().getPropValue('isTab');
             },
             defaultValue: 'medium',
@@ -393,7 +398,7 @@ module.exports = {
               tip: '选项卡过多时，超出可视区域部分的tab该如何展示',
             },
             defaultValue: 'slide',
-            condition: (target) => {
+            condition: (target: IPublicModelSettingPropEntry) => {
               return !!target.getProps().getPropValue('isTab');
             },
             setter: {
@@ -549,7 +554,7 @@ module.exports = {
         extraProps: {
           display: 'block',
         },
-        condition: (target) => {
+        condition: (target: IPublicModelSettingPropEntry) => {
           return !target.getProps().getPropValue('isTab');
         },
         // condition: () => false,
@@ -649,7 +654,7 @@ module.exports = {
               const oldCondition = Object.prototype.hasOwnProperty.call(action, 'condition')
                 ? action.condition
                 : true;
-              action.condition = (node) => {
+              action.condition = (node: IPublicModelNode) => {
                 if (node.componentName === PAGE) {
                   return false;
                 }

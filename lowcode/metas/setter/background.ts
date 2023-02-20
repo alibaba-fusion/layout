@@ -1,5 +1,7 @@
 // const TooltipLabel = require('./tooltip-label');
 
+import { IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+
 module.exports = [
   // {
   //   name: 'style.background',
@@ -65,17 +67,17 @@ module.exports = [
       },
     },
     extraProps: {
-      getValue: (target) => {
-        const bgImg = target.getNode().getPropValue('style.backgroundImage');
+      getValue: (target: IPublicModelSettingPropEntry) => {
+        const bgImg = target.node?.getPropValue('style.backgroundImage');
         return bgImg?.match(/^url\((.*)\)$/)?.[1];
       },
-      setValue: (target, value) => {
+      setValue: (target: IPublicModelSettingPropEntry, value) => {
         if (value) {
-          target.getNode().setPropValue('style.backgroundImage', `url(${value})`);
+          target.node?.setPropValue('style.backgroundImage', `url(${value})`);
         } else {
-          const style = target.getNode().getPropValue('style');
+          const style = target.node?.getPropValue('style');
           style && delete style.backgroundImage;
-          target.getNode().setPropValue('style', style);
+          target.node?.setPropValue('style', style);
         }
       },
     },

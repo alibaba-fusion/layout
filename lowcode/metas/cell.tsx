@@ -1,3 +1,6 @@
+import { IPublicModelNode, IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+import * as React from "react";
+
 const { CELL, ROW, COL, P, BLOCK } = require('../names');
 const widthSetter = require('./setter/width');
 const heightSetter = require('./setter/min-height');
@@ -55,7 +58,7 @@ window.parent?.AliLowCodeEngine?.material?.addBuiltinComponentAction?.({
       </svg>
     ),
     title: '转为自由布局容器',
-    action(node) {
+    action(node: IPublicModelNode) {
       const fixedContainerSnippets = createFixedContainerSnippet();
       const parentNode = node.parent;
 
@@ -69,19 +72,19 @@ window.parent?.AliLowCodeEngine?.material?.addBuiltinComponentAction?.({
           },
         },
       };
-      const wrapNode = node.document.createNode(wrapSnippet);
-      parentNode.insertAfter(wrapNode, node, false);
-      wrapNode.select();
+      const wrapNode = node.document?.createNode(wrapSnippet);
+      wrapNode && parentNode?.insertAfter(wrapNode, node, false);
+      wrapNode && wrapNode.select();
       node.remove();
     },
   },
-  condition: (node) => {
-    return node.componentMeta.componentName === CELL;
+  condition: (node: IPublicModelNode) => {
+    return node.componentMeta?.componentName === CELL;
   },
   important: true,
 });
 
-module.exports = {
+export default {
   componentName: CELL,
   title: '容器',
   category: '布局容器类',
@@ -165,9 +168,9 @@ module.exports = {
       title: '宽度控制',
       type: 'group',
       display: 'block',
-      condition: (target) => {
+      condition: (target: IPublicModelSettingPropEntry) => {
         // Col 下不允许控制宽度
-        return target.getNode().parent.componentName !== COL;
+        return target.node?.parent?.componentName !== COL;
       },
       items: [...widthSetter],
     },
@@ -175,9 +178,9 @@ module.exports = {
       title: '高度控制',
       type: 'group',
       display: 'block',
-      condition: (target) => {
+      condition: (target: IPublicModelSettingPropEntry) => {
         // Row 下不允许控制高度
-        return target.getNode().parent.componentName !== ROW;
+        return target.node?.parent?.componentName !== ROW;
       },
       items: [...heightSetter],
     },
@@ -192,10 +195,10 @@ module.exports = {
     component: {
       isContainer: true,
       nestingRule: {
-        childWhitelist: (node) => {
+        childWhitelist: (node: IPublicModelNode) => {
           return [CELL, ROW, COL].indexOf(node.componentName) === -1;
         },
-        parentWhitelist: (node) => {
+        parentWhitelist: (node: IPublicModelNode) => {
           return [P, CELL].indexOf(node.componentName) === -1;
         },
       },
@@ -215,7 +218,7 @@ module.exports = {
        * @param {*} draggedNode 被拖入的组件
        * @param {*} currentNode 被拖入到 CELL
        */
-      onNodeAdd: (draggedNode, currentNode) => {
+      onNodeAdd: (draggedNode: IPublicModelNode, currentNode: IPublicModelNode) => {
         if (
           !draggedNode ||
           // Slider 不能包裹在 P 里面
@@ -237,36 +240,36 @@ module.exports = {
             'StepForm',
             'Filter',
           ].includes(draggedNode.componentName) ||
-          (draggedNode.isModal && draggedNode.isModal())
+          (draggedNode.isModal && draggedNode.isModalNode)
         ) {
           return;
         }
 
-        const { currentDocument } = draggedNode.document.project;
-        const { dropLocation } = draggedNode.document.canvas;
+        const currentDocument = draggedNode.document?.project?.currentDocument;
+        const dropLocation = draggedNode.document?.dropLocation;
 
         if (
           dropLocation?.target === currentNode ||
-          currentDocument.selection.selected[0] === currentNode.id
+          currentDocument?.selection.selected[0] === currentNode.id
         ) {
           // 自动包裹 P
           const pSnippet = createPSnippet();
 
-          const newNode = currentNode.document.createNode(pSnippet);
-          newNode.insertAfter(draggedNode, newNode, false);
+          const newNode = currentNode.document?.createNode(pSnippet);
+          newNode?.insertAfter(draggedNode, newNode, false);
 
           if (dropLocation?.detail?.near?.node) {
             const insertPoint = dropLocation.detail.near.node;
             dropLocation.detail.near.pos === 'after'
-              ? currentNode.insertAfter(newNode, insertPoint, false)
-              : currentNode.insertBefore(newNode, insertPoint, false);
+              ? (newNode && currentNode.insertAfter(newNode, insertPoint, false))
+              : (newNode && currentNode.insertBefore(newNode, insertPoint, false));
           } else {
             // 粘贴进来的
-            currentNode.insertAfter(newNode, currentNode, false);
+            newNode && currentNode.insertAfter(newNode, currentNode, false);
           }
         }
       },
-      onSubtreeModified: (currentNode, e) => {
+      onSubtreeModified: (currentNode: IPublicModelNode, e) => {
         onNodeReplaceSelfWithChildrenCell(currentNode, e);
       },
       /**

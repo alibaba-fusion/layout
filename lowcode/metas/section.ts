@@ -1,9 +1,11 @@
+import { IPublicModelNode } from "@alilc/lowcode-types";
+
 const { updateSpan } = require('../common/split/auto-block');
 const { PAGE, SECTION, BLOCK, CELL } = require('../names');
 const minHeight = require('./setter/min-height');
 const background = require('./setter/background');
 
-module.exports = {
+export default {
   componentName: SECTION,
   title: '区域',
   category: '布局容器类',
@@ -38,7 +40,7 @@ module.exports = {
       isContainer: true,
       nestingRule: {
         childWhitelist: [BLOCK],
-        parentWhitelist: (testNode) => {
+        parentWhitelist: (testNode: IPublicModelNode) => {
           // 允许拖入LayoutPage aside slot中
           if (testNode.componentName === PAGE) {
             return true;
@@ -136,7 +138,7 @@ module.exports = {
   },
   experimental: {
     callbacks: {
-      onNodeRemove: (removedNode) => {
+      onNodeRemove: (removedNode: IPublicModelNode) => {
         updateSpan({
           parent: removedNode.parent,
           child: removedNode,

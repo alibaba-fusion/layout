@@ -1,3 +1,5 @@
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
+
 export const operationConfig = {
   name: 'operationConfig',
   display: 'accordion',
@@ -66,7 +68,7 @@ export const operationConfig = {
   },
 };
 
-export const operations = {
+export const operations: IPublicTypeFieldConfig = {
   name: 'operations',
   display: 'block',
   title: '操作项',
@@ -95,7 +97,7 @@ export const operations = {
                     {
                       name: 'id',
                       condition: () => false,
-                      setter: (target) => {
+                      setter: (target: IPublicModelSettingPropEntry) => {
                         if (!target.getValue()) {
                           target.setValue(`${target.id}`);
                         }
@@ -114,7 +116,7 @@ export const operations = {
                       display: 'inline',
                       title: '操作',
                       important: true,
-                      setValue: (target, value) => {
+                      setValue: (target: IPublicModelSettingPropEntry, value) => {
                         const actionNameMap = {
                           submit: '提交',
                           reset: '重置',
@@ -172,13 +174,13 @@ export const operations = {
                       name: 'behavior',
                       title: '交互设置',
                       display: 'block',
-                      condition: (target) => {
+                      condition: (target: IPublicModelSettingPropEntry) => {
                         const action = target.parent.getPropValue('action');
                         return !action || action === 'custom';
                       },
                       setter: {
                         componentName: 'BehaviorSetter',
-                        props: (target) => ({
+                        props: (target: IPublicModelSettingPropEntry) => ({
                           actions: ['onClick'],
                           enableTooltipAction: true,
                           enableMessageAction: true,
@@ -220,14 +222,14 @@ export const operations = {
                         componentName: 'BoolSetter',
                       },
                       extraProps: {
-                        setValue: (target, value) => {
+                        setValue: (target: IPublicModelSettingPropEntry, value) => {
                           target.parent.setPropValue('htmlType', value ? 'submit' : '');
                         },
                         getValue: (target, value) => {
                           return value === 'submit';
                         },
                       },
-                      condition: (target) => {
+                      condition: (target: IPublicModelSettingPropEntry) => {
                         return target.parent.getPropValue('action') !== 'submit';
                       },
                     },

@@ -1,12 +1,14 @@
+import { IPublicModelNode } from "@alilc/lowcode-types";
+
 const { PAGE_CONTENT } = require('../names');
 
 const navAside = require('./nav-aside');
 
-const newNavAside = navAside.map((item) => {
+const newNavAside = navAside.map((item: any) => {
   return { ...item };
 });
 
-module.exports = {
+export default {
   componentName: PAGE_CONTENT,
   title: '页面主体',
   npm: {
@@ -71,7 +73,7 @@ module.exports = {
   experimental: {
     callbacks: {
       // onNodeAdd,
-      onNodeRemove: (removedNode, currentNode) => {
+      onNodeRemove: (removedNode: IPublicModelNode, currentNode: IPublicModelNode) => {
         // 如果删除的是slot 那么焦点聚焦到PageContent上
         if (
           removedNode.componentName === 'Slot' &&

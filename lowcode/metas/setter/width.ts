@@ -1,3 +1,5 @@
+import { IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+
 module.exports = [
   {
     name: '!widthType',
@@ -24,8 +26,8 @@ module.exports = [
       },
     },
     extraProps: {
-      getValue: (target) => {
-        if (target.getNode().getPropValue('width')) {
+      getValue: (target: IPublicModelSettingPropEntry) => {
+        if (target.node?.getPropValue('width')) {
           return 'fixed';
         }
         return 'auto';
@@ -35,11 +37,11 @@ module.exports = [
         //   return 'auto';
         // }
       },
-      setValue: (target, value) => {
+      setValue: (target: IPublicModelSettingPropEntry, value) => {
         if (value === 'fixed') {
-          target.getNode().setPropValue('width', parseInt(target.getNode().getRect().width));
+          target.node?.setPropValue('width', parseInt(String(target.node?.getRect()?.width)));
         } else if (value === 'auto') {
-          target.getNode().setPropValue('width', undefined);
+          target.node?.setPropValue('width', undefined);
           // target.getNode().setPropValue('autoFit', false);
         } else if (value === 'autoFit') {
           // target.getNode().setPropValue('autoFit', true);
@@ -58,10 +60,10 @@ module.exports = [
         units: 'px',
       },
     },
-    condition: (target) => {
+    condition: (target: IPublicModelSettingPropEntry) => {
       return (
-        target.getNode().getPropValue('!widthType') === 'fixed' ||
-        !!target.getNode().getPropValue('width')
+        target.node?.getPropValue('!widthType') === 'fixed' ||
+        !!target.node?.getPropValue('width')
       );
     },
   },

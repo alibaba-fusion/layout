@@ -2,7 +2,7 @@ const { PAGE_FOOTER } = require('../names');
 const minHeight = require('./setter/min-height');
 const background = require('./setter/background');
 
-module.exports = {
+export default {
   componentName: PAGE_FOOTER,
   title: '页面尾部',
   npm: {

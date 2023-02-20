@@ -7,7 +7,7 @@ import { CELL, ROW, COL, BLOCK, P } from '../names';
  * @returns
  */
 function isInLiveEditing() {
-  return (window.parent as any).AliLowCodeEngine.project.simulator?.liveEditing?.editing;
+  return window.parent.AliLowCodeEngine.canvas?.isInLiveEditing;
 }
 /**
  * 是否focus在表单
@@ -102,8 +102,6 @@ export const registHotKeys = () => {
     keybinding: 'tab',
     components: '*',
     cb: (node, e) => {
-      // console.log(node, (window.parent as any).AliLowCodeEngine.project.simulator.liveEditing.editing)
-
       // 正在输入则忽略
       if (isInLiveEditing() || isFormEvent(e)) {
         // console.log(/in tab/)
@@ -144,7 +142,7 @@ export const registHotKeys = () => {
       if (isInLiveEditing() || isFormEvent(e)) {
         return;
       }
-      (window.parent as any).AliLowCodeEngine.skeleton.getPanel('componentsPane').setActive(true);
+      window.parent.AliLowCodeEngine.skeleton.showPanel('componentsPane');
     },
     desc: 'a 打开物料面板',
   });
@@ -167,7 +165,7 @@ export const registHotKeys = () => {
   //       console.log(firstText, selectedText, lastText);
   //     }
 
-  //     // (window.parent as any).AliLowCodeEngine.skeleton.getPanel('componentsPane').setActive(true);
+  //     // window.parent.AliLowCodeEngine.skeleton.showPanel('componentsPane');
   //   },
   //   desc: 'command+k 把选中部分的文字快速变成链接',
   // });

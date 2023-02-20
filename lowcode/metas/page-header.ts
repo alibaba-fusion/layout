@@ -3,7 +3,7 @@ const { PAGE_HEADER, CELL } = require('../names');
 const minHeight = require('./setter/min-height');
 const background = require('./setter/background');
 
-module.exports = {
+export default {
   componentName: PAGE_HEADER,
   title: '页面头部',
   npm: {
