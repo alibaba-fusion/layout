@@ -1,11 +1,11 @@
-import { CSSProperties, ElementType, HTMLAttributes, ReactNode } from 'react';
+import { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 
 export type BaseSize = 'small' | 'medium' | 'large';
 
 /**
  * 基础属性
  */
-export type BaseProps = Omit<HTMLAttributes<HTMLElement>, 'title'>;
+export type BaseProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'>;
 
 /**
  * 基础的小布局简写配置
@@ -20,7 +20,7 @@ export interface BaseBgMode {
 }
 
 export interface TypeMark {
-  _typeMark?: string;
+  typeMark?: string;
 }
 
 /**
@@ -67,7 +67,7 @@ export interface LayoutContextProps {
    */
   maxNumberOfColumns: number;
   /**
-   * content 内部章之间的间距
+   * content 中 "章" 之间的间距
    */
   sectionGap?: BaseGap;
   /**
@@ -78,10 +78,6 @@ export interface LayoutContextProps {
    * 小布局间距（行、列、网格布局的 单元格-Cell 间距）
    */
   gridGap?: BaseGap;
-  /**
-   * 是否为 tab 模式
-   */
-  isTab?: boolean;
 }
 
 /**
@@ -136,6 +132,10 @@ export interface CellProps extends BaseProps {
    * 在行模式下，未设置 autoFit 时, 自定义单个 cell 的宽度，
    */
   width?: number | string;
+  /**
+   * 指定高度
+   */
+  height?: number | string;
   /**
    * 是否宽度（行模式下）/ 高度（列模式下）自适应内容
    */
@@ -284,6 +284,10 @@ interface BaseRowColPropBases extends BaseProps {
    */
   width?: number | string;
   /**
+   *固定高度
+   */
+  height?: number | string;
+  /**
    * 自定义样式
    */
   style?: CSSProperties;
@@ -344,7 +348,7 @@ export interface TextProps extends BaseProps {
   /**
    * 设置标签类型
    */
-  component?: ElementType;
+  component?: string;
   /**
    * 自定义颜色
    */
@@ -382,11 +386,11 @@ export interface ParagraphProps extends BaseProps {
   /**
    * 子元素间水平间距
    */
-  spacing?: true | BaseSize;
+  spacing?: BaseSize | string | number;
   /**
-   * 添加子元素垂直间距
+   * 子元素间具有垂直间距
    */
-  verMargin?: boolean;
+  hasVerSpacing?: boolean;
   /**
    * 段前间距尺寸（在父容器中的第一个段落无效）
    */
@@ -408,7 +412,7 @@ export interface SpaceProps extends BaseProps {
   /**
    * 尺寸
    */
-  size?: BaseSize | number;
+  size?: BaseSize | string | number;
   /**
    * 布局方向
    */

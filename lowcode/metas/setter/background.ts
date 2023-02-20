@@ -47,21 +47,17 @@ module.exports = [
   {
     name: 'style.backgroundColor',
     title: '背景色',
-    initialValue: 'rgba(255,255,255,0)',
-    defaultValue: 'rgba(255,255,255,0)',
     setter: {
       componentName: 'ColorSetter',
-      initialValue: 'rgba(255,255,255,0)',
-      defaultValue: 'rgba(255,255,255,0)',
+      initialValue: 'rgba(255,255,255,1)'
     },
   },
   {
     name: 'style.backgroundImage',
     title: '背景图',
-    initialValue: '',
-    defaultValue: '',
     setter: {
       componentName: 'StringSetter',
+      initialValue: '',
       props: {
         placeholder: '输入图片 url',
       },

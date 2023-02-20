@@ -100,6 +100,7 @@ export const Divider = (props: IDividerProps) => {
 
   useEffect(() => {
     const { project } = engine.current;
+    if (!project) return;
 
     project.currentDocument?.onChangeSelection(onSelectionChange);
   }, []);

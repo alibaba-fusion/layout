@@ -114,7 +114,7 @@ export default {
         return (
           <div style={shortcutsStyle}>
             <a
-              href="https://yuque.antfin-inc.com/fusion-design-system/scbzfw/pbkx1v#eVkqj"
+              href="https://www.yuque.com/fusion-design/layout/pbkx1v"
               target="_blank"
               style={{ position: 'absolute', right: 20 }}
               rel="noreferrer"

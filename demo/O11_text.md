@@ -11,10 +11,10 @@ import ReactDOM from 'react-dom';
 import { Button, Breadcrumb, Radio, Icon } from '@alifd/next';
 import { Page, Section, Block, Row, Col, Grid, Cell, P, Text } from '@alifd/layout';
 
-const { Header } = Page;
+import '@alifd/theme-3/variables.css';
+import '@alifd/theme-3/index.scss';
 
-import '@alifd/theme-3/variables.css'
-import '@alifd/theme-3/index.scss'
+const { Header } = Page;
 
 const App = () => {
   const [align, setAlign] = useState('left');

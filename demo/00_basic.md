@@ -9,7 +9,6 @@ order: 1
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Breadcrumb, Button, Divider, Balloon, Icon, Progress, Slider } from '@alifd/next';
-
 import { Page, Section, Block, Row, Col, Cell, P, Text } from '@alifd/layout';
 
 import '@alifd/theme-3/variables.css';
@@ -102,67 +101,6 @@ const App = () => {
             <Text type="h5">Footer</Text>
           </Cell>
         </Footer>
-      </Page>
-      <br />
-      <Page isTab style={{ border: '3px solid black', borderRadius: 12, overflow: 'hidden' }}>
-        <Header>
-          <Cell align="center">
-            <Text type="h5">Header</Text>
-          </Cell>
-        </Header>
-        <Content title="Tab1">
-          <Nav>
-            <Block>
-              <Cell align="center" verAlign="middle" style={{ height: '80vh' }}>
-                <Text type="h5">Nav</Text>
-              </Cell>
-            </Block>
-          </Nav>
-          <Aside>
-            <Block>
-              <Cell align="center" verAlign="middle" style={{ height: '80vh' }}>
-                <Text type="h5">Aside</Text>
-              </Cell>
-            </Block>
-          </Aside>
-          <Section title="Section 1">
-            <Block title="Block">
-              <Cell style={{ height: '40vh' }}></Cell>
-            </Block>
-          </Section>
-          <Section title="Section 2">
-            <Block title="Block">
-              <Cell>
-                <Text type="h5">Block</Text>
-              </Cell>
-            </Block>
-          </Section>
-        </Content>
-        <Content title="Tab2">
-          <Section title="Section 2">
-            <Block title="Block">
-              <Cell>
-                <Text type="h5">Block</Text>
-              </Cell>
-            </Block>
-          </Section>
-        </Content>
-        <Content title="Tab3">
-          <Section>
-            <Block title="Block">
-              <Cell>
-                <Text type="h5">Block</Text>
-              </Cell>
-            </Block>
-          </Section>
-          <Aside>
-            <Block>
-              <Cell align="center" verAlign="middle" style={{ height: '80vh' }}>
-                <Text type="h5">Aside</Text>
-              </Cell>
-            </Block>
-          </Aside>
-        </Content>
       </Page>
     </>
   );

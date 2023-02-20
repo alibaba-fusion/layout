@@ -1,4 +1,4 @@
-# 自然布局(@alifd/layout)
+# 自然布局
 
 <p align="center">
   <a href="https://fusion.design/">
@@ -6,26 +6,31 @@
   </a>
 </p>
 <p align="center">
-  <img src="https://img.shields.io/npm/v/@alifd/layout.svg">
-  <img src="https://img.shields.io/npm/dm/@alifd/layout.svg">
-  <img src="https://img.shields.io/npm/l/@alifd/layout.svg">
+  <img src="https://img.shields.io/npm/v/@alifd/layout.svg?style=flat-square">
+  <img src="https://img.shields.io/npm/dm/@alifd/layout?style=flat-square">
+  <img src="https://img.shields.io/npm/l/@alifd/layout.svg?style=flat-square">
 </p>
 
 用于搭建、源码，嵌套特定组件的布局体系，目标是不写任何布局 CSS 代码。
 
-## 设计理念
+[🔗 预览 Demo](https://unpkg.com/@alifd/layout/build/index.html)
+[🔗 阿里低代码搭建 Demo](https://unpkg.com/@alifd/layout/build/lowcode/index.html)
+
+**设计理念**
 
 - **初衷**：愿布局不需写 css 样式
 - **定位**：页面内容区的布局解决方案
 
 > 详细介绍：https://www.yuque.com/fusion-design/layout/yzx8g4 （需先加入 [Fusion Design](https://www.yuque.com/g/fusion-design/layout/collaborator/join?token=7bTjikyxDTAh3WwS) 语雀知识库）
 
-## 使用指引
+## 使用
 
 自然布局提供的能力分为「页面布局」、「局部布局」两种。
 
 - 页面布局：会用到 `Page` `Page.Header` `Page.Footer` `Page.Content` `Page.Aside` `Page.Nav` 六类组件。
-- 局部局部：会用到 `Section` `Block`, `Row`, `Col`, `Cell`, `P`, `Text` 等
+- 局部局部：会用到 `Section` `Block`, `Row`, `Col`, `Cell`, `P`, `Text`, `Space`
+
+布局示例：
 
 ```jsx
 import { Page, Section, Block, Row, Col, Cell, P, Text, Space } from '@alifd/layout';
@@ -33,7 +38,7 @@ import { Page, Section, Block, Row, Col, Cell, P, Text, Space } from '@alifd/lay
 export default function App() {
   return (
     <Page>
-      <Page.Header></Page.Header>
+      <Page.Header>Header</Page.Header>
       <Page.Content>
         <Section>
           <Block>
@@ -69,7 +74,40 @@ export default function App() {
           </Block>
         </Section>
       </Page.Content>
-      <Page.Footer></Page.Footer>
+      <Page.Footer>Footer</Page.Footer>
+    </Page>
+  );
+}
+```
+
+### 进一步封装 Block 和 Text。
+
+由于 `Section > Block` 具有强关联性（依赖 `Block` 对子元素宽度做计算并调整）。如果业务上需要进一步封装 `Block`，需要对 `Block` 增加类型标记，一遍 Section 能识别其 `span` 等属性。
+
+同理 `P > Text` 也具有类似强相关性，对于 `Text` 的组件封装，如果希望在 `P` 中表现和 `Text` 近似，也需要标记 `typeMark`.
+
+示例：
+
+```jsx
+import { Page, Section, Block } from '@alifd/layout';
+
+function NewBlock(props) {
+  const { children, ...others } = props;
+  // 加入新业组件逻辑
+  return <Block {...others}>{children}</Block>;
+}
+
+// 标记 NewBlock 可以视为 Block 作为 Section 的子元素
+NewBlock.typeMark = 'Block';
+
+// 页面渲染可以使用 NewBlock
+function App() {
+  return (
+    <Page>
+      <Section>
+        <Block span={2}>block</Block>
+        <NewBlock span={10}>new block</NewBlock>
+      </Section>
     </Page>
   );
 }
@@ -77,7 +115,7 @@ export default function App() {
 
 ## 开发
 
-1. 启动 demo
+1. 调试和预览 demo
 
 ```bash
 npm run start
@@ -100,8 +138,6 @@ npm run lowcode:dev
 | prefix             | CSS 类名前缀                                | string                                            | `fd-layout-` |
 | minHeight          | 页面的最小高度，例如 `calc(100vh - 52px)`   | Number/String                                     | -            |
 | noPadding          | 禁用页面内边距,包含 Header, Content, Footer | Boolean                                           | `false`      |
-| isTab              | 是否开启分页布局                            | Boolean                                           | `false`      |
-| tabProps           | 放到 Tab 组件上的一些默认值                 | Object                                            | -            |
 | sectionGap         | Header、Footer、Nav、Aside 和章节之间间隙   | Number                                            | -            |
 | blockGap           | Section 中栅格布局间隙                      | Number                                            | -            |
 | gridGap            | 小布局间隙（包含行、列、网格布局）          | Number                                            | -            |
@@ -109,7 +145,7 @@ npm run lowcode:dev
 | children           | 子元素                                      | ReactNode                                         | -            |
 | onBreakPointChange | 断点变更回调                                | (curBreakPoint, oldBreakPoint, breakPoints)=>void |              |
 
-```
+```ts
 interface BreakPoint {
   /**
    *  断点宽度(包含)
@@ -154,12 +190,10 @@ interface BreakPoint {
 
 内容
 
-| 参数      | 含义                                             | 类型          | 默认值 |
-| --------- | ------------------------------------------------ | ------------- | ------ |
-| minHeight | 页面的最小高度，例如 calc(100vh - 52px)          | Number/String | -      |
-| title     | 开启分页布局后生效，作为子页面(Tab.Item)的 title | String        | -      |
-| key       | 开启分页布局后生效，作为子页面(Tab.Item)的 key   | String        | -      |
-| children  | 子元素                                           | ReactNode     | -      |
+| 参数      | 含义                                    | 类型          | 默认值 |
+| --------- | --------------------------------------- | ------------- | ------ |
+| minHeight | 页面的最小高度，例如 calc(100vh - 52px) | Number/String | -      |
+| children  | 子元素                                  | ReactNode     | -      |
 
 #### Page.Aside
 
@@ -214,24 +248,27 @@ interface BreakPoint {
 
 行
 
-| 参数     | 含义                                                      | 类型      | 默认值 |
-| -------- | --------------------------------------------------------- | --------- | ------ |
-| width    | 指定宽度                                                  | Number    | -      |
-| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效）        | Boolean   | -      |
-| gap      | 自定义元素间间距                                          | Number    | -      |
-| verAlign | 垂直对齐方式， 可选值：top/middle/bottom/stretch/baseline | Enum      | -      |
-| children | 子元素                                                    | ReactNode | -      |
+| 参数     | 含义                                                      | 类型          | 默认值 |
+| -------- | --------------------------------------------------------- | ------------- | ------ |
+| width    | 指定宽度                                                  | Number/String | -      |
+| height   | 指定高度                                                  | Number/String | -      |
+| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效）        | Boolean       | -      |
+| gap      | 自定义元素间间距                                          | Number        | -      |
+| verAlign | 垂直对齐方式， 可选值：top/middle/bottom/stretch/baseline | Enum          | -      |
+| children | 子元素                                                    | ReactNode     | -      |
 
 ### Col
 
 列
 
-| 参数     | 含义                                               | 类型      | 默认值 |
-| -------- | -------------------------------------------------- | --------- | ------ |
-| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效） | Boolean   | -      |
-| gap      | 自定义元素间间距                                   | Number    | -      |
-| align    | 水平对齐方式， 可选值：left/center/right/stretch   | Enum      | -      |
-| children | 子元素                                             | ReactNode | -      |
+| 参数     | 含义                                               | 类型          | 默认值 |
+| -------- | -------------------------------------------------- | ------------- | ------ |
+| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效） | Boolean       | -      |
+| width    | 指定宽度                                           | Number/String | -      |
+| height   | 指定高度                                           | Number/String | -      |
+| gap      | 自定义元素间间距                                   | Number        | -      |
+| align    | 水平对齐方式， 可选值：left/center/right/stretch   | Enum          | -      |
+| children | 子元素                                             | ReactNode     | -      |
 
 ### Grid
 
@@ -252,15 +289,16 @@ interface BreakPoint {
 
 单元格，其内容默认为 flex 纵向布局
 
-| 参数     | 含义                                                                                 | 类型      | 默认值 |
-| -------- | ------------------------------------------------------------------------------------ | --------- | ------ |
-| width    | 指定宽度                                                                             | Number    | -      |
-| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效）                                   | Boolean   | -      |
-| gap      | 自定义内部元素的行解析                                                               | Number    | 0      |
-| align    | 内容水平对齐方式， 可选值: left/center/right                                         | Enum      | -      |
-| verAlign | 内容垂直对齐方式， 可选值: top/middle/bottom/space-between/space-around/space-evenly | Enum      | -      |
-| block    | 使用 `block` 布局                                                                    | Boolean   | -      |
-| children | 子元素                                                                               | ReactNode | -      |
+| 参数     | 含义                                                                                 | 类型          | 默认值 |
+| -------- | ------------------------------------------------------------------------------------ | ------------- | ------ |
+| width    | 指定宽度                                                                             | Number/String | -      |
+| height   | 指定高度                                                                             | Number/String | -      |
+| autoFit  | 根据内容自适应宽度（当作为行列布局的子元素时生效）                                   | Boolean       | -      |
+| gap      | 自定义内部元素的行解析                                                               | Number        | 0      |
+| align    | 内容水平对齐方式， 可选值: left/center/right                                         | Enum          | -      |
+| verAlign | 内容垂直对齐方式， 可选值: top/middle/bottom/space-between/space-around/space-evenly | Enum          | -      |
+| block    | 使用 `block` 布局                                                                    | Boolean       | -      |
+| children | 子元素                                                                               | ReactNode     | -      |
 
 ### Space
 
@@ -284,15 +322,15 @@ interface BreakPoint {
 
 段落
 
-| 参数         | 说明                                                                       | 类型      | 默认值     |
-| ------------ | -------------------------------------------------------------------------- | --------- | ---------- |
-| align        | 水平方向对齐模式 left/center/right/space-between/space-around/space-evenly | Enum      | 'left'     |
-| verAlign     | 垂直方向对齐模式 top/middle/bottom/baseline                                | Enum      | 'baseline' |
-| spacing      | 子元素间保持水平间距, 可选： small/medium/large/false                      | Enum      | medium     |
-| verMargin    | 除 Text 节点外子元素间保持垂直外边距                                       | Boolean   | true       |
-| beforeMargin | 段前外边距距（第一个子元素无效）                                           | Number    | 0          |
-| afterMargin  | 段尾外边距（最后一个子元素无效）                                           | Number    | 0          |
-| children     | 子元素                                                                     | ReactNode | -          |
+| 参数          | 说明                                                                       | 类型      | 默认值     |
+| ------------- | -------------------------------------------------------------------------- | --------- | ---------- |
+| align         | 水平方向对齐模式 left/center/right/space-between/space-around/space-evenly | Enum      | 'left'     |
+| verAlign      | 垂直方向对齐模式 top/middle/bottom/baseline                                | Enum      | 'baseline' |
+| spacing       | 子元素间保持水平间距, 可选： small/medium/large/false                      | Enum      | medium     |
+| hasVerSpacing | 除 `文本` 节点外子元素间保持垂直间距                                       | Boolean   | true       |
+| beforeMargin  | 段前外边距（作为第一个子元素时无效）                                       | Number    | 0          |
+| afterMargin   | 段后外边距（作为最后一个子元素时无效）                                     | Number    | 0          |
+| children      | 子元素                                                                     | ReactNode | -          |
 
 #### Text
 
@@ -310,6 +348,9 @@ interface BreakPoint {
 | color     | 颜色                                                              | String  | -      |
 
 ## CSS 变量
+
+自然布局默认引入了 Fusion 设计系统的 [Design Tokens](https://fusion.design/pc/design-tokens?type=theme&themeid=3)。
+布局可自定义 CSS Variables 如下，可基于实际情况修改：
 
 | 变量名                            | 说明                   | 默认值                 |
 | --------------------------------- | ---------------------- | ---------------------- |

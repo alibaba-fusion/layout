@@ -29,8 +29,6 @@ export default {
         title: {
           label: '内边距',
         },
-        defaultValue: '',
-        initialValue: '',
         setter: {
           componentName: 'RadioGroupSetter',
           initialValue: '',

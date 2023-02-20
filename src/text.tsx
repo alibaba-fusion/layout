@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { FC, useContext } from 'react';
+import React, { createElement, useMemo, FC, useContext } from 'react';
 import classNames from 'classnames';
-import { textTypeMap } from './util';
-import Context from './common/context';
+
+import Context from '@/common/context';
+import { TEXT_TYPE_MAP } from '@/common/constant';
 import { TextProps, LayoutContextProps, TypeMark } from './types';
 
 export type ITextComponent = FC<TextProps> & TypeMark;
@@ -15,7 +15,7 @@ const Text: ITextComponent = (props) => {
     className,
     type,
     style,
-    component,
+    component = 'span',
     strong,
     underline,
     delete: deleteProp,
@@ -24,69 +24,79 @@ const Text: ITextComponent = (props) => {
     color,
     align,
     backgroundColor,
+    children,
     ...others
   } = props;
   const { prefix } = useContext<LayoutContextProps>(Context);
 
-  let { children } = props;
   // @ts-ignore
-  const newType = textTypeMap[type] || type;
+  const newType = TEXT_TYPE_MAP[type] || type;
 
   const cls = classNames(className, {
     [`${prefix}text`]: true,
     [`${prefix}text-${newType}`]: newType,
   });
 
-  if (typeof children === 'string' && children.indexOf('\n') !== -1) {
-    const childrenList = children.split('\n');
-    const newChildren: any = [];
-    childrenList.forEach((child) => {
-      newChildren.push(child);
-      newChildren.push(<br />);
-    });
-    newChildren.pop();
+  const memorizedChildren = useMemo(() => {
+    let _children = children;
 
-    children = newChildren;
-  }
+    if (typeof _children === 'string' && _children.indexOf('\n') !== -1) {
+      const childrenList = _children.split('\n');
+      const newChildren: any = [];
+      childrenList.forEach((child) => {
+        newChildren.push(child);
+        newChildren.push(<br />);
+      });
+      newChildren.pop();
 
-  const Tag = component;
+      _children = newChildren;
+    }
 
-  if (strong) {
-    children = <strong>{children}</strong>;
-  }
+    if (strong) {
+      _children = <strong>{_children}</strong>;
+    }
 
-  if (underline) {
-    children = <u>{children}</u>;
-  }
+    if (underline) {
+      _children = <u>{_children}</u>;
+    }
 
-  if (deleteProp) {
-    children = <del>{children}</del>;
-  }
+    if (deleteProp) {
+      _children = <del>{_children}</del>;
+    }
 
-  if (code) {
-    children = <code>{children}</code>;
-  }
+    if (code) {
+      _children = <code>{_children}</code>;
+    }
 
-  if (mark) {
-    children = <mark>{children}</mark>;
-  }
+    if (mark) {
+      _children = <mark>{_children}</mark>;
+    }
+    return _children;
+  }, [children, mark, code, deleteProp, underline, strong]);
 
-  const newStyle = {
-    ...(color ? { color } : null),
-    ...(backgroundColor ? { backgroundColor } : null),
-    textAlign: align,
-    ...style,
-  };
+  const newStyle = useMemo(
+    () => ({
+      ...(color ? { color } : null),
+      ...(backgroundColor ? { backgroundColor } : null),
+      textAlign: align,
+      ...style,
+    }),
+    [color, backgroundColor, align, style],
+  );
 
-  return (
-    <Tag {...others} style={newStyle} className={cls}>
-      {children}
-    </Tag>
+  return createElement(
+    component,
+    {
+      ...others,
+      style: newStyle,
+      className: cls,
+    },
+    memorizedChildren,
   );
 };
 
 Text.displayName = 'Text';
-Text._typeMark = 'Text';
+Text.typeMark = 'Text';
 Text.defaultProps = {
   align: 'left',
   type: 'body2',

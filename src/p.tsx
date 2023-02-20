@@ -1,8 +1,7 @@
 /**
  * 段落
  */
-import * as React from 'react';
-import {
+import React, {
   useContext,
   forwardRef,
   Children,
@@ -11,12 +10,15 @@ import {
   isValidElement,
   cloneElement,
   ReactNode,
+  useMemo,
 } from 'react';
+import { isNumber, isString } from 'lodash-es';
 import classNames from 'classnames';
-import Context from './common/context';
-import Text from './text';
+
+import Context from '@/common/context';
+import { isPresetSize, wrapUnit } from '@/utils';
+import Text from '@/text';
 import { BaseSize, LayoutContextProps, ParagraphProps, TypeMark } from './types';
-import { isString, wrapUnit } from './utils';
 
 const getChildren = (children: any, type: ParagraphProps['type'] = 'body2') => {
   return Children.map(children, (child: ReactNode) => {
@@ -33,7 +35,7 @@ const getChildren = (children: any, type: ParagraphProps['type'] = 'body2') => {
           </Text>,
         );
         // @ts-ignore
-      } else if (child.type._typeMark === 'Text' && !child.props.type) {
+      } else if (child.type.typeMark === 'Text' && !child.props.type) {
         return cloneElement(child, {
           type,
         });
@@ -57,25 +59,38 @@ const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props
     afterMargin,
     align,
     verAlign,
-    spacing: pspacing,
-    verMargin,
+    spacing: spacingProp,
+    hasVerSpacing,
     children,
     style,
     ...others
   } = props;
   const { prefix } = useContext<LayoutContextProps>(Context);
   const clsPrefix = `${prefix}p`;
-  const newStyle = {
-    marginTop: wrapUnit(beforeMargin) || 0,
-    marginBottom: wrapUnit(afterMargin) || 0,
-    ...style,
-  };
+  const isCustomSize =
+    isNumber(spacingProp) ||
+    (isString(spacingProp) && spacingProp !== '' && !isPresetSize(spacingProp));
+  const spacing = isCustomSize ? 'medium' : spacingProp;
 
-  const spacing = pspacing === true ? 'medium' : pspacing;
+  const newStyle = useMemo(
+    () => ({
+      marginTop: wrapUnit(beforeMargin) || 0,
+      marginBottom: wrapUnit(afterMargin) || 0,
+      // 如果 spacingProp 为数值类型，则默认修改当前段落下的间隙值
+      ...(isCustomSize
+        ? {
+            '--page-p-medium-spacing': wrapUnit(spacingProp),
+          }
+        : null),
+      ...style,
+    }),
+    [beforeMargin, afterMargin, isCustomSize, style],
+  );
 
   return (
     <div
       {...others}
+      ref={ref}
       className={classNames(clsPrefix, className, {
         [`${clsPrefix}-spacing`]: spacing,
         [`${clsPrefix}-align--${align}`]: align,
@@ -83,11 +98,10 @@ const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props
         [`${clsPrefix}-spacing--${align}`]: spacing && align,
         [`${clsPrefix}-spacing--${spacing}`]:
           ['small', 'medium', 'large'].indexOf(spacing as BaseSize) > -1,
-        [`${clsPrefix}-margin`]: verMargin,
+        [`${clsPrefix}-margin`]: hasVerSpacing,
         [`${clsPrefix}--${type}`]: type,
       })}
       style={newStyle}
-      ref={ref}
     >
       {getChildren(children, type)}
     </div>
@@ -97,11 +111,11 @@ const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props
 const RefParagraph: IParagraph = forwardRef(P);
 
 RefParagraph.displayName = 'P';
-RefParagraph._typeMark = 'P';
+RefParagraph.typeMark = 'P';
 
 RefParagraph.defaultProps = {
   spacing: 'medium',
-  verMargin: true,
+  hasVerSpacing: true,
   verAlign: 'middle',
 };
 

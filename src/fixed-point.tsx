@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { useContext, forwardRef, ForwardRefRenderFunction } from 'react';
+import React, { useContext, forwardRef, ForwardRefRenderFunction } from 'react';
 import classNames from 'classnames';
-import Context from './common/context';
+
+import Context from '@/common/context';
 import { LayoutContextProps } from './types';
 
 /**

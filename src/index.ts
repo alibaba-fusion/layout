@@ -6,6 +6,8 @@ import Aside from './page/aside';
 import Content from './page/content';
 import Footer from './page/page-footer';
 
+import './index.scss';
+
 type IPage = typeof RefPage & {
   Header: typeof Header;
   Nav: typeof Nav;

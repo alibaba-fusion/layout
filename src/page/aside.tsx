@@ -1,8 +1,9 @@
 import React, { FC, ReactNode, useContext, cloneElement, Children, isValidElement } from 'react';
 import classNames from 'classnames';
-import Context from '../common/context';
-import Block from '../block';
-import { wrapUnit } from '../utils';
+
+import Context from '@/common/context';
+import Block from '@/block';
+import { wrapUnit } from '@/utils';
 import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '../types';
 
 export interface PageAsideProps extends BaseProps, BaseBgMode {
@@ -47,18 +48,22 @@ const PageAside: IPageAside = (props: PageAsideProps) => {
     ...style,
   };
 
-  return children ? (
+  if (!children) {
+    return null;
+  }
+
+  return (
     <aside className={asideCls} style={newStyle} {...others}>
       <div className={asideInnerCls}>{newChildren}</div>
     </aside>
-  ) : null;
+  );
 };
 
 PageAside.displayName = 'Aside';
+PageAside.typeMark = 'Aside';
 PageAside.defaultProps = {
   width: 200,
   mode: 'transparent',
 };
-PageAside._typeMark = 'Aside';
 
 export default PageAside;

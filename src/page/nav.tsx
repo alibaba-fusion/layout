@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { FC, ReactNode, cloneElement, useContext, isValidElement, Children } from 'react';
+import React, { FC, ReactNode, cloneElement, useContext, isValidElement, Children } from 'react';
 import classNames from 'classnames';
-import Context from '../common/context';
-import Block from '../block';
-import { wrapUnit } from '../utils';
+
+import Context from '@/common/context';
+import Block from '@/block';
+import { wrapUnit } from '@/utils';
 import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '../types';
 
 export interface PageNavProps extends BaseProps, BaseBgMode {
@@ -44,18 +44,22 @@ const PageNav: IPageNav = (props: PageNavProps) => {
     ...style,
   };
 
-  return children ? (
+  if (!children) {
+    return null;
+  }
+
+  return (
     <nav className={navCls} style={newStyle} {...others}>
       <div className={navInnerCls}>{newChildren}</div>
     </nav>
-  ) : null;
+  );
 };
 
 PageNav.displayName = 'Nav';
+PageNav.typeMark = 'Nav';
 PageNav.defaultProps = {
   width: 200,
   mode: 'transparent',
 };
-PageNav._typeMark = 'Nav';
 
 export default PageNav;

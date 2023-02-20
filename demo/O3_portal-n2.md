@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Box, Button, Tab } from '@alifd/next';
 import { Page, Block, Row, Col, Cell, Section, P, Text } from '@alifd/layout';
+
 import '@alifd/theme-3/variables.css';
 
 class App extends Component {

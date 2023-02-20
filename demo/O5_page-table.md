@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, Table, Pagination, Icon, Breadcrumb } from '@alifd/next';
 import { Page, Section, Block, Row, Col, P, Cell, Text } from '@alifd/layout';
+
 import '@alifd/theme-3/variables.css';
 
 const { Header } = Page;

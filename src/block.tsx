@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {
+import React, {
   useContext,
   forwardRef,
   ForwardedRef,
@@ -7,13 +6,13 @@ import {
   ForwardRefRenderFunction,
 } from 'react';
 import classNames from 'classnames';
-import Context from './common/context';
-import { isString } from './utils';
-import Row from './row';
-import Cell from './cell';
-// import Col from './col';
-import P from './p';
-import Text from './text';
+import { isString } from 'lodash-es';
+
+import Context from '@/common/context';
+import Row from '@/row';
+import Cell from '@/cell';
+import P from '@/p';
+import Text from '@/text';
 import { BlockProps, LayoutContextProps, TypeMark } from './types';
 
 type IBlock = ForwardRefExoticComponent<BlockProps> & TypeMark;
@@ -79,17 +78,15 @@ const Block: ForwardRefRenderFunction<any, BlockProps> = (props, ref: ForwardedR
     return (
       <div {...others} className={blockCls} ref={ref}>
         <Row autoFit verAlign="middle" className={headCls}>
-          {title ? (
-            <Cell className={`${clsPrefix}-title`} align={titleAlign}>
-              {isString(title) ? (
-                <P>
-                  <Text type="h6">{title}</Text>
-                </P>
-              ) : (
-                title
-              )}
-            </Cell>
-          ) : null}
+          <Cell className={`${clsPrefix}-title`} align={titleAlign}>
+            {isString(title) ? (
+              <P>
+                <Text type="h6">{title}</Text>
+              </P>
+            ) : (
+              title
+            )}
+          </Cell>
 
           {extra ? (
             <Cell autoFit className={`${clsPrefix}-extra`} align="right">
@@ -132,6 +129,6 @@ RefBlock.defaultProps = {
   mode: 'surface',
   noPadding: false,
 };
-RefBlock._typeMark = 'Block';
+RefBlock.typeMark = 'Block';
 
 export default RefBlock;

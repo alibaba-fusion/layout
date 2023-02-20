@@ -11,6 +11,7 @@ import ReactDOM from 'react-dom';
 import { Page, Section, Block, Cell, P, Text, BreakPoints } from '@alifd/layout';
 import { Table, Tag } from '@alifd/next';
 import throttle from 'lodash.throttle';
+
 import '@alifd/theme-3/variables.css';
 
 const cellProps = {
@@ -43,11 +44,11 @@ const breakPoints = [
 ];
 
 const App = () => {
-  const [availWidth, setAvailWidth] = useState(window.screen.availWidth);
+  const [availWidth, setAvailWidth] = useState(document.body.clientWidth);
   const [curBreakPoint, setBreakPoint] = useState(undefined);
 
   const resize = throttle(() => {
-    setAvailWidth(window.screen.availWidth);
+    setAvailWidth(document.body.clientWidth);
   }, 200);
 
   useEffect(() => {
@@ -69,7 +70,7 @@ const App = () => {
         <Block>
           <P type="h6">断点：</P>
           <P>
-            切换窗口尺寸，查看不同断点下的显示效果。 屏幕宽度
+            调整窗口尺寸，查看不同断点下的显示效果。 窗口宽度:
             <Tag size="small" type="primary" color="green">
               {availWidth}px
             </Tag>

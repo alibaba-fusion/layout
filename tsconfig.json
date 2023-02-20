@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "build",
     "module": "esnext",
     "target": "es6",
@@ -11,11 +12,15 @@
     "sourceMap": true,
     "allowJs": true,
     "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src/*.ts", "src/*.tsx", "global.d.ts", "lowcode/**/*.ts", "lowcode/**/*.tsx"],
   "exclude": ["node_modules", "build", "public"]

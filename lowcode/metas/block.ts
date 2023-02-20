@@ -169,10 +169,10 @@ export default {
                 type: 'JSSlot',
                 title: 'extra',
                 value: [
-                  {
-                    componentName: CELL,
-                    title: '容器',
-                  },
+                  // {
+                  //   componentName: CELL,
+                  //   title: '容器',
+                  // },
                 ],
               },
             },

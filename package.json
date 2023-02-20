@@ -1,7 +1,7 @@
 {
   "name": "@alifd/layout",
-  "version": "1.1.0",
-  "description": "自然布局",
+  "version": "2.0.1",
+  "description": "基于 Fusion 设计系统的自然布局体系",
   "files": [
     "demo/",
     "es/",
@@ -12,7 +12,10 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "lowcodeEditMain": "build/lowcode/view.js",
-  "author": "lianmin <406400939@qq.com>",
+  "author": {
+    "name": "lianmin",
+    "email": "406400939@qq.com"
+  },
   "contributors": [],
   "stylePath": "style.js",
   "scripts": {
@@ -41,6 +44,8 @@
     "@alilc/lowcode-engine": "^1.1.1",
     "@alilc/lowcode-types": "^1.1.1",
     "classnames": "^2.3.2",
+    "is-valid-array": "^1.0.1",
+    "lodash-es": "^4.17.21",
     "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
@@ -49,10 +54,12 @@
     "@alifd/next": "1.x",
     "@alifd/theme-3": "^0.5.3",
     "@iceworks/spec": "^1.0.0",
+    "@types/lodash-es": "^4.17.6",
     "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
     "build-plugin-component": "^1.0.0",
     "build-plugin-fusion": "^0.1.0",
+    "build-plugin-jsx-plus": "^0.1.4",
     "build-plugin-moment-locales": "^0.1.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
@@ -72,18 +79,19 @@
     "name": "Layout",
     "title": "自然布局",
     "category": "Information",
-    "materialSchema": "https://unpkg.alibaba-inc.com/@alifd/layout@1.1.0-beta.1/build/lowcode/assets-daily.json"
+    "materialSchema": "https://unpkg.alibaba-inc.com/@alifd/layout@2.0.0-beta.4/build/lowcode/assets-daily.json"
   },
   "publishConfig": {
     "access": "public"
   },
   "license": "MIT",
-  "homepage": "https://unpkg.com/@alifd/layout@1.1.0-beta.1/build/index.html",
+  "homepage": "https://unpkg.com/@alifd/layout@2.0.0/build/index.html",
   "bugs": "https://gitlab.alibaba-inc.com/fusion-design/layout/issues",
   "husky": {
     "hooks": {
       "pre-commit": "f2elint commit-file-scan",
       "commit-msg": "f2elint commit-msg-scan"
     }
-  }
+  },
+  "repository": "https://github.com/alibaba-fusion/layout.git"
 }
