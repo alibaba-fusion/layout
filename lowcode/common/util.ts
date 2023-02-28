@@ -25,7 +25,7 @@ const wrapWithProCard = (currentNode: IPublicModelNode) => {
     newProCard && currentNode.children?.insert(newProCard);
 
     for (const i in newSubChildren) {
-      currentNode.children?.get(0)?.insert(newSubChildren[i]);
+      currentNode.children?.get(0)?.insertAfter(newSubChildren[i]);
     }
   }
 };
@@ -36,14 +36,14 @@ const removeWrapProCard = (currentNode: IPublicModelNode) => {
 
   if (children0?.componentName === 'ProCard') {
     children0?.children?.map((item) => {
-      currentNode.insertBefore(item, children0.getNode());
+      currentNode.insertBefore(item, children0);
       return false;
     });
     children0.remove();
   }
 };
 
-module.exports = {
+export default {
   wrapWithProCard,
   removeWrapProCard,
 };

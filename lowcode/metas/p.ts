@@ -1,7 +1,8 @@
-const { CELL, P } = require('../names');
-const { onNodeRemoveSelfWhileNoChildren } = require('./enhance/callbacks');
+import { IPublicTypeComponentMetadata } from '@alilc/lowcode-types';
+import { CELL, P } from '../names';
+import { onNodeRemoveSelfWhileNoChildren } from './enhance/callbacks';
 
-export default {
+const config: IPublicTypeComponentMetadata = {
   componentName: P,
   title: '段落',
   category: '布局容器类',
@@ -244,7 +245,6 @@ export default {
         name: 'spacing',
         title: '内容间距',
         defaultValue: 'medium',
-        initialValue: 'medium',
         setter: {
           componentName: 'RadioGroupSetter',
           props: {
@@ -270,3 +270,5 @@ export default {
     },
   },
 };
+
+export default config;

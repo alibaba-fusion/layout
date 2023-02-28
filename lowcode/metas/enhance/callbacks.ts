@@ -1,13 +1,12 @@
 import { IPublicModelNode } from "@alilc/lowcode-types";
-
-const { CELL, ROW, COL } = require('../../names');
+import { CELL, ROW, COL } from '../../names';
 
 /**
  * onSubtreeModified 是从叶子节点逐级冒泡, 注意做好判断
  * options.isSubDeleting 是否因为父节点删除导致被连带删除。树根节点为 false，其他分支节点、叶子节点则为 true
  */
-export const onNodeReplaceSelfWithChildrenCell = (currentNode: IPublicModelNode, e) => {
-  const { removeNode, type, isSubDeleting } = e;
+export const onNodeReplaceSelfWithChildrenCell = (currentNode: IPublicModelNode, options: any) => {
+  const { removeNode, type, isSubDeleting } = options;
 
   // console.log(currentNode, currentNode.children.length, e)
 
@@ -23,8 +22,9 @@ export const onNodeReplaceSelfWithChildrenCell = (currentNode: IPublicModelNode,
   }
 
   const { children } = currentNode;
+  const componentName = children?.get(0)?.componentName;
   // 只有一个子元素 Cell/Row/Col，则让子元素替代自己
-  if (children?.size === 1 && [CELL, ROW, COL].indexOf(children.get(0)?.componentName) > -1) {
+  if (children?.size === 1 && componentName && [CELL, ROW, COL].indexOf(componentName) > -1) {
     const child = children.get(0);
     const { parent } = currentNode;
 
@@ -38,7 +38,7 @@ export const onNodeReplaceSelfWithChildrenCell = (currentNode: IPublicModelNode,
     // 同名节点提升
     const sameNameChild = children.find((n) => n.componentName === currentNode.componentName);
     if (sameNameChild?.children) {
-      [...sameNameChild.children].reverse().forEach((n) => {
+      sameNameChild.children.reverse().forEach((n) => {
         currentNode.insertAfter(n, sameNameChild, false);
       });
       sameNameChild.remove();
@@ -52,14 +52,14 @@ export const onNodeReplaceSelfWithChildrenCell = (currentNode: IPublicModelNode,
  * @param {*} currentNode
  * @returns boolean
  */
-export const onNodeRemoveSelfWhileNoChildren = (removeNode, currentNode) => {
+export const onNodeRemoveSelfWhileNoChildren = (removeNode: IPublicModelNode, currentNode: IPublicModelNode) => {
   if (!removeNode || !currentNode) {
     return false;
   }
 
   const { children } = currentNode;
   // 若无 children, 删除组件本身
-  if (children && children.length === 0) {
+  if (children && children.size === 0) {
     currentNode.remove();
     return true;
   }
@@ -77,7 +77,11 @@ function enableDivider() {
 }
 
 export const onDrageResize = {
-  onResizeStart(e, currentNode: IPublicModelNode) {
+  onResizeStart(e: MouseEvent & {
+    trigger: string;
+    deltaX?: number;
+    deltaY?: number;
+  }, currentNode: IPublicModelNode) {
     disableDivider();
 
     currentNode.startRect = currentNode.getRect();
@@ -85,7 +89,11 @@ export const onDrageResize = {
       e.trigger === 'n' || e.trigger === 'w' ? currentNode.prevSibling : currentNode.nextSibling;
     currentNode.siblingRect = currentNode.siblingNode ? currentNode.siblingNode.getRect() : null;
   },
-  onResize(e, currentNode: IPublicModelNode) {
+  onResize(e: MouseEvent & {
+    trigger: string;
+    deltaX?: number;
+    deltaY?: number;
+  }, currentNode: IPublicModelNode) {
     const { deltaY, deltaX } = e;
     const { height: startHeight, width: startWidth } = currentNode.startRect;
 

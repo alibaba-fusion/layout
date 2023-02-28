@@ -12,7 +12,7 @@ interface Pos {
   dimension: 'v' | 'h' | 'm';
   left: number;
   top: number;
-  node: any;
+  node: IPublicModelNode;
 }
 
 const FUSION_UI_VIEW_PREFIX = 'fd-layout-view';
@@ -153,10 +153,10 @@ export const Divider = (props: IDividerProps) => {
   return (
     <>
       {/* vertical */}
-      <Cut pos={cuts.find((p) => p.dimension === 'v')} split={props.split} />
+      <Cut pos={cuts.find((p) => p.dimension === 'v')!} split={props.split} />
 
       {/* horizontal */}
-      <Cut pos={cuts.find((p) => p.dimension === 'h')} split={props.split} />
+      <Cut pos={cuts.find((p) => p.dimension === 'h')!} split={props.split} />
 
       {/* middle for grid */}
       {/* <Cut pos={cuts.find((p) => p.dimension === 'm')} split={props.split} /> */}
@@ -174,8 +174,14 @@ const Cut = (props: ICutProps) => {
   const { pos, split } = props;
   if (!pos || !pos.node) return null;
 
-  const objectRect = pos.node.getRect() || {};
-  const computeLineStyle = () => {
+  const objectRect: DOMRect | {
+    [key: string]: undefined;
+  } = pos.node.getRect() || {};
+  const computeLineStyle = (): {
+    width: number | undefined;
+    height: number | undefined;
+    transform?: string | undefined;
+  } & Pos | null => {
     if (pos?.dimension === 'v') {
       return {
         width: 1,
@@ -197,6 +203,7 @@ const Cut = (props: ICutProps) => {
         ...pos,
       };
     }
+    return null;
   };
 
   const computeCutStyle = () => {
@@ -221,7 +228,7 @@ const Cut = (props: ICutProps) => {
     };
   };
 
-  const lineStyle = computeLineStyle();
+  const lineStyle: React.CSSProperties = computeLineStyle() || {};
   return (
     <>
       <div
@@ -245,7 +252,7 @@ const Cut = (props: ICutProps) => {
             />
             <div
               className={`${FUSION_UI_VIEW_PREFIX}-dividerLine`}
-              style={{ ...lineStyle, width: 1, top: lineStyle.top - lineStyle.height / 2 }}
+              style={{ ...lineStyle, width: 1, top: Number(lineStyle!.top) - Number(lineStyle!.height) / 2 }}
             />
           </>
         ) : (

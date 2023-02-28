@@ -1,6 +1,8 @@
-const TooltipLabel = require('./tooltip-label');
+import { IPublicTypeFieldConfig } from '@alilc/lowcode-types';
+import React from 'react';
+import TooltipLabel from './tooltip-label';
 
-module.exports = () => [
+export default (): IPublicTypeFieldConfig[] => [
   {
     name: 'align',
     title: '水平对齐',
@@ -158,7 +160,6 @@ module.exports = () => [
     name: 'verAlign',
     title: '垂直对齐',
     defaultValue: 'top',
-    initialValue: 'top',
     setter: {
       componentName: 'RadioGroupSetter',
       initialValue: 'top',

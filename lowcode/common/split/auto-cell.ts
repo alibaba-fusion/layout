@@ -12,7 +12,7 @@ import { IPublicModelNode } from '@alilc/lowcode-types';
  * 把 CELL 变成 Grid
  * @param node
  */
-export const changeCellToGrid = (node: any) => {
+export const changeCellToGrid = (node: IPublicModelNode) => {
   const parentNode = node.parent;
 
   const gridSnippet = createGridlSnippet();
@@ -23,20 +23,20 @@ export const changeCellToGrid = (node: any) => {
       style: node.schema.props?.style,
     },
   };
-  const wrapNode = node.document.createNode(wrapSnippet);
-  parentNode.insertAfter(wrapNode, node, false);
+  const wrapNode = node.document?.createNode(wrapSnippet);
+  wrapNode && parentNode?.insertAfter(wrapNode, node, false);
   // node 的宽度要去掉
   node.setPropValue('style', undefined);
 
-  wrapNode.insert(node);
+  wrapNode?.insertAfter(node);
   [1, 2, 3].forEach(() => {
-    const cellSnippet = node.document.createNode(createCellSnippet());
-    wrapNode.insertAfter(cellSnippet, node, false);
+    const cellSnippet = node.document?.createNode(createCellSnippet());
+    cellSnippet && wrapNode?.insertAfter(cellSnippet, node, false);
   });
-  wrapNode.select();
+  wrapNode?.select();
 };
 
-export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: any, preAppend = false) => {
+export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: IPublicModelNode, preAppend = false) => {
   const { currentDocument } = window.parent.AliLowCodeEngine.project;
   if (!currentDocument) {
     return;
@@ -44,15 +44,15 @@ export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: any, preA
 
   const selectedIds = currentDocument.selection.selected;
 
-  let nodeList = [node];
+  let nodeList: IPublicModelNode[] = [node];
   if (selectedIds.length > 1) {
     nodeList = selectedIds.map((id) => {
       return currentDocument.nodesMap.get(id);
-    });
+    }).filter<IPublicModelNode>((_node: IPublicModelNode | undefined): _node is IPublicModelNode => !!_node);
     // 1. 类型必须完全相等，并且在同一个父元素中
     if (
       nodeList.some(
-        (n) => [CELL, ROW, COL].indexOf(n.componentName) === -1 || n.parentNode !== node.parentNode,
+        (n) => [CELL, ROW, COL].indexOf(n.componentName) === -1 || n.parent?.id !== node.parent?.id,
       )
     ) {
       // @ts-ignore
@@ -86,7 +86,7 @@ export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: any, preA
     case ROW:
     case COL:
       {
-        const pComponentName = parentNode.componentName;
+        const pComponentName = parentNode?.componentName;
 
         let isSameDirection =
           (pComponentName === ROW && dimension === 'v') ||
@@ -100,7 +100,7 @@ export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: any, preA
         if (
           !isSameDirection &&
           nodeList.length > 1 &&
-          parentNode.children.length === nodeList.length
+          parentNode?.children?.size === nodeList.length
         ) {
           const ppComponentName = parentNode.parent?.componentName;
           isSameDirection =
@@ -115,18 +115,20 @@ export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: any, preA
         if (isSameDirection) {
           // 切割手法和方向一致，直接 append 节点
           const cellSnippet = createCellSnippet();
-          cellSnippet.props = {
-            ...cellSnippet.props,
-            ...insertPoint.schema.props,
-            style: cellSnippet.props?.style,
-          };
-          const newNode = node.document.createNode(cellSnippet);
+          const newNode = node.document?.createNode({
+            ...cellSnippet,
+            props: {
+              ...cellSnippet.props,
+              ...insertPoint.schema.props,
+              style: cellSnippet.props?.style,
+            }
+          });
 
           preAppend
-            ? parentNode.insertBefore(newNode, insertPoint, false)
-            : parentNode.insertAfter(newNode, insertPoint, false);
+            ? newNode && parentNode?.insertBefore(newNode, insertPoint, false)
+            : newNode && parentNode?.insertAfter(newNode, insertPoint, false);
 
-          newNode.select();
+          newNode?.select();
         } else {
           // 切割手法不一致，一变三节点 <ROW><CELL/><CELL/></ROW>
           const rowcolSnippet = createRowColSnippet(dimension === 'v' ? ROW : COL);
@@ -139,40 +141,44 @@ export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: any, preA
               height: node.schema.props?.height,
             },
           };
-          const wrapNode = node.document.createNode(wrapSnippet);
-          parentNode.insertAfter(wrapNode, node, false);
+          const wrapNode = node.document?.createNode(wrapSnippet);
+          wrapNode && parentNode?.insertAfter(wrapNode, node, false);
 
           if (nodeList.length > 1) {
             // 多个子节点选中，需要先合并
             const rowcolSnippet2 = createRowColSnippet(dimension === 'v' ? COL : ROW);
-            const wrapNode2 = node.document.createNode(rowcolSnippet2);
-            parentNode.insertAfter(wrapNode2, node, false);
+            const wrapNode2 = node.document?.createNode(rowcolSnippet2);
+            wrapNode2 && parentNode?.insertAfter(wrapNode2, node, false);
 
-            nodeList.forEach((n) => wrapNode2.insertAfter(n));
-            wrapNode.insertAfter(wrapNode2);
+            nodeList.forEach((n) => wrapNode2?.insertAfter(n));
+            wrapNode2 && wrapNode?.insertAfter(wrapNode2);
 
-            insertPoint = wrapNode2;
+            if (wrapNode2) {
+              insertPoint = wrapNode2;
+            }
           } else {
             // node 的宽度要去掉
             node.setPropValue('style', undefined);
-            wrapNode.insertAfter(node, wrapNode, false);
+            wrapNode?.insertAfter(node, wrapNode, false);
           }
 
           const cellSnippet = createCellSnippet();
-          cellSnippet.props = {
-            ...cellSnippet.props,
-            ...insertPoint.schema.props,
-            style: cellSnippet.props?.style,
-            width: undefined,
-            height: undefined,
-          };
 
-          const newNode = node.document.createNode(cellSnippet);
+          const newNode = node.document?.createNode({
+            ...cellSnippet,
+            props: {
+              ...cellSnippet.props,
+              ...insertPoint.schema.props,
+              style: cellSnippet.props?.style,
+              width: undefined,
+              height: undefined,
+            }
+          });
           preAppend
-            ? wrapNode.insertBefore(newNode, insertPoint, false)
-            : wrapNode.insertAfter(newNode, insertPoint, false);
+            ? newNode && wrapNode?.insertBefore(newNode, insertPoint, false)
+            : newNode && wrapNode?.insertAfter(newNode, insertPoint, false);
 
-          newNode.select();
+          newNode?.select();
         }
       }
       break;

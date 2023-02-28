@@ -1,3 +1,4 @@
+import { IPublicTypeNodeSchema, IPublicTypePropsMap } from '@alilc/lowcode-types';
 import {
   SECTION,
   CELL,
@@ -12,7 +13,7 @@ import {
   FIXED_CONTAINER,
 } from './names';
 
-export const createHeaderSnippet = () => {
+export const createHeaderSnippet = (): IPublicTypeNodeSchema => {
   return {
     componentName: PAGE_HEADER,
     title: '页面头部',
@@ -20,7 +21,7 @@ export const createHeaderSnippet = () => {
     children: [createCellSnippet()],
   };
 };
-export const createFooterSnippet = () => {
+export const createFooterSnippet = (): IPublicTypeNodeSchema => {
   return {
     componentName: PAGE_FOOTER,
     title: '页面尾部',
@@ -29,7 +30,7 @@ export const createFooterSnippet = () => {
   };
 };
 
-export const createNavSnippet = () => {
+export const createNavSnippet = (): IPublicTypeNodeSchema => {
   return {
     componentName: PAGE_NAV,
     title: '左侧区域',
@@ -39,7 +40,7 @@ export const createNavSnippet = () => {
     children: [createBlockSnippet()],
   };
 };
-export const createAsideSnippet = () => {
+export const createAsideSnippet = (): IPublicTypeNodeSchema => {
   return {
     componentName: PAGE_ASIDE,
     title: '右侧区域',
@@ -50,7 +51,7 @@ export const createAsideSnippet = () => {
   };
 };
 
-export const createSectionSnippet = ({ blockProps } = {}) => {
+export const createSectionSnippet = ({ blockProps }: { blockProps?: IPublicTypePropsMap } = {}): IPublicTypeNodeSchema => {
   return {
     componentName: SECTION,
     title: '区域',
@@ -59,7 +60,7 @@ export const createSectionSnippet = ({ blockProps } = {}) => {
   };
 };
 
-export const createBlockSnippet = ({ blockProps } = {}) => {
+export const createBlockSnippet = ({ blockProps }: { blockProps?: IPublicTypePropsMap } = {}): IPublicTypeNodeSchema => {
   return {
     componentName: BLOCK,
     title: '区块',
@@ -70,7 +71,7 @@ export const createBlockSnippet = ({ blockProps } = {}) => {
   };
 };
 
-export const createRowColSnippet = (componentName = COL) => {
+export const createRowColSnippet = (componentName = COL): IPublicTypeNodeSchema => {
   return {
     componentName,
     title: componentName === COL ? '列容器' : '行容器',
@@ -79,7 +80,7 @@ export const createRowColSnippet = (componentName = COL) => {
   };
 };
 
-export const createGridlSnippet = () => {
+export const createGridlSnippet = (): IPublicTypeNodeSchema => {
   return {
     componentName: GRID,
     title: '网格容器',
@@ -91,7 +92,7 @@ export const createGridlSnippet = () => {
   };
 };
 
-export const createCellSnippet = () => {
+export const createCellSnippet = (): IPublicTypeNodeSchema => {
   return {
     componentName: CELL,
     title: '容器',
@@ -100,7 +101,7 @@ export const createCellSnippet = () => {
   };
 };
 
-export const createFixedContainerSnippet = () => {
+export const createFixedContainerSnippet = (): IPublicTypeNodeSchema => {
   return {
     componentName: FIXED_CONTAINER,
     title: '自由容器',
@@ -118,7 +119,7 @@ export const createFixedContainerSnippet = () => {
  * @param {*} dragged 被拖入的组件，是个引擎 node 类型
  * @returns {} 返回值是个对象
  */
-export const createPSnippet = () => {
+export const createPSnippet = (): IPublicTypeNodeSchema => {
   return {
     componentName: P,
     title: '段落',

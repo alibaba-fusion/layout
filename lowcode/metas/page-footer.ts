@@ -1,8 +1,9 @@
-const { PAGE_FOOTER } = require('../names');
-const minHeight = require('./setter/min-height');
-const background = require('./setter/background');
+import { PAGE_FOOTER } from '../names';
+import minHeight from './setter/min-height';
+import background from './setter/background';
+import { IPublicTypeComponentMetadata } from '@alilc/lowcode-types';
 
-export default {
+const meta: IPublicTypeComponentMetadata = {
   componentName: PAGE_FOOTER,
   title: '页面尾部',
   npm: {
@@ -27,7 +28,6 @@ export default {
           tip: '可以用来放置吸底的表单提交按钮等',
         },
         defaultValue: false,
-        initialValue: false,
         setter: {
           componentName: 'BoolSetter',
           initialValue: false,
@@ -51,3 +51,5 @@ export default {
   },
   icon: 'https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_table.png',
 };
+
+export default meta;

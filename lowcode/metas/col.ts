@@ -1,15 +1,13 @@
 import { IPublicModelNode } from "@alilc/lowcode-types";
-
-const { CELL, COL } = require('../names');
-const { createCellSnippet, createPSnippet } = require('../default-schema');
-
-const { getResizingHandlers } = require('./enhance/experimentals');
-const {
+import { CELL, COL } from '../names';
+import { createCellSnippet, createPSnippet } from '../default-schema';
+import { getResizingHandlers } from './enhance/experimentals';
+import {
   onNodeRemoveSelfWhileNoChildren,
   onNodeReplaceSelfWithChildrenCell,
   onDrageResize,
-} = require('./enhance/callbacks');
-const widthSetter = require('./setter/width');
+} from './enhance/callbacks';
+import widthSetter from './setter/width';
 
 export default {
   componentName: COL,
@@ -88,7 +86,7 @@ export default {
       onNodeRemove: (removedNode: IPublicModelNode, currentNode: IPublicModelNode) => {
         onNodeRemoveSelfWhileNoChildren(removedNode, currentNode);
       },
-      onSubtreeModified: (currentNode: IPublicModelNode, e) => {
+      onSubtreeModified: (currentNode: IPublicModelNode, e: MouseEvent) => {
         onNodeReplaceSelfWithChildrenCell(currentNode, e);
       },
       /**

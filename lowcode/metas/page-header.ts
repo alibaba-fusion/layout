@@ -1,9 +1,9 @@
-const { PAGE_HEADER, CELL } = require('../names');
+import { PAGE_HEADER, CELL } from '../names';
+import minHeight from './setter/min-height';
+import background from './setter/background';
+import { IPublicTypeComponentMetadata } from '@alilc/lowcode-types';
 
-const minHeight = require('./setter/min-height');
-const background = require('./setter/background');
-
-export default {
+const config: IPublicTypeComponentMetadata = {
   componentName: PAGE_HEADER,
   title: '页面头部',
   npm: {
@@ -74,3 +74,5 @@ export default {
   },
   icon: 'https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_table.png',
 };
+
+export default config;

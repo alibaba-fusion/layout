@@ -1,6 +1,6 @@
-import { IPublicModelNode, IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+import { IPublicModelNode, IPublicModelSettingPropEntry, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
 
-const {
+import {
   PAGE,
   PAGE_HEADER,
   PAGE_FOOTER,
@@ -10,33 +10,35 @@ const {
   CELL,
   PAGE_NAV,
   PAGE_ASIDE,
-} = require('../names');
-const {
+} from '../names';
+import {
   createHeaderSnippet,
   createFooterSnippet,
   createSectionSnippet,
-} = require('../default-schema');
-const navAside = require('./nav-aside');
+} from '../default-schema';
+import navAside from './nav-aside';
 
 const newNavAside = navAside.map((item) => {
   const newItem = { ...item };
-  newItem.condition = (target: IPublicModelSettingPropEntry) => {
+  newItem.condition = (target: IPublicModelSettingPropEntry): boolean => {
     const isTab = target.getProps().getPropValue('isTab');
-    if (['nav', 'aside'].indexOf(newItem.name) > -1) {
+    if (['nav', 'aside'].indexOf(String(newItem.name)) > -1) {
       return !isTab;
     }
-    if (['navProps.width'].indexOf(newItem.name) > -1) {
+    if (['navProps.width'].indexOf(String(newItem.name)) > -1) {
       return !isTab && !!target.getProps().getPropValue('nav');
     }
 
-    if (['asideProps.width'].indexOf(newItem.name) > -1) {
+    if (['asideProps.width'].indexOf(String(newItem.name)) > -1) {
       return !isTab && !!target.getProps().getPropValue('aside');
     }
+
+    return false;
   };
   return newItem;
 });
 
-export default {
+const config: IPublicTypeComponentMetadata = {
   componentName: PAGE,
   title: '页面',
   category: '布局容器类',
@@ -126,7 +128,7 @@ export default {
                 const pageNode = target.node;
                 return !!pageNode?.children?.find((n) => n.componentName === PAGE_HEADER);
               },
-              setValue: (target: IPublicModelSettingPropEntry, value) => {
+              setValue: (target: IPublicModelSettingPropEntry, value: boolean) => {
                 const pageNode = target.node;
                 const node = pageNode?.children?.find((n) => n.componentName === PAGE_HEADER);
                 if (value && !node) {
@@ -149,7 +151,7 @@ export default {
                 const pageNode = target.node;
                 return !!pageNode?.children?.find((n) => n.componentName === PAGE_FOOTER);
               },
-              setValue: (target: IPublicModelSettingPropEntry, value) => {
+              setValue: (target: IPublicModelSettingPropEntry, value: boolean) => {
                 const pageNode = target.node;
                 const node = pageNode?.children?.find((n) => n.componentName === PAGE_FOOTER);
                 if (value && !node) {
@@ -217,7 +219,7 @@ export default {
                     };
                   });
               },
-              setValue(target: IPublicModelSettingPropEntry, value) {
+              setValue(target: IPublicModelSettingPropEntry, value: any[]) {
                 const node = target.node;
                 const map: {
                   [key: string]: any;
@@ -601,11 +603,11 @@ export default {
               const oldCondition = Object.prototype.hasOwnProperty.call(action, 'condition')
                 ? action.condition
                 : true;
-              action.condition = (node: IPublicModelNode) => {
+              action.condition = (node: IPublicModelNode): boolean => {
                 if (node.componentName === PAGE) {
                   return false;
                 }
-                return typeof oldCondition === 'function' ? oldCondition(node) : oldCondition;
+                return typeof oldCondition === 'function' ? oldCondition(node) : Boolean(oldCondition);
               };
             },
           );
@@ -661,3 +663,5 @@ export default {
     },
   ],
 };
+
+export default config;

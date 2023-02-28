@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import Balloon from '@alifd/next/lib/balloon';
 import hoistNonReactStatic from 'hoist-non-react-statics';
-import Draggable from 'react-draggable';
+import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 
 import { initSingletonDivider } from './common/divider';
 import { registHotKeys } from './common/hotkeys';
@@ -9,7 +9,7 @@ import { SECTION, BLOCK, CELL } from './names';
 import { createBlockSnippet, createSectionSnippet } from './default-schema';
 import * as ProLayout from '../src';
 import './index.scss';
-import { IPublicModelNode } from '@alilc/lowcode-types';
+import { IPublicModelNode, IPublicTypeNodeData } from '@alilc/lowcode-types';
 
 let pageLoaded = false;
 
@@ -27,7 +27,10 @@ const {
 
 const FUSION_UI_VIEW_PREFIX = 'fd-layout-view';
 
-const AddSection = ({ onClick, alwaysShow = false }) => {
+const AddSection = ({ onClick, alwaysShow = false }: {
+  onClick: MouseEventHandler;
+  alwaysShow: boolean;
+}) => {
   return (
     <div className={`${FUSION_UI_VIEW_PREFIX}-section-add`}>
       <div className={`${FUSION_UI_VIEW_PREFIX}-section-add-wrapper ${alwaysShow ? 'show' : ''}`}>
@@ -39,9 +42,9 @@ const AddSection = ({ onClick, alwaysShow = false }) => {
   );
 };
 
-function addNewSection(_leaf) {
+function addNewSection(_leaf?: IPublicModelNode) {
   const prevSectionSchema =
-    [...(_leaf.schema?.children || [])].reverse().find((n) => n.componentName === SECTION) ||
+    [...(_leaf?.schema?.children || [])].reverse().find((n) => n.componentName === SECTION) ||
     createSectionSnippet();
   const prevBlockSchema =
     [...prevSectionSchema?.children].reverse().find((n) => n.componentName === BLOCK) ||
@@ -49,7 +52,7 @@ function addNewSection(_leaf) {
   const prevBlockProps = { ...prevBlockSchema.props };
   delete prevBlockProps.operation;
 
-  _leaf.insertAfter({
+  _leaf?.insertAfter({
     ...prevSectionSchema,
     children: [
       {
@@ -72,9 +75,9 @@ function addNewSection(_leaf) {
   });
 }
 
-const addNewBlock = (_leaf: IPublicModelNode) => {
+const addNewBlock = (_leaf: IPublicModelNode | undefined) => {
   const children = _leaf?.schema?.children;
-  const prevBlockSchema =
+  const prevBlockSchema: IPublicTypeNodeData =
     [...((Array.isArray(children) ? children : []) || [])].reverse().find((n) => typeof n === 'object' && (n as any).componentName === BLOCK) ||
     createBlockSnippet();
   const prevBlockProps = { ...prevBlockSchema.props };
@@ -86,16 +89,19 @@ const addNewBlock = (_leaf: IPublicModelNode) => {
     span: 12,
   };
 
-  const newNode = _leaf.document?.createNode(blockSchema);
-  newNode && _leaf.insertAfter(newNode);
+  const newNode = _leaf?.document?.createNode(blockSchema);
+  newNode && _leaf?.insertAfter(newNode);
   newNode && newNode.select();
 };
 
-const PageView = (props) => {
+const PageView = (props: {
+  _leaf?: IPublicModelNode;
+  [key: string]: any;
+}) => {
   const { children, _leaf, ...others } = props;
 
-  const isTab = _leaf.getProps().getPropValue('isTab');
-  const hasSection = _leaf.schema.children?.length;
+  const isTab = _leaf?.props?.getPropValue('isTab');
+  const hasSection = Array.isArray(_leaf?.schema.children) && _leaf?.schema.children?.length;
 
   useEffect(() => {
     if (!pageLoaded) {
@@ -136,7 +142,10 @@ const PageView = (props) => {
   );
 };
 
-const SectionView = (props) => {
+const SectionView = (props: {
+  _leaf?: IPublicModelNode;
+  [key: string]: any;
+}) => {
   const { children, _leaf, ...others } = props;
 
   return (
@@ -169,23 +178,23 @@ const SectionView = (props) => {
   );
 };
 
-const BlockView = (props) => {
+const BlockView = (props: any) => {
   return <Block {...props} />;
 };
 
-const GridView = (props) => {
+const GridView = (props: any) => {
   return <Grid {...props} />;
 };
 
-const ColView = (props) => {
+const ColView = (props: any) => {
   return <Col {...props} />;
 };
 
-const RowView = (props) => {
+const RowView = (props: any) => {
   return <Row {...props} />;
 };
 
-const CellView = (props) => {
+const CellView = (props: any) => {
   const { children, ...others } = props;
   useEffect(() => {
     if (!pageLoaded) {
@@ -201,23 +210,23 @@ const CellView = (props) => {
   return <Cell {...others}>{newChildren}</Cell>;
 };
 
-const PView = (props) => {
+const PView = (props: any) => {
   return <P {...props} />;
 };
 
-const TextView = (props) => {
+const TextView = (props: any) => {
   return <Text {...props} />;
 };
 
-const PageHeaderView = (props) => {
+const PageHeaderView = (props: any) => {
   return <PageHeader {...props} />;
 };
 
-const PageFooterView = (props) => {
+const PageFooterView = (props: any) => {
   return <PageFooter {...props} />;
 };
 
-const PageContentView = (props) => {
+const PageContentView = (props: any) => {
   const { children, _leaf, ...others } = props;
   const hasSection = _leaf.schema.children?.length;
 
@@ -229,7 +238,10 @@ const PageContentView = (props) => {
   );
 };
 
-const PageNavAsideView = (props) => {
+const PageNavAsideView = (props: {
+  _leaf?: IPublicModelNode;
+  [key: string]: any;
+}) => {
   const { children, _leaf, component: Tag, ...others } = props;
   return (
     <Tag {...others}>
@@ -261,21 +273,26 @@ const PageNavAsideView = (props) => {
   );
 };
 
-const PageNavView = (props) => {
+const PageNavView = (props: any) => {
   return <PageNavAsideView {...props} component={PageNav} />;
 };
-const PageAsideView = (props) => {
+const PageAsideView = (props: any) => {
   return <PageNavAsideView {...props} component={PageAside} />;
 };
 
-const FixedPointView = (props) => {
+const FixedPointView = (props: {
+  _leaf?: IPublicModelNode;
+  [key: string]: any;
+}) => {
   const { _leaf, children, left = 0, top = 0, ...others } = props;
 
   // hack engine for mousedown
-  _leaf.parent.isRGLContainer = true;
+  if (_leaf?.parent?.isRGLContainerNode) {
+    _leaf.parent.isRGLContainerNode = true;
+  }
 
   // const enableMouseEventPropagationInCanvas = useRef();
-  const movehook = useRef();
+  const movehook = useRef<(currentNode: any) => boolean>();
   const [isDraging, setDraging] = useState(false);
   const [disabled, setDisaled] = useState(false);
 
@@ -286,16 +303,20 @@ const FixedPointView = (props) => {
     window.parent.AliLowCodeEngine.config.set('enableMouseEventPropagationInCanvas', true);
 
     // disable move
-    movehook.current = _leaf.componentMeta.getMetadata().experimental.callbacks.onMoveHook;
-    _leaf.componentMeta.getMetadata().experimental.callbacks.onMoveHook = () => false;
+    movehook.current = _leaf?.componentMeta?.getMetadata().experimental?.callbacks?.onMoveHook;
+    if (_leaf?.componentMeta?.getMetadata().experimental?.callbacks) {
+      _leaf.componentMeta.getMetadata().experimental!.callbacks!.onMoveHook = () => false;
+    }
     setDraging(true);
   };
-  const onDragEnd = (e, uiData) => {
+  const onDragEnd = (e: DraggableEvent, uiData: DraggableData) => {
     // window.parent.AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = enableMouseEventPropagationInCanvas.current;
-    _leaf.componentMeta.getMetadata().experimental.callbacks.onMoveHook = movehook.current;
+    if (_leaf?.componentMeta?.getMetadata().experimental?.callbacks) {
+      _leaf.componentMeta.getMetadata().experimental!.callbacks!.onMoveHook = movehook.current;
+    }
 
-    _leaf.setPropValue('left', uiData.x + left);
-    _leaf.setPropValue('top', uiData.y + top);
+    _leaf?.setPropValue('left', uiData.x + left);
+    _leaf?.setPropValue('top', uiData.y + top);
 
     setDraging(false);
   };
@@ -371,13 +392,17 @@ const FixedContainerView = (props: IFixedContainerViewProps) => {
     // disable move
     movehook.current = _leaf?.componentMeta?.getMetadata().experimental?.callbacks?.onMoveHook;
     // TODO: 不一定能设置上
-    _leaf.componentMeta.getMetadata().experimental.callbacks.onMoveHook = () => false;
+    if (_leaf.componentMeta?.getMetadata()?.experimental?.callbacks?.onMoveHook) {
+      _leaf.componentMeta.getMetadata().experimental!.callbacks!.onMoveHook = () => false;
+    }
     setDraging(true);
   };
-  const onDragEnd = (uiData, idx) => {
+  const onDragEnd = (uiData: DraggableData, idx: number) => {
     // window.parent.AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = enableMouseEventPropagationInCanvas.current;
     // // TODO: 不一定能设置上
-    _leaf.componentMeta.getMetadata().experimental.callbacks.onMoveHook = movehook.current;
+    if (_leaf.componentMeta?.getMetadata()?.experimental?.callbacks?.onMoveHook) {
+      _leaf.componentMeta.getMetadata().experimental!.callbacks!.onMoveHook = movehook.current;
+    }
 
     // 有节点增加
     const newItems = [..._leaf.schema.children].map((child, index) => {
@@ -402,7 +427,7 @@ const FixedContainerView = (props: IFixedContainerViewProps) => {
 
   return (
     <FixedContainer {...others} items={items}>
-      {children.map((child, idx) => {
+      {children.map((child, idx: number) => {
         return (
           <Draggable
             onStart={onDragStart}

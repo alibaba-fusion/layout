@@ -1,9 +1,10 @@
-module.exports = [
+import { IPublicTypeFieldConfig } from "@alilc/lowcode-types";
+
+const item: IPublicTypeFieldConfig[] = [
   {
     name: 'gap',
     title: '间距',
     defaultValue: 0,
-    initialValue: 0,
     setter: {
       componentName: 'NumberSetter',
       props: {
@@ -12,3 +13,5 @@ module.exports = [
     },
   },
 ];
+
+export default item;

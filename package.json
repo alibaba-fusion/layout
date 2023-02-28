@@ -42,20 +42,23 @@
   "dependencies": {
     "@alifd/next": "^1.x",
     "@alilc/lowcode-engine": "^1.1.1",
-    "@alilc/lowcode-types": "^1.1.1",
+    "@alilc/lowcode-types": "^1.1.3-beta.1",
     "classnames": "^2.3.2",
     "is-valid-array": "^1.0.1",
     "lodash-es": "^4.17.21",
-    "resize-observer-polyfill": "^1.5.1"
+    "resize-observer-polyfill": "^1.5.1",
+    "typescript": "^4.9.5"
   },
   "devDependencies": {
     "@alib/build-scripts": "^0.1.3",
     "@alifd/build-plugin-lowcode": "^0.3.0",
     "@alifd/next": "1.x",
     "@alifd/theme-3": "^0.5.3",
+    "@alilc/lowcode-types": "^1.1.3-beta.2",
     "@iceworks/spec": "^1.0.0",
+    "@types/hoist-non-react-statics": "^3.3.1",
     "@types/lodash-es": "^4.17.6",
-    "@types/react": "^16.9.13",
+    "@types/react": "^16.14.35",
     "@types/react-dom": "^16.9.4",
     "build-plugin-component": "^1.0.0",
     "build-plugin-fusion": "^0.1.0",
@@ -72,8 +75,8 @@
     "react-draggable": "^4.4.4"
   },
   "peerDependencies": {
-    "react": "^16.3.0",
-    "@alifd/next": "1.x"
+    "@alifd/next": "1.x",
+    "react": "^16.3.0"
   },
   "componentConfig": {
     "name": "Layout",

@@ -1,7 +1,8 @@
-const Balloon = require('@alifd/next/lib/balloon');
-const Box = require('@alifd/next/lib/box');
+import React from 'react';
+import Balloon from '@alifd/next/lib/balloon';
+import Box from '@alifd/next/lib/box';
 
-module.exports = (props) => {
+export default (props: any) => {
   const { overlay, children, ...others } = props;
   return (
     <Balloon.Tooltip
