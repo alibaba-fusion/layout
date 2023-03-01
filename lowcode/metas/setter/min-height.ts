@@ -1,6 +1,6 @@
-import { IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
 
-module.exports = [
+const items: IPublicTypeFieldConfig[] = [
   {
     name: '!heightType',
     title: '高度类型',
@@ -28,7 +28,7 @@ module.exports = [
           return 'auto';
         }
       },
-      setValue: (target: IPublicModelSettingPropEntry, value) => {
+      setValue: (target: IPublicModelSettingPropEntry, value: string) => {
         if (value === 'min') {
           target
             .node
@@ -58,3 +58,5 @@ module.exports = [
     },
   },
 ];
+
+export default items;

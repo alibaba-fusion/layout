@@ -1,6 +1,7 @@
-const { FIXED_POINT } = require('../names');
+import { IPublicTypeComponentMetadata } from '@alilc/lowcode-types';
+import { FIXED_POINT } from '../names';
 
-export default {
+const config: IPublicTypeComponentMetadata = {
   componentName: FIXED_POINT,
   title: '自由节点',
   category: '布局容器类',
@@ -52,3 +53,5 @@ export default {
     },
   ],
 };
+
+export default config;

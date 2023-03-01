@@ -1,10 +1,9 @@
-import { IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
 
-module.exports = [
+const items: IPublicTypeFieldConfig[] = [
   {
     name: 'style.width',
     title: '宽度类型',
-    initialValue: '',
     defaultValue: '',
     setter: {
       componentName: 'RadioGroupSetter',
@@ -29,7 +28,7 @@ module.exports = [
       getValue: (target: IPublicModelSettingPropEntry) => {
         return typeof target.node?.getPropValue('style.width') === 'number' ? 'fixed' : '';
       },
-      setValue: (target: IPublicModelSettingPropEntry, value) => {
+      setValue: (target: IPublicModelSettingPropEntry, value: string) => {
         if (value === 'fixed') {
           target.node?.setPropValue('style.width', parseInt(String(target.node?.getRect()?.width)));
         } else if (value === '') {
@@ -52,3 +51,5 @@ module.exports = [
     condition: (target: IPublicModelSettingPropEntry) => typeof target.node?.getPropValue('style.width') === 'number',
   },
 ];
+
+export default items;

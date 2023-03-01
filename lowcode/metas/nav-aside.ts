@@ -1,9 +1,9 @@
-import { IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
 
-const { PAGE_NAV, PAGE_ASIDE } = require('../names');
-const { createNavSnippet, createAsideSnippet } = require('../default-schema');
+import { PAGE_NAV, PAGE_ASIDE } from '../names';
+import { createNavSnippet, createAsideSnippet } from '../default-schema';
 
-module.exports = [
+const navAside: IPublicTypeFieldConfig[] = [
   {
     name: '!nav',
     title: {
@@ -15,7 +15,7 @@ module.exports = [
         const pageNode = target.node;
         return !!pageNode?.children?.find((n) => n.componentName === PAGE_NAV);
       },
-      setValue: (target: IPublicModelSettingPropEntry, value) => {
+      setValue: (target: IPublicModelSettingPropEntry, value: boolean) => {
         const pageNode = target.node;
         const navNode = pageNode?.children?.find((n) => n.componentName === PAGE_NAV);
         if (value && !navNode) {
@@ -39,7 +39,7 @@ module.exports = [
         const pageNode = target.node;
         return !!pageNode?.children?.find((n) => n.componentName === PAGE_ASIDE);
       },
-      setValue: (target: IPublicModelSettingPropEntry, value) => {
+      setValue: (target: IPublicModelSettingPropEntry, value: boolean) => {
         const pageNode = target.node;
         const asideNode = pageNode?.children?.find((n) => n.componentName === PAGE_ASIDE);
         if (value && !asideNode) {
@@ -53,3 +53,5 @@ module.exports = [
     },
   },
 ];
+
+export default navAside;

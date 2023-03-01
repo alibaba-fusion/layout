@@ -1,6 +1,7 @@
-const { PAGE_NAV, BLOCK } = require('../names');
+import { IPublicTypeComponentMetadata } from '@alilc/lowcode-types';
+import { PAGE_NAV, BLOCK } from '../names';
 
-export default {
+const config: IPublicTypeComponentMetadata = {
   componentName: PAGE_NAV,
   title: '页面左侧',
   npm: {
@@ -48,3 +49,5 @@ export default {
   },
   icon: 'https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_table.png',
 };
+
+export default config;

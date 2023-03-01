@@ -1,4 +1,8 @@
-module.exports = {
+const map: {
+  [key: string]: {
+    [key: string]: string;
+  }
+} = {
   12: {
     '0s': '6,6',
     '0d': '',
@@ -292,3 +296,5 @@ module.exports = {
     '5d': '2,2,2,2,4',
   },
 };
+
+export default map;

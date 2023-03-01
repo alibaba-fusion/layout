@@ -1,11 +1,11 @@
-import { IPublicModelNode } from "@alilc/lowcode-types";
+import { IPublicModelNode, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
 
-const { updateSpan } = require('../common/split/auto-block');
-const { PAGE, SECTION, BLOCK, CELL } = require('../names');
-const minHeight = require('./setter/min-height');
-const background = require('./setter/background');
+import { updateSpan } from '../common/split/auto-block';
+import { PAGE, SECTION, BLOCK, CELL } from '../names';
+import minHeight from './setter/min-height';
+import background from './setter/background';
 
-export default {
+const config: IPublicTypeComponentMetadata =  {
   componentName: SECTION,
   title: '区域',
   category: '布局容器类',
@@ -46,7 +46,7 @@ export default {
             return true;
           }
 
-          if (testNode.componentName === 'Slot' && ['aside'].indexOf(testNode.title) > -1) {
+          if (testNode.componentName === 'Slot' && ['aside'].indexOf(testNode.title as string) > -1) {
             return true;
           }
           return false;
@@ -187,3 +187,5 @@ export default {
   },
   icon: 'https://img.alicdn.com/imgextra/i3/O1CN018CwRJM1ZkIpmeEfRD_!!6000000003232-55-tps-128-128.svg',
 };
+
+export default config;

@@ -1,19 +1,23 @@
-import { IPublicModelNode, IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+import { IPublicModelNode, IPublicModelSettingPropEntry, IPublicTypeLocationChildrenDetail, IPublicTypeLocationDetail, IPublicTypeLocationDetailType, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
 import * as React from "react";
 
-const { CELL, ROW, COL, P, BLOCK } = require('../names');
-const widthSetter = require('./setter/width');
-const heightSetter = require('./setter/min-height');
-const backgroundSetter = require('./setter/background');
-const flexColumn = require('./setter/flex-column');
-const { getResizingHandlers } = require('./enhance/experimentals');
-const { onNodeReplaceSelfWithChildrenCell, onDrageResize } = require('./enhance/callbacks');
-const { createPSnippet, createFixedContainerSnippet } = require('../default-schema');
-const { changeCellToGrid } = require('../common/split/auto-cell');
+import { CELL, ROW, COL, P, BLOCK } from '../names';
+import widthSetter from './setter/width';
+import heightSetter from './setter/min-height';
+import backgroundSetter from './setter/background';
+import flexColumn from './setter/flex-column';
+import { getResizingHandlers } from './enhance/experimentals';
+import { onNodeReplaceSelfWithChildrenCell, onDrageResize } from './enhance/callbacks';
+import { createPSnippet, createFixedContainerSnippet } from '../default-schema';
+import { changeCellToGrid } from '../common/split/auto-cell';
+
+function isChildrenDetail(value: IPublicTypeLocationDetail | undefined): value is IPublicTypeLocationChildrenDetail {
+  return value?.type === IPublicTypeLocationDetailType.Children;
+}
 
 const flexSetter = flexColumn();
-const shortcutsStyle = { display: 'flex', gap: 5, flexDirection: 'column' };
-const codeStyle = {
+const shortcutsStyle: React.CSSProperties = { display: 'flex', gap: 5, flexDirection: 'column' };
+const codeStyle: React.CSSProperties = {
   background: '#333',
   borderRadius: '2px',
   color: '#fff',
@@ -67,8 +71,8 @@ window.parent?.AliLowCodeEngine?.material?.addBuiltinComponentAction?.({
         props: {
           ...fixedContainerSnippets.props,
           style: {
-            ...node.schema.props?.style,
-            ...fixedContainerSnippets.props?.style,
+            ...(node.schema.props?.style as Object),
+            ...(fixedContainerSnippets.props?.style as Object),
           },
         },
       };
@@ -84,7 +88,7 @@ window.parent?.AliLowCodeEngine?.material?.addBuiltinComponentAction?.({
   important: true,
 });
 
-export default {
+const config: IPublicTypeComponentMetadata = {
   componentName: CELL,
   title: '容器',
   category: '布局容器类',
@@ -258,7 +262,7 @@ export default {
           const newNode = currentNode.document?.createNode(pSnippet);
           newNode?.insertAfter(draggedNode, newNode, false);
 
-          if (dropLocation?.detail?.near?.node) {
+          if (isChildrenDetail(dropLocation?.detail) && dropLocation?.detail?.near?.node) {
             const insertPoint = dropLocation.detail.near.node;
             dropLocation.detail.near.pos === 'after'
               ? (newNode && currentNode.insertAfter(newNode, insertPoint, false))
@@ -269,8 +273,8 @@ export default {
           }
         }
       },
-      onSubtreeModified: (currentNode: IPublicModelNode, e) => {
-        onNodeReplaceSelfWithChildrenCell(currentNode, e);
+      onSubtreeModified: (currentNode: IPublicModelNode, options: any) => {
+        onNodeReplaceSelfWithChildrenCell(currentNode, options);
       },
       /**
        * 节点被拖拽的回调
@@ -294,3 +298,5 @@ export default {
     },
   ],
 };
+
+export default config;

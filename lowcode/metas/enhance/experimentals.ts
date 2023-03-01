@@ -1,6 +1,5 @@
 import { IPublicModelNode } from "@alilc/lowcode-types";
-
-const { ROW, COL } = require('../../names');
+import { ROW, COL } from '../../names';
 
 export const getResizingHandlers = (node: IPublicModelNode) => {
   const directionList: string[] = [];

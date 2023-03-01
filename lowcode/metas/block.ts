@@ -1,18 +1,17 @@
-import { IPublicModelNode } from "@alilc/lowcode-types";
-
-const { updateSpan } = require('../common/split/auto-block');
-const BLOCK_RESIZE_MAP = require('../common/split/block-resize-map');
-const { CELL, ROW, COL, SECTION, BLOCK } = require('../names');
-const heightSetter = require('./setter/min-height');
-const backgroundSetter = require('./setter/background');
-const { onNodeRemoveSelfWhileNoChildren } = require('./enhance/callbacks');
+import { IPublicModelNode, IPublicModelSettingPropEntry, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
+import { updateSpan } from '../common/split/auto-block';
+import BLOCK_RESIZE_MAP from '../common/split/block-resize-map';
+import { CELL, ROW, COL, SECTION, BLOCK } from '../names';
+import heightSetter from './setter/min-height';
+import backgroundSetter from './setter/background';
+import { onNodeRemoveSelfWhileNoChildren } from './enhance/callbacks';
 
 /**
  * 获取数组 arr 中， 前 index 个（包括第index个）元素的加和值, index 是索引 从0开始
  * @param {*} arr
  * @param {*} index
  */
-const getAcc = (arr, index) => {
+const getAcc = (arr: string[], index: number): number => {
   if (Array.isArray(arr) && arr.length > 0) {
     return arr.reduce((last, count, i) => {
       if (i <= index) {
@@ -24,7 +23,7 @@ const getAcc = (arr, index) => {
   return 0;
 };
 
-export default {
+const config: IPublicTypeComponentMetadata = {
   componentName: BLOCK,
   title: '区块',
   category: '容器',
@@ -95,11 +94,11 @@ export default {
               },
             },
             extraProps: {
-              setValue: (target, value) => {
+              setValue: (target: IPublicModelSettingPropEntry, value: string) => {
                 if (value === 'transparent') {
-                  target.getNode().setPropValue('title', undefined);
+                  target.node?.setPropValue('title', undefined);
                 } else if (value !== undefined) {
-                  target.getNode().setPropValue('mode', undefined);
+                  target.node?.setPropValue('mode', undefined);
                 }
               },
             },
@@ -125,10 +124,10 @@ export default {
           {
             name: 'title',
             title: '标题',
-            condition: (target) => {
+            condition: (target: IPublicModelSettingPropEntry) => {
               return target.parent.getPropValue('mode') !== 'transparent';
             },
-            setter: (target) => {
+            setter: (target: IPublicModelSettingPropEntry) => {
               if (
                 window.AliLowCodeEngine &&
                 window.AliLowCodeEngine.setters.getSetter('TitleSetter')
@@ -149,7 +148,7 @@ export default {
           {
             name: 'divider',
             title: '头部分割线',
-            condition: (target) => {
+            condition: (target: IPublicModelSettingPropEntry) => {
               return (
                 target.parent.getPropValue('mode') !== 'transparent' &&
                 !!target.parent.getPropValue('title')
@@ -160,7 +159,7 @@ export default {
           {
             name: 'extra',
             title: '扩展',
-            condition: (target) => {
+            condition: (target: IPublicModelSettingPropEntry) => {
               return target.parent.getPropValue('mode') !== 'transparent';
             },
             setter: {
@@ -180,7 +179,7 @@ export default {
           {
             name: 'bordered',
             title: '边框',
-            condition: (target) => {
+            condition: (target: IPublicModelSettingPropEntry) => {
               return target.parent.getPropValue('mode') !== 'transparent';
             },
             setter: 'BoolSetter',
@@ -236,7 +235,11 @@ export default {
     },
     callbacks: {
       onNodeRemove: onNodeRemoveSelfWhileNoChildren,
-      onResizeStart: (e, currentNode: IPublicModelNode) => {
+      onResizeStart: (e: MouseEvent & {
+        trigger: string;
+        deltaX?: number;
+        deltaY?: number;
+      }, currentNode: IPublicModelNode) => {
         const parent = currentNode.parent;
         if (parent) {
           const parentNode = parent.getDOMNode();
@@ -247,7 +250,11 @@ export default {
         currentNode.lastDeltaX = 0;
         currentNode.lastGroupList = '';
       },
-      onResize: (e, currentNode: IPublicModelNode) => {
+      onResize: (e: MouseEvent & {
+        trigger: string;
+        deltaX?: number;
+        deltaY?: number;
+      }, currentNode: IPublicModelNode) => {
         // 获取合法移动位移
         // 判断是否要变化
         // 更新鼠标开始位置，更新span信息
@@ -307,7 +314,7 @@ export default {
           });
         }
       },
-      onResizeEnd: (e, currentNode) => {
+      onResizeEnd: (e: MouseEvent, currentNode: IPublicModelNode) => {
         currentNode.movementAtOnce = 'clear';
       },
       // onLocateHook: (e) => {
@@ -324,3 +331,5 @@ export default {
   },
   icon: 'https://img.alicdn.com/imgextra/i2/O1CN01wBgtFK1NKP32cK57c_!!6000000001551-55-tps-128-128.svg',
 };
+
+export default config;

@@ -46,11 +46,11 @@ function getValidChildren(
  * @return ReactNode[]
  */
 function wrapBlock(children: ReactNode, maxNumberOfColumns: number) {
-  let tmp: any[] = [];
-  const ret: any[] = [];
+  let tmp: ReactNode[] = [];
+  const ret: ReactNode[] = [];
   const validChildList = Children.toArray(children).filter((child) => !isNil(child));
 
-  validChildList.forEach((child: any, index) => {
+  validChildList.forEach((child, index) => {
     if (child?.type === Block || child?.type?.typeMark === 'Block') {
       if (tmp.length > 0) {
         ret.push(

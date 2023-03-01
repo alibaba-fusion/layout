@@ -1,6 +1,7 @@
+import { IPublicTypeFieldConfig, IPublicTypePropConfig, IPublicTypeComponentMetadata } from '@alilc/lowcode-types';
 import { operationProps } from './setter/operations';
 
-export const CardTagItemProps = [
+export const CardTagItemProps: IPublicTypeFieldConfig[] = [
   {
     name: 'label',
     title: '名称',
@@ -49,7 +50,7 @@ export const CardTagItemProps = [
   },
 ];
 
-export const CardActionButtonProps = [
+export const CardActionButtonProps: IPublicTypeFieldConfig[] = [
   {
     name: 'children',
     title: '名称',
@@ -67,7 +68,7 @@ export const CardActionButtonProps = [
   },
 ];
 
-export const CardSectionProps = [
+export const CardSectionProps: IPublicTypeFieldConfig[] = [
   {
     name: 'title',
     title: '标题',
@@ -148,7 +149,7 @@ export const CardSectionProps = [
   },
 ];
 
-export const CardProps = [
+export const CardProps: IPublicTypePropConfig[] = [
   {
     name: 'title',
     title: '标题',
@@ -351,7 +352,7 @@ export const CardProps = [
   ...operationProps,
 ];
 
-export const CardMeta = {
+export const CardMeta: IPublicTypeComponentMetadata = {
   componentName: 'ProCard',
   title: '卡片',
   group: '精选组件',

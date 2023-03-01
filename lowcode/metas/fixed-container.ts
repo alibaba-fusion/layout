@@ -1,7 +1,8 @@
-const minHeight = require('./setter/min-height');
-const { FIXED_CONTAINER } = require('../names');
+import minHeight from './setter/min-height';
+import { FIXED_CONTAINER } from '../names';
+import { IPublicTypeComponentMetadata } from '@alilc/lowcode-types';
 
-export default {
+const config: IPublicTypeComponentMetadata = {
   componentName: FIXED_CONTAINER,
   title: '自由容器',
   category: '布局容器类',
@@ -75,3 +76,5 @@ export default {
   icon: 'https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_table.png',
   snippets: [],
 };
+
+export default config;

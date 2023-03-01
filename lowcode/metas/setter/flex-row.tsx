@@ -1,6 +1,8 @@
-const TooltipLabel = require('./tooltip-label');
+import { IPublicTypeFieldConfig } from '@alilc/lowcode-types';
+import React from 'react';
+import TooltipLabel from './tooltip-label';
 
-module.exports = () => [
+export default (): IPublicTypeFieldConfig[] => [
   {
     name: 'align',
     title: '交叉轴对齐',
@@ -130,7 +132,6 @@ module.exports = () => [
     name: 'justify',
     title: '主轴对齐',
     defaultValue: 'flex-start',
-    initialValue: 'flex-start',
     setter: {
       componentName: 'RadioGroupSetter',
       initialValue: 'flex-start',

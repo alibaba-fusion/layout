@@ -1,16 +1,15 @@
-import { IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
 import React from "react";
+import TooltipLabel from "./tooltip-label";
 
-const TooltipLabel = require('./tooltip-label');
-
-module.exports = () => [
+export default (): IPublicTypeFieldConfig[] => [
   {
     name: 'direction',
     title: '对齐方向',
     defaultValue: 'column',
     initialValue: 'column',
     extraProps: {
-      setValue: (target: IPublicModelSettingPropEntry, value) => {
+      setValue: (target: IPublicModelSettingPropEntry, value: string) => {
         const titleProp = target.node?.getExtraProp('title');
         if (value === 'column') {
           titleProp?.setValue('列容器');
@@ -79,7 +78,7 @@ module.exports = () => [
     title: '主轴对齐',
     defaultValue: 'flex-start',
     initialValue: 'flex-start',
-    condition: (target) => {
+    condition: (target: IPublicModelSettingPropEntry) => {
       return target.getProps().getPropValue('direction') === 'row';
     },
     setter: {
@@ -211,7 +210,7 @@ module.exports = () => [
     title: '主轴对齐',
     defaultValue: 'flex-start',
     initialValue: 'flex-start',
-    condition: (target) => {
+    condition: (target: IPublicModelSettingPropEntry) => {
       return target.getProps().getPropValue('direction') === 'column';
     },
     setter: {
@@ -343,7 +342,7 @@ module.exports = () => [
     title: '交叉轴对齐',
     defaultValue: 'flex-start',
     initialValue: 'flex-start',
-    condition: (target) => {
+    condition: (target: IPublicModelSettingPropEntry) => {
       return target.getProps().getPropValue('direction') === 'row';
     },
     setter: {
@@ -471,7 +470,7 @@ module.exports = () => [
     title: '交叉轴对齐',
     defaultValue: 'flex-start',
     initialValue: 'flex-start',
-    condition: (target) => {
+    condition: (target: IPublicModelSettingPropEntry) => {
       return target.getProps().getPropValue('direction') === 'column';
     },
     setter: {
@@ -605,7 +604,6 @@ module.exports = () => [
     name: 'spacing',
     title: '内容间距',
     defaultValue: 0,
-    initialValue: 0,
     setter: {
       componentName: 'NumberSetter',
       props: {

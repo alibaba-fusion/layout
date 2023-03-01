@@ -1,8 +1,9 @@
-module.exports = [
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
+
+const items: IPublicTypeFieldConfig[] = [
   {
     name: '!heightType',
     title: '高度类型',
-    initialValue: '',
     defaultValue: '',
     setter: {
       componentName: 'RadioGroupSetter',
@@ -24,8 +25,8 @@ module.exports = [
       },
     },
     extraProps: {
-      getValue: (target) => {
-        if (target.getNode().getPropValue('height')) {
+      getValue: (target: IPublicModelSettingPropEntry) => {
+        if (target.node?.getPropValue('height')) {
           return 'fixed';
         }
         return 'auto';
@@ -35,11 +36,11 @@ module.exports = [
         //   return 'auto';
         // }
       },
-      setValue: (target, value) => {
+      setValue: (target: IPublicModelSettingPropEntry, value: string) => {
         if (value === 'fixed') {
-          target.getNode().setPropValue('height', parseInt(target.getNode().getRect().height));
+          target.node?.setPropValue('height', parseInt(String(target.node?.getRect()?.height)));
         } else if (value === 'auto') {
-          target.getNode().setPropValue('height', undefined);
+          target.node?.setPropValue('height', undefined);
           // target.getNode().setPropValue('autoFit', false);
         } else if (value === 'autoFit') {
           // target.getNode().setPropValue('autoFit', true);
@@ -51,18 +52,19 @@ module.exports = [
     name: 'height',
     title: '高度值',
     defaultValue: '',
-    initialValue: '',
     setter: {
       componentName: 'NumberSetter',
       props: {
         units: 'px',
       },
     },
-    condition: (target) => {
+    condition: (target: IPublicModelSettingPropEntry) => {
       return (
-        target.getNode().getPropValue('!heightType') === 'fixed' ||
-        !!target.getNode().getPropValue('height')
+        target.node?.getPropValue('!heightType') === 'fixed' ||
+        !!target.node?.getPropValue('height')
       );
     },
   },
 ];
+
+export default items;

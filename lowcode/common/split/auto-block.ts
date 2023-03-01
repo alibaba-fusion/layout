@@ -1,10 +1,18 @@
-import { IPublicModelNode } from '@alilc/lowcode-types';
+import { IPublicModelNode, IPublicTypeNodeSchema } from '@alilc/lowcode-types';
 import { createBlockSnippet } from '../../default-schema';
 import { BLOCK, SECTION } from '../../names';
+import BLOCK_RESIZE_MAP from './block-resize-map';
 
-const BLOCK_RESIZE_MAP = require('./block-resize-map');
+interface IGroup {
+  id: string | undefined;
+  groupIndex: number;
+  span?: number;
+  groupInnerIndex?: number;
+  groupList?: string;
+  groupLength?: number;
+}
 
-const parseFlaten2Tree = (flaten = [], tree) => {
+const parseFlaten2Tree = (flaten: IGroup[] = [], tree: IGroup[][]) => {
   flaten.forEach((item) => {
     if (!tree[item.groupIndex]) {
       tree[item.groupIndex] = [];
@@ -21,7 +29,7 @@ const parseFlaten2Tree = (flaten = [], tree) => {
  * @param {Emun} direction 'e' | 'w' 表示在用哪条bar e（右） 或 w（左）
  * @returns
  */
-const handleResize = (groupArr, blockNode: IPublicModelNode, offset, direction = 'e') => {
+const handleResize = (groupArr: IGroup[], blockNode: IPublicModelNode, offset: number, direction = 'e') => {
   const changeIndex = groupArr.findIndex((item) => item.id === blockNode.schema.id);
   const key = groupArr.map((item) => item.span).join(',');
   if (changeIndex < 0) {
@@ -47,7 +55,7 @@ const handleResize = (groupArr, blockNode: IPublicModelNode, offset, direction =
  * @param {*} groupIndex 当前所处理的数组，他们有共同的组序列号
  * @returns
  */
-const handleSplit = (groupArr, blockNode: IPublicModelNode, groupIndex) => {
+const handleSplit = (groupArr: IGroup[], blockNode: IPublicModelNode, groupIndex: number) => {
   const changeIndex = groupArr.findIndex((item) => item.id === blockNode.schema.id);
   const key = groupArr.map((item) => item.span).join(',');
   if (changeIndex < 0) {
@@ -85,13 +93,13 @@ const handleSplit = (groupArr, blockNode: IPublicModelNode, groupIndex) => {
  * @param {*} sectionNode 触发 删除 的节点属的Block
  * @returns
  */
-const handleDelete = (afterTreeGroup, afterFlatenGroup, blockNode: IPublicModelNode, sectionNode: IPublicModelNode) => {
-  const treeMap = [];
+const handleDelete = (afterTreeGroup: IGroup[][], afterFlatenGroup: IGroup[], blockNode: IPublicModelNode, sectionNode: IPublicModelNode) => {
+  const treeMap: IGroup[][] = [];
   parseFlaten2Tree(sectionNode.lastFlatenMap, treeMap);
   treeMap.forEach((group) => {
     const { groupIndex } = group[0];
     const changeIndex = group.findIndex((item) => item.id === blockNode.schema.id);
-    const key = group.map((item) => item.span).join(',');
+    const key: string = group.map((item) => item.span).join(',');
     if (changeIndex < 0) {
       afterFlatenGroup.push(...afterTreeGroup[groupIndex]);
       return;
@@ -109,7 +117,7 @@ const handleDelete = (afterTreeGroup, afterFlatenGroup, blockNode: IPublicModelN
   });
 };
 // currentBlock.lastFlatenMap
-const findGroupIndex = (id, map = []) => {
+const findGroupIndex = (id: string, map: IGroup[] = []) => {
   let groupIndex = -1;
   map.forEach((m) => {
     if (m.id === id) {
@@ -134,6 +142,12 @@ export const updateSpan = ({
   type,
   offset = 0,
   direction = 'e',
+}: {
+  parent: IPublicModelNode | null;
+  type: 'split' | 'delete' | 'resize' | 'refresh';
+  child?: IPublicModelNode;
+  offset?: number;
+  direction?: string
 }) => {
   if (
     !(
@@ -145,32 +159,34 @@ export const updateSpan = ({
     return;
   }
 
-  const beforeFlatenGroup = [];
-  const childrenListSchema = currentSection.schema.children;
+  const beforeFlatenGroup: IGroup[] = [];
+  const children = currentSection.schema.children;
+  const childrenListSchema = Array.isArray(children) ? children : [children];
 
   if (!childrenListSchema) {
     // 把 SECTION 中的最后一个元素 BLOCK 删掉，意味着删掉 SECTION
     currentSection.remove();
     return;
   }
-  let total = 0;
+  let total: number = 0;
   let groupIndex = 0;
 
-  childrenListSchema.forEach((c) => {
-    const item = {
+  (childrenListSchema as any).forEach((c: IPublicTypeNodeSchema) => {
+    const item: IGroup = {
       id: c.id,
-      span: c.props.span || 12,
+      span: (c.props?.span as number) || 12,
+      groupIndex,
     };
 
-    const inheritIndex = findGroupIndex(c.id, currentBlock.lastFlatenMap);
+    const inheritIndex = findGroupIndex(c.id!, currentBlock?.lastFlatenMap);
 
     if (inheritIndex > -1 && type === 'delete') {
       item.groupIndex = inheritIndex;
     } else {
-      total += c.props.span || 0;
+      total += (c.props?.span as number) || 0;
       if (total > 12) {
         groupIndex++;
-        total = c.props.span;
+        total = (c.props?.span as number);
       }
       item.groupIndex = groupIndex;
     }
@@ -179,25 +195,25 @@ export const updateSpan = ({
   });
   // console.log(beforeFlatenGroup, '====== before group =====');
 
-  const beforeTreeGroup = [];
+  const beforeTreeGroup: IGroup[][] = [];
 
   parseFlaten2Tree(beforeFlatenGroup, beforeTreeGroup);
 
-  const afterFlatenGroup = [];
+  const afterFlatenGroup: IGroup[] = [];
 
   if (type === 'resize' && offset !== 0) {
     beforeTreeGroup.forEach((group) => {
-      handleResize(group, currentBlock, offset, direction);
+      handleResize(group, currentBlock!, offset, direction);
       afterFlatenGroup.push(...group);
     });
   } else if (type === 'split') {
     beforeTreeGroup.forEach((group, idx) => {
-      handleSplit(group, currentBlock, idx);
+      handleSplit(group, currentBlock!, idx);
       afterFlatenGroup.push(...group);
     });
   } else if (type === 'delete') {
     // 由于事件监听的是onNodeRemove, 所以对 delete 来说，这里已经是after的group了
-    handleDelete(beforeTreeGroup, afterFlatenGroup, currentBlock, currentSection);
+    handleDelete(beforeTreeGroup, afterFlatenGroup, currentBlock!, currentSection);
   } else {
     beforeTreeGroup.forEach((group) => {
       afterFlatenGroup.push(...group);
@@ -206,12 +222,12 @@ export const updateSpan = ({
 
   afterFlatenGroup.forEach((data) => {
     const currentGroupIndex = data.groupIndex;
-    const groupList = [];
+    const groupList: number[] = [];
     let num = 0;
     afterFlatenGroup.forEach((item) => {
       if (item.groupIndex === currentGroupIndex) {
         item.groupInnerIndex = num;
-        groupList.push(item.span);
+        item.span && groupList.push(item.span);
         num++;
       }
     });
@@ -221,9 +237,9 @@ export const updateSpan = ({
 
   // console.log(afterFlatenGroup, '====== after group =====');
 
-  const adjustColSpan = (afterFlaten) => {
+  const adjustColSpan = (afterFlaten: IGroup[]) => {
     afterFlaten.forEach((item) => {
-      currentSection.document.getNodeById(item.id).setPropValue('span', item.span);
+      item.id && currentSection.document?.getNodeById(item.id)?.setPropValue('span', item.span);
     });
   };
 

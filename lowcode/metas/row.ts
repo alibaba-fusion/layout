@@ -1,16 +1,15 @@
-import { IPublicModelNode } from "@alilc/lowcode-types";
-
-const { CELL, ROW } = require('../names');
-const { createCellSnippet, createPSnippet } = require('../default-schema');
-const {
+import { IPublicModelNode, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
+import { CELL, ROW } from '../names';
+import { createCellSnippet, createPSnippet } from '../default-schema';
+import {
   onNodeRemoveSelfWhileNoChildren,
   onNodeReplaceSelfWithChildrenCell,
   onDrageResize,
-} = require('./enhance/callbacks');
-const { getResizingHandlers } = require('./enhance/experimentals');
-const minHeight = require('./setter/min-height');
+} from './enhance/callbacks';
+import { getResizingHandlers } from './enhance/experimentals';
+import minHeight from './setter/min-height';
 
-export default {
+const config: IPublicTypeComponentMetadata =  {
   componentName: ROW,
   title: '行容器',
   category: '容器',
@@ -50,7 +49,6 @@ export default {
         name: 'gap',
         title: '间距',
         defaultValue: 4,
-        initialValue: 4,
         setter: {
           componentName: 'NumberSetter',
           props: {
@@ -67,7 +65,7 @@ export default {
       onNodeRemove: (removedNode: IPublicModelNode, currentNode: IPublicModelNode) => {
         onNodeRemoveSelfWhileNoChildren(removedNode, currentNode);
       },
-      onSubtreeModified: (currentNode: IPublicModelNode, e) => {
+      onSubtreeModified: (currentNode: IPublicModelNode, e: MouseEvent) => {
         onNodeReplaceSelfWithChildrenCell(currentNode, e);
       },
       /**
@@ -102,3 +100,5 @@ export default {
   },
   icon: 'https://img.alicdn.com/imgextra/i1/O1CN01AQZw941ZgdfVtjsDO_!!6000000003224-55-tps-128-128.svg',
 };
+
+export default config;

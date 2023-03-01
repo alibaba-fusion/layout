@@ -1,8 +1,8 @@
 // const TooltipLabel = require('./tooltip-label');
 
-import { IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
 
-module.exports = [
+const items: IPublicTypeFieldConfig[] = [
   // {
   //   name: 'style.background',
   //   title: '背景类型',
@@ -67,7 +67,7 @@ module.exports = [
         const bgImg = target.node?.getPropValue('style.backgroundImage');
         return bgImg?.match(/^url\((.*)\)$/)?.[1];
       },
-      setValue: (target: IPublicModelSettingPropEntry, value) => {
+      setValue: (target: IPublicModelSettingPropEntry, value: string) => {
         if (value) {
           target.node?.setPropValue('style.backgroundImage', `url(${value})`);
         } else {
@@ -79,3 +79,5 @@ module.exports = [
     },
   },
 ];
+
+export default items;

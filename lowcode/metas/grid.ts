@@ -1,16 +1,14 @@
-import { IPublicModelNode, IPublicModelSettingPropEntry } from "@alilc/lowcode-types";
-
-const { CELL, GRID, BLOCK, ROW, COL } = require('../names');
-const { createCellSnippet, createPSnippet } = require('../default-schema');
-const widthSetter = require('./setter/width');
-const heightSetter = require('./setter/min-height');
-
-const {
+import { IPublicModelNode, IPublicModelSettingPropEntry, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
+import { CELL, GRID, BLOCK, ROW, COL } from '../names';
+import { createCellSnippet, createPSnippet } from '../default-schema';
+import widthSetter from './setter/width';
+import heightSetter from './setter/min-height';
+import {
   onNodeRemoveSelfWhileNoChildren,
   onNodeReplaceSelfWithChildrenCell,
-} = require('./enhance/callbacks');
+} from './enhance/callbacks';
 
-export default {
+const config: IPublicTypeComponentMetadata = {
   componentName: GRID,
   title: '网格容器',
   category: '容器',
@@ -43,7 +41,6 @@ export default {
         name: 'cols',
         title: '列数',
         defaultValue: 2,
-        initialValue: 2,
         setter: {
           componentName: 'NumberSetter',
           props: {
@@ -56,7 +53,7 @@ export default {
         type: 'group',
         display: 'block',
         condition: (target: IPublicModelSettingPropEntry) => {
-          return [BLOCK, ROW].indexOf(target.node?.parent?.componentName) !== -1;
+          return target.node?.parent?.componentName && [BLOCK, ROW].indexOf(target.node?.parent?.componentName) !== -1;
         },
         items: [...widthSetter],
       },
@@ -65,7 +62,7 @@ export default {
         type: 'group',
         display: 'block',
         condition: (target: IPublicModelSettingPropEntry) => {
-          return [BLOCK, COL].indexOf(target.node?.parent?.componentName) !== -1;
+          return target.node?.parent?.componentName && [BLOCK, COL].indexOf(target.node?.parent?.componentName) !== -1;
         },
         items: [...heightSetter],
       },
@@ -84,7 +81,6 @@ export default {
         name: 'rowGap',
         title: '水平间隙',
         defaultValue: 4,
-        initialValue: 4,
         setter: {
           componentName: 'NumberSetter',
           props: {
@@ -115,8 +111,8 @@ export default {
       onNodeRemove: (removedNode: IPublicModelNode, currentNode: IPublicModelNode) => {
         onNodeRemoveSelfWhileNoChildren(removedNode, currentNode);
       },
-      onSubtreeModified: (currentNode: IPublicModelNode, e) => {
-        onNodeReplaceSelfWithChildrenCell(currentNode, e);
+      onSubtreeModified: (currentNode: IPublicModelNode, options: any) => {
+        onNodeReplaceSelfWithChildrenCell(currentNode, options);
       },
       /**
        * 组件拖入回调逐层向上触发，需要做好判断。
@@ -149,3 +145,5 @@ export default {
   },
   icon: 'https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_table.png',
 };
+
+export default config;
