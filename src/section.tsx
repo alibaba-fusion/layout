@@ -36,7 +36,7 @@ function getValidChildren(
 ) {
   const newChildren = wrapBlock(children, maxNumberOfColumns);
 
-  return calBlockSpan(newChildren, numberOfColumns);
+  return calBlockSpan(newChildren as ReactElement[], numberOfColumns);
 }
 
 /**
@@ -50,7 +50,7 @@ function wrapBlock(children: ReactNode, maxNumberOfColumns: number) {
   const ret: ReactNode[] = [];
   const validChildList = Children.toArray(children).filter((child) => !isNil(child));
 
-  validChildList.forEach((child, index) => {
+  validChildList.forEach((child: any, index) => {
     if (child?.type === Block || child?.type?.typeMark === 'Block') {
       if (tmp.length > 0) {
         ret.push(
