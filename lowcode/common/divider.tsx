@@ -102,7 +102,7 @@ export const Divider = (props: IDividerProps) => {
     const { project } = engine.current;
     if (!project) return;
 
-    project.currentDocument?.onChangeSelection(onSelectionChange);
+    project.currentDocument?.onChangeSelection(() => onSelectionChange(100));
   }, []);
 
   /*
