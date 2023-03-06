@@ -1,14 +1,13 @@
-name: auto-publisher
+name: publish-latest
 
 on:
   push:
-    branches: [ next ]
+    branches: [master]
   pull_request:
-    branches: [ next ]
+    branches: [master]
 
 jobs:
   build-and-publish-npm:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -22,6 +21,6 @@ jobs:
         with:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install --legacy-peer-deps
-      - run: npm publish --tag next
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
