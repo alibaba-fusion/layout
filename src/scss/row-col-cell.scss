@@ -1,0 +1,52 @@
+@import 'variable';
+
+#{$biz-css-prefix} {
+  @each $bgType in $backgroundTypes {
+    &-bg--#{$bgType} {
+      background: var(--color-#{$bgType});
+    }
+  }
+
+  &cell {
+    box-sizing: border-box;
+    // 1.去掉 flex 场景： cell 单独定高，如果有 flex 属性会影响高度
+    // 2. 保留 flex 场景：在 block 容器中，放入希望 cell 容器可以撑满父级容器的高度
+    // flex: 1 1 auto;
+
+    &-align {
+      &--left {
+        align-items: flex-start;
+      }
+      &--center {
+        align-items: center;
+      }
+      &--right {
+        align-items: flex-end;
+      }
+
+      &-stretch {
+        & > *,
+        & > text {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  &row-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex: 1 1 auto;
+    gap: var(--page-grid-gap);
+  }
+
+  &col-flex {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex: 1 1;
+    gap: var(--page-grid-gap);
+  }
+}

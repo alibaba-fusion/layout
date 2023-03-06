@@ -1,0 +1,258 @@
+@import 'variable';
+
+#{$biz-css-prefix} {
+  &cell {
+    &-align {
+      &--left #{$biz-css-prefix}p {
+        justify-content: flex-start;
+      }
+      &--center #{$biz-css-prefix}p {
+        justify-content: center;
+      }
+      &--right #{$biz-css-prefix}p {
+        justify-content: flex-end;
+      }
+      &--space-evenly #{$biz-css-prefix}p {
+        justify-content: space-evenly;
+      }
+      &--space-between #{$biz-css-prefix}p {
+        justify-content: space-between;
+      }
+      &--space-around #{$biz-css-prefix}p {
+        justify-content: space-around;
+      }
+
+      &--middle,
+      &--center,
+      &--left {
+        @each $size in $sizes {
+          #{$biz-css-prefix}p-spacing--#{$size} {
+            & > * {
+              margin-right: var(--page-p-#{$size}-spacing);
+            }
+          }
+        }
+      }
+
+      &--space-evenly,
+      &--space-around,
+      &--space-between,
+      &--stretch {
+        #{$biz-css-prefix}p-spacing {
+          & > *,
+          & > text {
+            margin-left: 0;
+            margin-right: 0;
+          }
+        }
+      }
+
+      &--left,
+      &--center,
+      &--middle {
+        #{$biz-css-prefix}p-spacing {
+          & > * {
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+
+      &--right {
+        @each $size in $sizes {
+          #{$biz-css-prefix}p-spacing--#{$size} {
+            & > * {
+              margin-left: var(--page-p-#{$size}-spacing);
+            }
+          }
+        }
+
+        #{$biz-css-prefix}p-spacing {
+          & > * {
+            margin-right: 0;
+
+            &:first-child {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &p {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: var(--page-p-font-color);
+    width: 100%;
+
+    // 段落下的纯文本
+    &-text {
+      font-size: var(--p-body-1-font-size) !important;
+      font-weight: var(--p-body-1-font-weight);
+      line-height: var(--p-body-1-line-height);
+    }
+
+    @each $type in $fontTypes {
+      &--#{$type} {
+        font-size: var(--p-#{$type}-font-size);
+        font-weight: var(--p-#{$type}-font-weight);
+        line-height: var(--p-#{$type}-line-height);
+      }
+    }
+
+    @each $size in $sizes {
+      &-before-padding {
+        &--#{$size} {
+          margin-top: var(--page-p-padding-#{$size}-size);
+
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+      }
+
+      &-after-padding {
+        &--#{$size} {
+          margin-bottom: var(--page-p-padding-#{$size}-size);
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    &-margin > * {
+      margin-top: var(--page-p-el-margin);
+      margin-bottom: var(--page-p-el-margin);
+    }
+
+    // notice: 对于已经认定的纯文本节点，不加上下间距（依赖行高处理）
+    &-margin > #{$biz-css-prefix}text,
+    &-margin > text {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    @each $size in $sizes {
+      &-spacing--#{$size} {
+        & > * {
+          margin-right: var(--page-p-#{$size}-spacing);
+        }
+        &#{$biz-css-prefix}p-spacing--middle,
+        &#{$biz-css-prefix}p-spacing--center,
+        &#{$biz-css-prefix}p-spacing--left {
+          & > * {
+            margin-right: var(--page-p-#{$size}-spacing);
+          }
+        }
+        &#{$biz-css-prefix}p-spacing--right {
+          & > * {
+            margin-left: var(--page-p-#{$size}-spacing);
+          }
+        }
+      }
+    }
+
+    &-spacing {
+      & > * {
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      &--left,
+      &--center,
+      &--middle {
+        & > * {
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+
+      &--right {
+        & > * {
+          margin-right: 0;
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+      }
+
+      &--space-between,
+      &--space-around,
+      &--space-evenly {
+        & > * {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+
+    &-valign--top {
+      align-items: flex-start;
+      vertical-align: top;
+    }
+
+    &-valign--stretch {
+      align-items: stretch;
+      vertical-align: middle;
+    }
+
+    &-valign--center,
+    &-valign--middle {
+      align-items: center;
+      vertical-align: middle;
+    }
+
+    &-valign--bottom {
+      align-items: flex-end;
+      vertical-align: bottom;
+    }
+
+    &-valign--baseline {
+      align-items: baseline;
+      vertical-align: baseline;
+    }
+  }
+
+  // notice: 为了处理 cell 中的 align，  p 的 align 模式，优先级提升
+  &page #{$biz-css-prefix}p-align {
+    &--right {
+      text-align: right;
+      justify-content: flex-end;
+    }
+
+    &--left {
+      text-align: left;
+      justify-content: flex-start;
+    }
+
+    &--center {
+      text-align: center;
+      justify-content: center;
+    }
+
+    &--space-between {
+      justify-content: space-between;
+    }
+
+    &--space-evenly {
+      justify-content: space-evenly;
+    }
+
+    &--space-around {
+      justify-content: space-around;
+    }
+  }
+}

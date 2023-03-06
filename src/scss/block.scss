@@ -1,0 +1,48 @@
+@import 'variable';
+
+#{$biz-css-prefix}block {
+  border-radius: var(--page-block-corner);
+  overflow: hidden;
+
+  &-head {
+    padding: var(--page-block-padding-tb) var(--page-block-padding-lr);
+  }
+
+  &--headless {
+    padding: var(--page-block-padding-tb) var(--page-block-padding-lr);
+  }
+
+  &--bordered {
+    border: var(--page-block-border-width) solid var(--page-block-border-color);
+  }
+
+  &-content {
+    padding-left: var(--page-block-padding-lr);
+    padding-right: var(--page-block-padding-lr);
+    padding-bottom: var(--page-block-padding-tb);
+  }
+
+  &--no-padding,
+  &-content--no-padding {
+    padding: 0;
+  }
+
+  &-title,
+  &-title #{$biz-css-prefix}p {
+    color: var(--page-block-title-font-color);
+  }
+
+  &-extra,
+  &-extra #{$biz-css-prefix}p {
+    color: var(--page-block-extra-font-color);
+  }
+
+  &--divided {
+    #{$biz-css-prefix}block-head {
+      border-bottom: var(--line-1) solid var(--color-line1-1);
+    }
+    #{$biz-css-prefix}block-content {
+      padding-top: var(--page-block-padding-tb);
+    }
+  }
+}
