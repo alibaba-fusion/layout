@@ -57,7 +57,7 @@
     "@alifd/validate" "^1.2.0"
     prop-types "^15.5.8"
 
-"@alifd/next@^1.19.12", "@alifd/next@^1.19.16", "@alifd/next@^1.20.12", "@alifd/next@^1.21.16", "@alifd/next@^1.x":
+"@alifd/next@^1.19.12", "@alifd/next@^1.19.16", "@alifd/next@^1.20.12", "@alifd/next@^1.21.16", "@alifd/next@^1.x", "@alifd/next@~1.26.x":
   version "1.26.14"
   resolved "https://registry.npmjs.org/@alifd/next/-/next-1.26.14.tgz#1761d691088e6d62cd5d7df094f765ed5a8b4c75"
   integrity sha512-fBnmiG19gCV9VV5ZYqT6aozWMNkMeeqS7EqxSGAP2NVKIerNQGY6/AnpKXXD3K5ke5sJcvho/a1Zu/FERBBMdw==
@@ -77,25 +77,6 @@
     resize-observer-polyfill "^1.5.1"
     shallow-element-equals "^1.0.1"
 
-"@alifd/next@~1.24.x":
-  version "1.24.18"
-  resolved "https://registry.npmjs.org/@alifd/next/-/next-1.24.18.tgz#5189f6439e156ccbd99e1bfa51322894ae5f4578"
-  integrity sha512-qfpkZxz/81WxloxAJ9ZR3YRwVh7oR9HM0GbChaSAYAJXaawkZcs7obvgmmePq285Qv5agOzmLpFdJwJ8oRTmIQ==
-  dependencies:
-    "@alifd/field" "~1.5.5"
-    "@alifd/validate" "~1.2.0"
-    babel-runtime "^6.26.0"
-    bignumber.js "^9.0.1"
-    classnames "^2.2.3"
-    dayjs "^1.9.6"
-    hoist-non-react-statics "^3.0.0"
-    lodash.clonedeep "^4.5.0"
-    prop-types "^15.6.0"
-    react-lifecycles-compat "^3.0.4"
-    react-transition-group "^2.2.1"
-    resize-observer-polyfill "^1.5.1"
-    shallow-element-equals "^1.0.1"
-
 "@alifd/overlay@^0.2.9":
   version "0.2.12"
   resolved "https://registry.npmjs.org/@alifd/overlay/-/overlay-0.2.12.tgz#2696864d33def52d81dabb1bfe18f1250993bd4c"
@@ -103,12 +84,12 @@
   dependencies:
     resize-observer-polyfill "^1.5.1"
 
-"@alifd/theme-3@^0.5.3":
-  version "0.5.3"
-  resolved "https://registry.npmjs.org/@alifd/theme-3/-/theme-3-0.5.3.tgz#d2abf9608154466ed07130ce1b2cd990441c30f6"
-  integrity sha512-++2bYYLZfpwnsnNg2W94voY8Od9OyMb1g1uw9lJMY2KBwUG017TQnpBL8Dqs/zdLcCctkWaPZbeTEdmPKwTXSw==
+"@alifd/theme-3@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@alifd/theme-3/-/theme-3-0.6.0.tgz#e4fe33d0e7e493c56174eb9d81a8d75b41fcc0c7"
+  integrity sha512-ofU1YoF35MjIjGKmXa/U8TbPfW2z13M09Z7Y1ZRnkoeh6JqfjWUKUxIGeW9/nMiXnv7eWwKG2RlOQMKK5cbR6g==
   dependencies:
-    "@alifd/next" "~1.24.x"
+    "@alifd/next" "~1.26.x"
 
 "@alifd/validate@^1.2.0":
   version "1.4.0"
@@ -4134,11 +4115,6 @@ big.js@^6.2.0:
   version "6.2.1"
   resolved "https://registry.npmjs.org/big.js/-/big.js-6.2.1.tgz#7205ce763efb17c2e41f26f121c420c6a7c2744f"
   integrity sha512-bCtHMwL9LeDIozFn+oNhhFoq+yQ3BNdnsLSASUxLciOb1vgvpHsIO1dsENiGMgbb4SkP5TrzWzRiLddn8ahVOQ==
-
-bignumber.js@^9.0.1:
-  version "9.1.1"
-  resolved "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.1.1.tgz#c4df7dc496bd849d4c9464344c1aa74228b4dac6"
-  integrity sha512-pHm4LsMJ6lzgNGVfZHjMoO8sdoRhOzOH4MLmY65Jg70bpxCKu5iOHNJyfF6OyvYw7t8Fpf35RuzUyqnQsj8Vig==
 
 binary-extensions@^1.0.0:
   version "1.13.1"
