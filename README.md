@@ -11,10 +11,10 @@
   <img src="https://img.shields.io/npm/l/@alifd/layout.svg?style=flat-square">
 </p>
 
-用于搭建、源码，嵌套特定组件的布局体系，目标是不写任何布局 CSS 代码。
+用于快速完成页面布局体系 (低代码搭建或源码开发)，目标是不写任何布局 CSS 代码。
 
-[🔗 预览 Demo](https://unpkg.com/@alifd/layout/build/index.html)
-[🔗 阿里低代码搭建 Demo](https://unpkg.com/@alifd/layout/build/lowcode/index.html)
+[🔗 预览 Demo](https://g.alipay.com/@alifd/layout/build/index.html)
+[🔗 阿里低代码搭建 Demo](https://g.alipay.com/@alifd/layout/build/lowcode/index.html)
 
 **设计理念**
 
@@ -350,7 +350,7 @@ interface BreakPoint {
 ## CSS 变量
 
 自然布局默认引入了 Fusion 设计系统的 [Design Tokens](https://fusion.design/pc/design-tokens?type=theme&themeid=3)。
-布局可自定义 CSS Variables 如下，可基于实际情况修改：
+布局可自定义 `CSS Variables` 如下，可基于实际情况修改：
 
 | 变量名                            | 说明                   | 默认值                 |
 | --------------------------------- | ---------------------- | ---------------------- |
