@@ -82,7 +82,7 @@
     "name": "Layout",
     "title": "自然布局",
     "category": "Information",
-    "materialSchema": "https://unpkg.alibaba-inc.com/@alifd/layout@2.0.3/build/lowcode/assets-prod.json"
+    "materialSchema": "https://unpkg.alibaba-inc.com/@alifd/layout@2.0.4/build/lowcode/assets-prod.json"
   },
   "publishConfig": {
     "access": "public"
@@ -96,5 +96,8 @@
       "commit-msg": "f2elint commit-msg-scan"
     }
   },
-  "repository": "https://github.com/alibaba-fusion/layout.git"
+  "repository": "https://github.com/alibaba-fusion/layout.git",
+  "resolutions": {
+    "sass": "1.35.x"
+  }
 }
