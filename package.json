@@ -58,8 +58,8 @@
     "@iceworks/spec": "^1.0.0",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/lodash-es": "^4.17.6",
-    "@types/react": "^16.14.35",
-    "@types/react-dom": "^16.9.4",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "build-plugin-component": "^1.0.0",
     "build-plugin-fusion": "^0.1.0",
     "build-plugin-jsx-plus": "^0.1.4",
@@ -70,8 +70,8 @@
     "iceworks": "^3.4.5",
     "lodash.throttle": "^4.1.1",
     "moment": "^2.29.4",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-draggable": "^4.4.4"
   },
   "peerDependencies": {
