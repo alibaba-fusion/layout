@@ -20,6 +20,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           registry-url: 'https://registry.npmjs.org'
+        env:
+          NODE_OPTIONS: '--openssl-legacy-provider'
       - run: npm install --legacy-peer-deps
       - run: npm publish
         env:
