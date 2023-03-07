@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import Context from '@/common/context';
 import { VER_ALIGN_ALIAS_MAP } from '@/common/constant';
 import { isValidGap, wrapUnit } from '@/utils';
+import useFlexClassNames from '@/hooks/use-flex-class-names';
 import { CellProps, LayoutContextProps, TypeMark } from './types';
 
 type ICell = ForwardRefExoticComponent<CellProps> & TypeMark;
@@ -37,6 +38,7 @@ const Cell: ForwardRefRenderFunction<HTMLDivElement, CellProps> = (props, ref) =
   const { prefix } = useContext<LayoutContextProps>(Context);
   const clsPrefix = `${prefix}cell`;
 
+  const valiedWidth = width || style?.width
   const newStyle: CSSProperties = useMemo(
     () => ({
       ...(!block
@@ -51,16 +53,20 @@ const Cell: ForwardRefRenderFunction<HTMLDivElement, CellProps> = (props, ref) =
       ...(width ? { width: wrapUnit(width) } : null),
       ...(height ? { height: wrapUnit(height) } : null),
       ...(isValidGap(gap) ? { gap: wrapUnit(gap) } : null),
+      // 有 width 或者 style.width 的时候，设置 flexBasis 宽度
+      ...(valiedWidth ? { flexBasis: wrapUnit(valiedWidth) } : null ),
       ...style,
     }),
     [block, direction, verAlign, width, height, gap, style],
   );
 
+  const flexClassNames = useFlexClassNames(props);
+
   return (
     <div
       {...others}
       ref={ref}
-      className={classNames(clsPrefix, className, {
+      className={classNames(clsPrefix, className, flexClassNames, {
         [`${clsPrefix}-align--${align}`]: align,
       })}
       style={newStyle}

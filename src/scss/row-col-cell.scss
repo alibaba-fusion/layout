@@ -40,6 +40,11 @@
     flex-wrap: nowrap;
     flex: 1 1 auto;
     gap: var(--page-grid-gap);
+    // 行容器下的子容器 flex 属性，只在 validWidth 时生效
+    // 并且只有前两个参数 0 0，第三个参数需要根据 validWidth 设置，所以单独在子容器里面设置
+    > #{$biz-css-prefix}flex-item-valid-width {
+      flex: 0 0;
+    }
   }
 
   &col-flex {
@@ -48,5 +53,21 @@
     flex-wrap: nowrap;
     flex: 1 1;
     gap: var(--page-grid-gap);
+    // 列容器下的子容器 flex 属性，只在 validHeight 时生效
+    > #{$biz-css-prefix}flex-item-valid-height {
+      flex: 0 0 auto;
+    }
+  }
+
+  &row-flex,
+  &col-flex {
+    > #{$biz-css-prefix}flex-item {
+      &-default {
+        flex: 1 1 0;
+      }
+      &-auto-fit {
+        flex: 0 0 auto;
+      }
+    }
   }
 }

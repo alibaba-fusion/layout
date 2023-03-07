@@ -1,9 +1,6 @@
 import React, {
   useContext,
-  cloneElement,
-  isValidElement,
   forwardRef,
-  Children,
   ForwardRefExoticComponent,
   ForwardRefRenderFunction,
   useMemo,
@@ -13,6 +10,7 @@ import classNames from 'classnames';
 import { VER_ALIGN_ALIAS_MAP } from '@/common/constant';
 import Context from '@/common/context';
 import { getGapVal, wrapUnit } from '@/utils';
+import useFlexClassNames from '@/hooks/use-flex-class-names';
 import { LayoutContextProps, RowProps, TypeMark } from './types';
 
 type IRow = ForwardRefExoticComponent<RowProps> & TypeMark;
@@ -36,43 +34,8 @@ const Row: ForwardRefRenderFunction<HTMLDivElement, RowProps> = (props: RowProps
   const clsPrefix = `${prefix}row-flex`;
   const gap = getGapVal(gridGap, gapProp);
 
-  // 暂存 children (此处用处不大，上层大部分情况有 clone children 的操作)
-  const memorizedChildren = useMemo(() => {
-    return Children.map(children, (child) => {
-      if (isValidElement(child)) {
-        const { width: childWidth, autoFit: childAutoFit, style: childStyle } = child?.props;
-        const { width: childStyleWidth, ...otherChildStyle } = childStyle || {};
+  const valiedWidth = width || style?.width
 
-        let flex;
-        let validWidth;
-
-        if (childWidth && childWidth !== '') {
-          validWidth = childWidth;
-        } else if (childStyleWidth && childStyleWidth !== '') {
-          validWidth = childStyle.width;
-        }
-
-        if (childAutoFit) {
-          flex = '0 0 auto';
-        } else if (validWidth) {
-          flex = `0 0 ${wrapUnit(validWidth)}`;
-        } else {
-          flex = '1 1 0';
-        }
-
-        return cloneElement(child, {
-          ...child?.props,
-          style: {
-            flex,
-            width: validWidth,
-            ...otherChildStyle,
-          },
-        });
-      }
-
-      return child;
-    });
-  }, [children]);
 
   const newStyle = useMemo(
     () => ({
@@ -81,14 +44,19 @@ const Row: ForwardRefRenderFunction<HTMLDivElement, RowProps> = (props: RowProps
       ...(width ? { width: wrapUnit(width) } : null),
       ...(height ? { height: wrapUnit(height) } : null),
       ...(gap ? { gap: wrapUnit(gap) } : null),
+      // 有 width 或者 style.width 的时候，设置 flexBasis 宽度
+      ...(valiedWidth ? { flexBasis: wrapUnit(valiedWidth) } : null ),
       ...style,
     }),
     [verAlign, width, height, gap, style],
   );
+  const flexClassNames = useFlexClassNames(props);
 
   return (
-    <div {...others} className={classNames(className, clsPrefix)} style={newStyle} ref={ref}>
-      {memorizedChildren}
+    <div
+      {...others}
+      className={classNames(className, clsPrefix, flexClassNames)} style={newStyle} ref={ref}>
+      {children}
     </div>
   );
 };

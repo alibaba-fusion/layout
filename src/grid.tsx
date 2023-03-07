@@ -9,6 +9,7 @@ import classNames from 'classnames';
 
 import Context from '@/common/context';
 import { getGapVal, wrapUnit } from '@/utils';
+import useFlexClassNames from '@/hooks/use-flex-class-names';
 import { GridProps, LayoutContextProps, TypeMark } from './types';
 
 type IGrid = ForwardRefExoticComponent<GridProps> & TypeMark;
@@ -30,6 +31,7 @@ const Grid: ForwardRefRenderFunction<HTMLDivElement, GridProps> = (props, ref) =
     renderItem,
     rows,
     cols,
+    width,
     minWidth,
     maxWidth,
     ...others
@@ -40,6 +42,7 @@ const Grid: ForwardRefRenderFunction<HTMLDivElement, GridProps> = (props, ref) =
   const rowGap = getGapVal(gridGap, rowGapProp);
   const colGap = getGapVal(gridGap, colGapProp);
 
+  const valiedWidth = width || style?.width || minWidth
   const memorizedNewStyle = useMemo(() => {
     let gtc = `repeat(${cols}, 1fr)`;
 
@@ -61,6 +64,8 @@ const Grid: ForwardRefRenderFunction<HTMLDivElement, GridProps> = (props, ref) =
       gridTemplateRows: `repeat(${rows}, 1fr)`,
       ...(rowGap ? { gridRowGap: wrapUnit(rowGap) } : null),
       ...(colGap ? { gridColumnGap: wrapUnit(colGap) } : null),
+      // 有 width 或者 style.width 的时候，设置 flexBasis 宽度
+      ...(valiedWidth ? { flexBasis: wrapUnit(valiedWidth) } : null ),
       ...style,
     };
   }, [cols, colGap, minWidth, maxWidth, rows, rowGap, style]);
@@ -74,11 +79,12 @@ const Grid: ForwardRefRenderFunction<HTMLDivElement, GridProps> = (props, ref) =
     });
   };
 
+  const flexClassNames = useFlexClassNames(props);
   return (
     <div
       {...others}
       ref={ref}
-      className={classNames(className, clsPrefix, {
+      className={classNames(className, clsPrefix, flexClassNames, {
         [`${clsPrefix}-align--${align}`]: align,
         [`${clsPrefix}-valign--${verAlign}`]: verAlign,
       })}
