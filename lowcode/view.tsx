@@ -203,7 +203,7 @@ const CellView = (props: any) => {
   }, []);
 
   let newChildren = children;
-  if (!children?.length && !props.style?.minHeight) {
+  if (!children?.length) {
     newChildren = <div className="lc-container-placeholder">拖拽组件或模板到这里</div>;
   }
 
