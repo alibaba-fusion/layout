@@ -65,7 +65,9 @@ const Cell: ForwardRefRenderFunction<HTMLDivElement, CellProps> = (props, ref) =
       })}
       style={newStyle}
     >
-      {children}
+      <div>
+        {children}
+      </div>
     </div>
   );
 };

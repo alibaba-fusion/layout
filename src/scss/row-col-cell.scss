@@ -32,6 +32,11 @@
         }
       }
     }
+
+    > div {
+      height: 100%;
+      width: 100%;
+    }
   }
 
   &row-flex {
@@ -40,6 +45,15 @@
     flex-wrap: nowrap;
     flex: 1 1 auto;
     gap: var(--page-grid-gap);
+
+    > #{$biz-css-prefix} {
+      &cell,
+      &row-flex,
+      &col-flex,
+      &grid {
+        width: 0;
+      }
+    }
   }
 
   &col-flex {
