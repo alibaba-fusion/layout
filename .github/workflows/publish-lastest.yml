@@ -5,6 +5,7 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+    types: ['closed']
 
 jobs:
   build-and-publish-npm:
@@ -12,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [17.x]
 
     steps:
       - uses: actions/checkout@v3
@@ -20,9 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           registry-url: 'https://registry.npmjs.org'
-        env:
-          NODE_OPTIONS: '--openssl-legacy-provider'
-      - run: npm install --legacy-peer-deps
+      - run: yarn install
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
