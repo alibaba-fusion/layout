@@ -98,6 +98,6 @@
   },
   "repository": "https://github.com/alibaba-fusion/layout.git",
   "resolutions": {
-    "sass": "1.35.x"
+    "sass": "1.59.x"
   }
 }
