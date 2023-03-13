@@ -34,7 +34,7 @@ const Row: ForwardRefRenderFunction<HTMLDivElement, RowProps> = (props: RowProps
   const clsPrefix = `${prefix}row-flex`;
   const gap = getGapVal(gridGap, gapProp);
 
-  const valiedWidth = width || style?.width
+  const validWidth = width || style?.width
 
 
   const newStyle = useMemo(
@@ -45,10 +45,10 @@ const Row: ForwardRefRenderFunction<HTMLDivElement, RowProps> = (props: RowProps
       ...(height ? { height: wrapUnit(height) } : null),
       ...(gap ? { gap: wrapUnit(gap) } : null),
       // 有 width 或者 style.width 的时候，设置 flexBasis 宽度
-      ...(valiedWidth ? { flexBasis: wrapUnit(valiedWidth) } : null ),
+      ...(validWidth ? { flexBasis: wrapUnit(validWidth) } : null ),
       ...style,
     }),
-    [verAlign, width, height, gap, style],
+    [verAlign, width, height, gap, style, validWidth],
   );
   const flexClassNames = useFlexClassNames(props);
 

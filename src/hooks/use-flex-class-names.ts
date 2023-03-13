@@ -30,14 +30,13 @@ const useFlexClassNames = (props: any) => {
     isDefault = true
   }
 
-  const classes = classNames({
+  return classNames({
     [`${clsPrefix}-default`]: isDefault,
     [`${clsPrefix}-auto-fit`]: isAutoFit,
     [`${clsPrefix}-valid-width`]: isValidWidth,
     [`${clsPrefix}-valid-height`]: isValidHeight
   })
 
-  return classes
 }
 
 export default useFlexClassNames
