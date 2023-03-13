@@ -234,6 +234,10 @@ export interface GridProps extends BaseProps {
    */
   cols?: number;
   /**
+   * 单元格的宽度
+   */
+  width?: number;
+  /**
    * 单元格的最小宽度
    */
   minWidth?: number;
