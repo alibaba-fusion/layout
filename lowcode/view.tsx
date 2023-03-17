@@ -104,10 +104,11 @@ const PageView = (props: {
   const hasSection = Array.isArray(_leaf?.schema.children) && _leaf?.schema.children?.length;
 
   useEffect(() => {
+    // 加载切割的交互能力
+    initSingletonDivider();
+
     if (!pageLoaded) {
       registHotKeys();
-      // 加载切割的交互能力
-      initSingletonDivider();
 
       // 增加快捷选择父节点的按钮
       window.parent?.AliLowCodeEngine?.material?.addBuiltinComponentAction({
