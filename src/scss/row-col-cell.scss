@@ -45,6 +45,10 @@
     > #{$biz-css-prefix}flex-item-valid-width {
       flex: 0 0;
     }
+
+    > #{$biz-css-prefix}fixed-container#{$biz-css-prefix}flex-item-valid-height {
+      flex: 1 1 0;
+    }
   }
 
   &col-flex {
@@ -63,7 +67,7 @@
   &col-flex {
     > #{$biz-css-prefix}flex-item {
       &-default {
-        flex: 1 1 0;
+        flex: 1 1 0 !important;
       }
       &-auto-fit {
         flex: 0 0 auto;
