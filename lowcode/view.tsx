@@ -303,16 +303,16 @@ const FixedPointView = (props: {
     window.parent.AliLowCodeEngine.config.set('enableMouseEventPropagationInCanvas', true);
 
     // disable move
-    movehook.current = _leaf?.componentMeta?.getMetadata().experimental?.callbacks?.onMoveHook;
-    if (_leaf?.componentMeta?.getMetadata().experimental?.callbacks) {
-      _leaf.componentMeta.getMetadata().experimental!.callbacks!.onMoveHook = () => false;
+    movehook.current = _leaf?.componentMeta?.getMetadata().configure?.advanced?.callbacks?.onMoveHook;
+    if (_leaf?.componentMeta?.getMetadata().configure.advanced?.callbacks) {
+      _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook = () => false;
     }
     setDraging(true);
   };
   const onDragEnd = (e: DraggableEvent, uiData: DraggableData) => {
     // window.parent.AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = enableMouseEventPropagationInCanvas.current;
-    if (_leaf?.componentMeta?.getMetadata().experimental?.callbacks) {
-      _leaf.componentMeta.getMetadata().experimental!.callbacks!.onMoveHook = movehook.current;
+    if (_leaf?.componentMeta?.getMetadata().configure.advanced?.callbacks) {
+      _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook = movehook.current;
     }
 
     _leaf?.setPropValue('left', uiData.x + left);
@@ -390,18 +390,18 @@ const FixedContainerView = (props: IFixedContainerViewProps) => {
     window.parent.AliLowCodeEngine.config.set('enableMouseEventPropagationInCanvas', true);
 
     // disable move
-    movehook.current = _leaf?.componentMeta?.getMetadata().experimental?.callbacks?.onMoveHook;
+    movehook.current = _leaf?.componentMeta?.getMetadata().configure.advanced?.callbacks?.onMoveHook;
     // TODO: 不一定能设置上
-    if (_leaf.componentMeta?.getMetadata()?.experimental?.callbacks?.onMoveHook) {
-      _leaf.componentMeta.getMetadata().experimental!.callbacks!.onMoveHook = () => false;
+    if (_leaf.componentMeta?.getMetadata()?.configure.advanced?.callbacks?.onMoveHook) {
+      _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook = () => false;
     }
     setDraging(true);
   };
   const onDragEnd = (uiData: DraggableData, idx: number) => {
     // window.parent.AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = enableMouseEventPropagationInCanvas.current;
     // // TODO: 不一定能设置上
-    if (_leaf.componentMeta?.getMetadata()?.experimental?.callbacks?.onMoveHook) {
-      _leaf.componentMeta.getMetadata().experimental!.callbacks!.onMoveHook = movehook.current;
+    if (_leaf.componentMeta?.getMetadata()?.configure.advanced?.callbacks?.onMoveHook) {
+      _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook = movehook.current;
     }
 
     // 有节点增加

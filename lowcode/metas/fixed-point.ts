@@ -35,9 +35,6 @@ const config: IPublicTypeComponentMetadata = {
       loop: false,
     },
   },
-  experimental: {
-    callbacks: {},
-  },
   icon: 'https://img.alicdn.com/imgextra/i1/O1CN0144G9Iw22y9fiO73NG_!!6000000007188-55-tps-56-56.svg',
   snippets: [
     {

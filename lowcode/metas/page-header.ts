@@ -64,11 +64,11 @@ const config: IPublicTypeComponentMetadata = {
         items: [...background],
       },
     ],
-  },
-  experimental: {
-    callbacks: {
-      onMoveHook() {
-        return false;
+    advanced: {
+      callbacks: {
+        onMoveHook() {
+          return false;
+        },
       },
     },
   },

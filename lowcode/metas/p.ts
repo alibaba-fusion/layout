@@ -260,13 +260,13 @@ const config: IPublicTypeComponentMetadata = {
     supports: {
       style: true,
     },
-  },
-  experimental: {
-    callbacks: {
-      onNodeRemove: onNodeRemoveSelfWhileNoChildren,
-      onHoverHook: () => false,
-      onMouseDownHook: () => false,
-      onClickHook: () => false,
+    advanced: {
+      callbacks: {
+        onNodeRemove: onNodeRemoveSelfWhileNoChildren,
+        onHoverHook: () => false,
+        onMouseDownHook: () => false,
+        onClickHook: () => false,
+      },
     },
   },
 };
