@@ -65,21 +65,21 @@ const meta: IPublicTypeComponentMetadata = {
         ],
       },
     ],
-  },
-  experimental: {
-    callbacks: {
-      // onNodeAdd,
-      onNodeRemove: (removedNode: IPublicModelNode, currentNode: IPublicModelNode) => {
-        // 如果删除的是slot 那么焦点聚焦到PageContent上
-        if (
-          removedNode.componentName === 'Slot' &&
-          ['header', 'footer', 'aside', 'nav'].indexOf(String(removedNode?.slotFor?.key)) > -1
-        ) {
-          currentNode.select();
-        }
-      },
-      onMoveHook() {
-        return false;
+    advanced: {
+      callbacks: {
+        // onNodeAdd,
+        onNodeRemove: (removedNode: IPublicModelNode, currentNode: IPublicModelNode) => {
+          // 如果删除的是slot 那么焦点聚焦到PageContent上
+          if (
+            removedNode.componentName === 'Slot' &&
+            ['header', 'footer', 'aside', 'nav'].indexOf(String(removedNode?.slotFor?.key)) > -1
+          ) {
+            currentNode.select();
+          }
+        },
+        onMoveHook() {
+          return false;
+        },
       },
     },
   },

@@ -33,11 +33,11 @@ const config: IPublicTypeComponentMetadata = {
         },
       },
     ],
-  },
-  experimental: {
-    callbacks: {
-      onMoveHook() {
-        return false;
+    advanced: {
+      callbacks: {
+        onMoveHook() {
+          return false;
+        },
       },
     },
   },

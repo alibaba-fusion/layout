@@ -591,41 +591,41 @@ const config: IPublicTypeComponentMetadata = {
         ],
       },
     ],
-  },
-  experimental: {
-    initials: [
-      {
-        name: 'modifyRemoveCondition',
-        initial: () => {
-          window.parent.AliLowCodeEngine.material.modifyBuiltinComponentAction(
-            'remove',
-            (action) => {
-              const oldCondition = Object.prototype.hasOwnProperty.call(action, 'condition')
-                ? action.condition
-                : true;
-              action.condition = (node: IPublicModelNode): boolean => {
-                if (node.componentName === PAGE) {
-                  return false;
-                }
-                return typeof oldCondition === 'function' ? oldCondition(node) : Boolean(oldCondition);
-              };
-            },
-          );
+    advanced: {
+      initials: [
+        {
+          name: 'modifyRemoveCondition',
+          initial: () => {
+            window.parent.AliLowCodeEngine.material.modifyBuiltinComponentAction(
+              'remove',
+              (action) => {
+                const oldCondition = Object.prototype.hasOwnProperty.call(action, 'condition')
+                  ? action.condition
+                  : true;
+                action.condition = (node: IPublicModelNode): boolean => {
+                  if (node.componentName === PAGE) {
+                    return false;
+                  }
+                  return typeof oldCondition === 'function' ? oldCondition(node) : Boolean(oldCondition);
+                };
+              },
+            );
+          },
         },
-      },
-      // 会让页面拖入不了 Dialog / Drawer 这些，暂时屏蔽
-      // {
-      //   name: 'drillDown',
-      //   initial: (target) => {
-      //     // 这里加 timeout 0 的原因是初始化时当前页面可能还没有添加到页面中（target.parent is null）
-      //     setTimeout(() => {
-      //       if (target.parent && target.parent.isRoot()) {
-      //         target.parent.document.drillDown(target);
-      //       }
-      //     }, 0);
-      //   },
-      // },
-    ],
+        // 会让页面拖入不了 Dialog / Drawer 这些，暂时屏蔽
+        // {
+        //   name: 'drillDown',
+        //   initial: (target) => {
+        //     // 这里加 timeout 0 的原因是初始化时当前页面可能还没有添加到页面中（target.parent is null）
+        //     setTimeout(() => {
+        //       if (target.parent && target.parent.isRoot()) {
+        //         target.parent.document.drillDown(target);
+        //       }
+        //     }, 0);
+        //   },
+        // },
+      ],
+    },
   },
   snippets: [
     {

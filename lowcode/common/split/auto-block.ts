@@ -160,7 +160,7 @@ export const updateSpan = ({
   }
 
   const beforeFlatenGroup: IGroup[] = [];
-  const children = currentSection.schema.children;
+  const children = currentSection.schema.children || [];
   const childrenListSchema = Array.isArray(children) ? children : [children];
 
   if (!childrenListSchema) {

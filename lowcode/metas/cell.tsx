@@ -211,79 +211,79 @@ const config: IPublicTypeComponentMetadata = {
       style: true,
       loop: false,
     },
-  },
-  experimental: {
-    getResizingHandlers,
-    callbacks: {
-      ...onDrageResize,
-      /**
-       * 组件拖入回调逐层向上触发，需要做好判断。
-       * 自动包裹 P
-       * @param {*} draggedNode 被拖入的组件
-       * @param {*} currentNode 被拖入到 CELL
-       */
-      onNodeAdd: (draggedNode: IPublicModelNode, currentNode: IPublicModelNode) => {
-        if (
-          !draggedNode ||
-          // Slider 不能包裹在 P 里面
-          // FusionUI 里面的通栏组件不包 P
-          [
-            P,
-            CELL,
-            ROW,
-            COL,
-            BLOCK,
-            'Slot',
-            'Anchor',
-            'AnchorForm',
-            'Slider',
-            'PageHeader',
-            'ProCard',
-            'ProTable',
-            'ProForm',
-            'StepForm',
-            'Filter',
-          ].includes(draggedNode.componentName) ||
-          (draggedNode.isModal && draggedNode.isModalNode)
-        ) {
-          return;
-        }
-
-        const currentDocument = draggedNode.document?.project?.currentDocument;
-        const dropLocation = draggedNode.document?.dropLocation;
-
-        if (
-          dropLocation?.target === currentNode ||
-          currentDocument?.selection.selected[0] === currentNode.id
-        ) {
-          // 自动包裹 P
-          const pSnippet = createPSnippet();
-
-          const newNode = currentNode.document?.createNode(pSnippet);
-          newNode?.insertAfter(draggedNode, newNode, false);
-
-          if (isChildrenDetail(dropLocation?.detail) && dropLocation?.detail?.near?.node) {
-            const insertPoint = dropLocation.detail.near.node;
-            dropLocation.detail.near.pos === 'after'
-              ? (newNode && currentNode.insertAfter(newNode, insertPoint, false))
-              : (newNode && currentNode.insertBefore(newNode, insertPoint, false));
-          } else {
-            // 粘贴进来的
-            newNode && currentNode.insertAfter(newNode, currentNode, false);
+    advanced: {
+      getResizingHandlers,
+      callbacks: {
+        ...onDrageResize,
+        /**
+         * 组件拖入回调逐层向上触发，需要做好判断。
+         * 自动包裹 P
+         * @param {*} draggedNode 被拖入的组件
+         * @param {*} currentNode 被拖入到 CELL
+         */
+        onNodeAdd: (draggedNode: IPublicModelNode, currentNode: IPublicModelNode) => {
+          if (
+            !draggedNode ||
+            // Slider 不能包裹在 P 里面
+            // FusionUI 里面的通栏组件不包 P
+            [
+              P,
+              CELL,
+              ROW,
+              COL,
+              BLOCK,
+              'Slot',
+              'Anchor',
+              'AnchorForm',
+              'Slider',
+              'PageHeader',
+              'ProCard',
+              'ProTable',
+              'ProForm',
+              'StepForm',
+              'Filter',
+            ].includes(draggedNode.componentName) ||
+            (draggedNode.isModal && draggedNode.isModalNode)
+          ) {
+            return;
           }
-        }
+  
+          const currentDocument = draggedNode.document?.project?.currentDocument;
+          const dropLocation = draggedNode.document?.dropLocation;
+
+          if (
+            dropLocation?.target === currentNode ||
+            currentDocument?.selection.selected[0] === currentNode.id
+          ) {
+            // 自动包裹 P
+            const pSnippet = createPSnippet();
+
+            const newNode = currentNode.document?.createNode(pSnippet);
+            newNode?.insertAfter(draggedNode, newNode, false);
+
+            if (isChildrenDetail(dropLocation?.detail) && dropLocation?.detail?.near?.node) {
+              const insertPoint = dropLocation.detail.near.node;
+              dropLocation.detail.near.pos === 'after'
+                ? (newNode && currentNode.insertAfter(newNode, insertPoint, false))
+                : (newNode && currentNode.insertBefore(newNode, insertPoint, false));
+            } else {
+              // 粘贴进来的
+              newNode && currentNode.insertAfter(newNode, currentNode, false);
+            }
+          }
+        },
+        onSubtreeModified: (currentNode: IPublicModelNode, options: any) => {
+          onNodeReplaceSelfWithChildrenCell(currentNode, options);
+        },
+        /**
+         * 节点被拖拽的回调
+         * @param {*} draggedNode 当前被拖拽节点 CELL
+         * @returns
+         */
+        // onMoveHook() {
+        //   return false;
+        // },
       },
-      onSubtreeModified: (currentNode: IPublicModelNode, options: any) => {
-        onNodeReplaceSelfWithChildrenCell(currentNode, options);
-      },
-      /**
-       * 节点被拖拽的回调
-       * @param {*} draggedNode 当前被拖拽节点 CELL
-       * @returns
-       */
-      // onMoveHook() {
-      //   return false;
-      // },
     },
   },
   snippets: [

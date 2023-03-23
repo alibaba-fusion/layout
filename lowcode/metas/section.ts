@@ -135,55 +135,55 @@ const config: IPublicTypeComponentMetadata =  {
       style: true,
       loop: false,
     },
-  },
-  experimental: {
-    callbacks: {
-      onNodeRemove: (removedNode: IPublicModelNode) => {
-        updateSpan({
-          parent: removedNode.parent,
-          child: removedNode,
-          type: 'delete',
-        });
+    advanced: {
+      callbacks: {
+        onNodeRemove: (removedNode: IPublicModelNode) => {
+          updateSpan({
+            parent: removedNode.parent,
+            child: removedNode,
+            type: 'delete',
+          });
+        },
+        onLocateHook: ({ dragObject, target, detail }) => {
+          if (dragObject.nodes?.length === 1) {
+            const dragNode = dragObject.nodes[0];
+            const currentDragIndex = dragNode.index;
+            if (!target.lastFlatenMap) {
+              updateSpan({
+                parent: target,
+                type: 'refresh',
+              });
+            }
+            const flattenMap = target.lastFlatenMap || [];
+            let distDragIndex = detail.index;
+            if (distDragIndex > currentDragIndex) {
+              distDragIndex -= 1;
+            }
+            // 只有同行可以换
+            if (flattenMap[currentDragIndex]?.groupIndex === flattenMap[distDragIndex]?.groupIndex) {
+              return true;
+            }
+          }
+          // 拖拽多个先不处理
+          return false;
+        },
+        // onHoverHook: () => false,
+        // onMouseDownHook: () => false,
+        // onClickHook: () => false,
       },
-      onLocateHook: ({ dragObject, target, detail }) => {
-        if (dragObject.nodes?.length === 1) {
-          const dragNode = dragObject.nodes[0];
-          const currentDragIndex = dragNode.index;
-          if (!target.lastFlatenMap) {
-            updateSpan({
-              parent: target,
-              type: 'refresh',
-            });
-          }
-          const flattenMap = target.lastFlatenMap || [];
-          let distDragIndex = detail.index;
-          if (distDragIndex > currentDragIndex) {
-            distDragIndex -= 1;
-          }
-          // 只有同行可以换
-          if (flattenMap[currentDragIndex]?.groupIndex === flattenMap[distDragIndex]?.groupIndex) {
-            return true;
-          }
-        }
-        // 拖拽多个先不处理
-        return false;
-      },
-      // onHoverHook: () => false,
-      // onMouseDownHook: () => false,
-      // onClickHook: () => false,
+      initialChildren: [
+        {
+          componentName: BLOCK,
+          props: {},
+          children: [
+            {
+              componentName: CELL,
+              props: {},
+            },
+          ],
+        },
+      ],
     },
-    initialChildren: [
-      {
-        componentName: BLOCK,
-        props: {},
-        children: [
-          {
-            componentName: CELL,
-            props: {},
-          },
-        ],
-      },
-    ],
   },
   icon: 'https://img.alicdn.com/imgextra/i3/O1CN018CwRJM1ZkIpmeEfRD_!!6000000003232-55-tps-128-128.svg',
 };
