@@ -1,19 +1,16 @@
 import React, {
   useContext,
-  cloneElement,
   forwardRef,
-  isValidElement,
-  Children,
   ForwardRefExoticComponent,
   ForwardRefRenderFunction,
   useMemo,
 } from 'react';
-import { isNumber, isString } from 'lodash-es';
 import classNames from 'classnames';
 
 import { ALIGN_ALIAS_MAP } from '@/common/constant';
 import Context from '@/common/context';
 import { wrapUnit, getGapVal } from '@/utils';
+import useFlexClassNames from '@/hooks/use-flex-class-names';
 import { ColProps, LayoutContextProps, TypeMark } from './types';
 
 type ICol = ForwardRefExoticComponent<ColProps> & TypeMark;
@@ -37,51 +34,7 @@ const Col: ForwardRefRenderFunction<HTMLDivElement, ColProps> = (props: ColProps
   const clsPrefix = `${prefix}col-flex`;
   const gap = getGapVal(gridGap, gapProp);
 
-  const memorizedChildren = useMemo(() => {
-    return Children.map(children, (child) => {
-      if (isValidElement(child)) {
-        const {
-          style: childStyle,
-          height: childHeight,
-          autoFit: childAutoFit,
-          ...otherChildProps
-        } = child?.props;
-        const { minHeight: childStyleMinHeight, ...otherChildStyle } = childStyle || {};
-
-        let flex;
-        // 有效的固定高度
-        let validHeight;
-        // 有效的最小高度
-        let validMinHeight;
-
-        if (isNumber(childHeight) || (isString(childHeight) && childHeight !== '')) {
-          validHeight = childHeight;
-        } else if (childStyleMinHeight && childStyleMinHeight !== '') {
-          validMinHeight = childStyleMinHeight;
-        }
-
-        // 如果设置了最小高, 那么 flex 伸缩能力就禁用了
-        if (childAutoFit || validMinHeight || validHeight) {
-          flex = `0 0 auto`;
-        } else {
-          flex = '1 1 0';
-        }
-
-        return cloneElement(child, {
-          ...otherChildProps,
-          style: {
-            flex,
-            ...(validMinHeight ? { minHeight: validMinHeight } : null),
-            ...(validHeight ? { height: validHeight } : null),
-            ...otherChildStyle,
-          },
-        });
-      }
-
-      return child;
-    });
-  }, [children]);
-
+  const validWidth = width || style?.width
   const newStyle = useMemo(
     () => ({
       // @ts-ignore
@@ -90,14 +43,21 @@ const Col: ForwardRefRenderFunction<HTMLDivElement, ColProps> = (props: ColProps
       ...(width ? { width: wrapUnit(width) } : null),
       ...(height ? { height: wrapUnit(height), flex: '0 0 auto' } : null),
       ...(gap ? { gap: wrapUnit(gap) } : null),
+      // 有 width 或者 style.width 的时候，设置 flexBasis 宽度
+      ...(validWidth ? { flexBasis: wrapUnit(validWidth) } : null ),
       ...style,
     }),
-    [align, width, height, gap, style],
+    [align, width, height, gap, style, validWidth],
   );
+  const flexClassNames = useFlexClassNames(props);
 
   return (
-    <div {...others} ref={ref} className={classNames(className, clsPrefix)} style={newStyle}>
-      {memorizedChildren}
+    <div
+      {...others} ref={ref}
+      className={classNames(className, clsPrefix, flexClassNames)}
+      style={newStyle}
+    >
+      {children}
     </div>
   );
 };

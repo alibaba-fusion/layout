@@ -5,6 +5,7 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+    types: ['closed']
 
 jobs:
   build-and-publish-npm:
@@ -19,10 +20,9 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
+          node-version: 16
           registry-url: 'https://registry.npmjs.org'
-        env:
-          NODE_OPTIONS: '--openssl-legacy-provider'
-      - run: npm install --legacy-peer-deps
+      - run: yarn install
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

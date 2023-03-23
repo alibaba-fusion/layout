@@ -287,7 +287,7 @@ const FixedPointView = (props: {
   const { _leaf, children, left = 0, top = 0, ...others } = props;
 
   // hack engine for mousedown
-  if (_leaf?.parent?.isRGLContainerNode) {
+  if (_leaf?.parent) {
     _leaf.parent.isRGLContainerNode = true;
   }
 
