@@ -1,4 +1,8 @@
-import { IPublicTypeFieldConfig, IPublicTypePropConfig, IPublicTypeComponentMetadata } from '@alilc/lowcode-types';
+import {
+  IPublicTypeFieldConfig,
+  IPublicTypePropConfig,
+  IPublicTypeComponentMetadata,
+} from '@alilc/lowcode-types';
 import { operationProps } from './setter/operations';
 
 export const CardTagItemProps: IPublicTypeFieldConfig[] = [

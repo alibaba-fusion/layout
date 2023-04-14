@@ -1,4 +1,4 @@
-import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from '@alilc/lowcode-types';
 
 import { PAGE_NAV, PAGE_ASIDE } from '../names';
 import { createNavSnippet, createAsideSnippet } from '../default-schema';

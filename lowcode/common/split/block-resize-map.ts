@@ -1,7 +1,7 @@
 const map: {
   [key: string]: {
     [key: string]: string;
-  }
+  };
 } = {
   12: {
     '0s': '6,6',

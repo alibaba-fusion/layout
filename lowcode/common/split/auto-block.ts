@@ -29,7 +29,12 @@ const parseFlaten2Tree = (flaten: IGroup[] = [], tree: IGroup[][]) => {
  * @param {Emun} direction 'e' | 'w' 表示在用哪条bar e（右） 或 w（左）
  * @returns
  */
-const handleResize = (groupArr: IGroup[], blockNode: IPublicModelNode, offset: number, direction = 'e') => {
+const handleResize = (
+  groupArr: IGroup[],
+  blockNode: IPublicModelNode,
+  offset: number,
+  direction = 'e',
+) => {
   const changeIndex = groupArr.findIndex((item) => item.id === blockNode.schema.id);
   const key = groupArr.map((item) => item.span).join(',');
   if (changeIndex < 0) {
@@ -93,7 +98,12 @@ const handleSplit = (groupArr: IGroup[], blockNode: IPublicModelNode, groupIndex
  * @param {*} sectionNode 触发 删除 的节点属的Block
  * @returns
  */
-const handleDelete = (afterTreeGroup: IGroup[][], afterFlatenGroup: IGroup[], blockNode: IPublicModelNode, sectionNode: IPublicModelNode) => {
+const handleDelete = (
+  afterTreeGroup: IGroup[][],
+  afterFlatenGroup: IGroup[],
+  blockNode: IPublicModelNode,
+  sectionNode: IPublicModelNode,
+) => {
   const treeMap: IGroup[][] = [];
   parseFlaten2Tree(sectionNode.lastFlatenMap, treeMap);
   treeMap.forEach((group) => {
@@ -147,7 +157,7 @@ export const updateSpan = ({
   type: 'split' | 'delete' | 'resize' | 'refresh';
   child?: IPublicModelNode;
   offset?: number;
-  direction?: string
+  direction?: string;
 }) => {
   if (
     !(
@@ -186,7 +196,7 @@ export const updateSpan = ({
       total += (c.props?.span as number) || 0;
       if (total > 12) {
         groupIndex++;
-        total = (c.props?.span as number);
+        total = c.props?.span as number;
       }
       item.groupIndex = groupIndex;
     }

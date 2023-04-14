@@ -1,4 +1,4 @@
-import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from '@alilc/lowcode-types';
 
 const items: IPublicTypeFieldConfig[] = [
   {
@@ -48,7 +48,8 @@ const items: IPublicTypeFieldConfig[] = [
         units: 'px',
       },
     },
-    condition: (target: IPublicModelSettingPropEntry) => typeof target.node?.getPropValue('style.width') === 'number',
+    condition: (target: IPublicModelSettingPropEntry) =>
+      typeof target.node?.getPropValue('style.width') === 'number',
   },
 ];
 

@@ -42,7 +42,7 @@ const Grid: ForwardRefRenderFunction<HTMLDivElement, GridProps> = (props, ref) =
   const rowGap = getGapVal(gridGap, rowGapProp);
   const colGap = getGapVal(gridGap, colGapProp);
 
-  const validWidth = width || style?.width || minWidth
+  const validWidth = width || style?.width || minWidth;
   const memorizedNewStyle = useMemo(() => {
     let gtc = `repeat(${cols}, 1fr)`;
 
@@ -65,7 +65,7 @@ const Grid: ForwardRefRenderFunction<HTMLDivElement, GridProps> = (props, ref) =
       ...(rowGap ? { gridRowGap: wrapUnit(rowGap) } : null),
       ...(colGap ? { gridColumnGap: wrapUnit(colGap) } : null),
       // 有 width 或者 style.width 的时候，设置 flexBasis 宽度
-      ...(validWidth ? { flexBasis: wrapUnit(validWidth) } : null ),
+      ...(validWidth ? { flexBasis: wrapUnit(validWidth) } : null),
       ...style,
     };
   }, [cols, colGap, minWidth, maxWidth, rows, rowGap, style, validWidth]);

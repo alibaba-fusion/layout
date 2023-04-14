@@ -38,7 +38,7 @@ const Cell: ForwardRefRenderFunction<HTMLDivElement, CellProps> = (props, ref) =
   const { prefix } = useContext<LayoutContextProps>(Context);
   const clsPrefix = `${prefix}cell`;
 
-  const validWidth = width || style?.width
+  const validWidth = width || style?.width;
   const newStyle: CSSProperties = useMemo(
     () => ({
       ...(!block
@@ -54,7 +54,7 @@ const Cell: ForwardRefRenderFunction<HTMLDivElement, CellProps> = (props, ref) =
       ...(height ? { height: wrapUnit(height) } : null),
       ...(isValidGap(gap) ? { gap: wrapUnit(gap) } : null),
       // 有 width 或者 style.width 的时候，设置 flexBasis 宽度
-      ...(validWidth ? { flexBasis: wrapUnit(validWidth) } : null ),
+      ...(validWidth ? { flexBasis: wrapUnit(validWidth) } : null),
       ...style,
     }),
     [block, direction, verAlign, width, height, gap, style, validWidth],

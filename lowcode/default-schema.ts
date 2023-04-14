@@ -51,7 +51,9 @@ export const createAsideSnippet = (): IPublicTypeNodeSchema => {
   };
 };
 
-export const createSectionSnippet = ({ blockProps }: { blockProps?: IPublicTypePropsMap } = {}): IPublicTypeNodeSchema => {
+export const createSectionSnippet = ({
+  blockProps,
+}: { blockProps?: IPublicTypePropsMap } = {}): IPublicTypeNodeSchema => {
   return {
     componentName: SECTION,
     title: '区域',
@@ -60,7 +62,9 @@ export const createSectionSnippet = ({ blockProps }: { blockProps?: IPublicTypeP
   };
 };
 
-export const createBlockSnippet = ({ blockProps }: { blockProps?: IPublicTypePropsMap } = {}): IPublicTypeNodeSchema => {
+export const createBlockSnippet = ({
+  blockProps,
+}: { blockProps?: IPublicTypePropsMap } = {}): IPublicTypeNodeSchema => {
   return {
     componentName: BLOCK,
     title: '区块',

@@ -1,4 +1,8 @@
-import { IPublicModelNode, IPublicTypeFieldConfig, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
+import {
+  IPublicModelNode,
+  IPublicTypeFieldConfig,
+  IPublicTypeComponentMetadata,
+} from '@alilc/lowcode-types';
 import { PAGE_CONTENT } from '../names';
 import navAside from './nav-aside';
 

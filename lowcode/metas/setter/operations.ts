@@ -1,4 +1,4 @@
-import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from '@alilc/lowcode-types';
 
 export const operationConfig: IPublicTypeFieldConfig = {
   name: 'operationConfig',
@@ -116,7 +116,10 @@ export const operations: IPublicTypeFieldConfig = {
                       display: 'inline',
                       title: '操作',
                       important: true,
-                      setValue: (target: IPublicModelSettingPropEntry, value: 'submit' | 'reset' | 'custom') => {
+                      setValue: (
+                        target: IPublicModelSettingPropEntry,
+                        value: 'submit' | 'reset' | 'custom',
+                      ) => {
                         const actionNameMap = {
                           submit: '提交',
                           reset: '重置',

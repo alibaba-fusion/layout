@@ -174,14 +174,18 @@ const Cut = (props: ICutProps) => {
   const { pos, split } = props;
   if (!pos || !pos.node) return null;
 
-  const objectRect: DOMRect | {
-    [key: string]: undefined;
-  } = pos.node.getRect() || {};
-  const computeLineStyle = (): {
-    width: number | undefined;
-    height: number | undefined;
-    transform?: string | undefined;
-  } & Pos | null => {
+  const objectRect:
+    | DOMRect
+    | {
+        [key: string]: undefined;
+      } = pos.node.getRect() || {};
+  const computeLineStyle = ():
+    | ({
+        width: number | undefined;
+        height: number | undefined;
+        transform?: string | undefined;
+      } & Pos)
+    | null => {
     if (pos?.dimension === 'v') {
       return {
         width: 1,
@@ -252,7 +256,11 @@ const Cut = (props: ICutProps) => {
             />
             <div
               className={`${FUSION_UI_VIEW_PREFIX}-dividerLine`}
-              style={{ ...lineStyle, width: 1, top: Number(lineStyle!.top) - Number(lineStyle!.height) / 2 }}
+              style={{
+                ...lineStyle,
+                width: 1,
+                top: Number(lineStyle!.top) - Number(lineStyle!.height) / 2,
+              }}
             />
           </>
         ) : (
@@ -291,7 +299,11 @@ const getSplitDimension = (componentName: string) => {
   return dimension;
 };
 
-const getSelectedNode = ({ project }: { project: IPublicApiProject }): IPublicModelNode | undefined => {
+const getSelectedNode = ({
+  project,
+}: {
+  project: IPublicApiProject;
+}): IPublicModelNode | undefined => {
   return project.currentDocument?.selection.getNodes()[0];
 };
 

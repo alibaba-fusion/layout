@@ -1,4 +1,4 @@
-import { IPublicModelNode } from "@alilc/lowcode-types";
+import { IPublicModelNode } from '@alilc/lowcode-types';
 
 const wrapWithProCard = (currentNode: IPublicModelNode) => {
   const subChildren = currentNode.children;

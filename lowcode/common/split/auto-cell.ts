@@ -36,7 +36,11 @@ export const changeCellToGrid = (node: IPublicModelNode) => {
   wrapNode?.select();
 };
 
-export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: IPublicModelNode, preAppend = false) => {
+export const splitNodeByDimension = (
+  dimension: 'v' | 'h' | 'm',
+  node: IPublicModelNode,
+  preAppend = false,
+) => {
   const { currentDocument } = window.parent.AliLowCodeEngine.project;
   if (!currentDocument) {
     return;
@@ -46,9 +50,13 @@ export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: IPublicMo
 
   let nodeList: IPublicModelNode[] = [node];
   if (selectedIds.length > 1) {
-    nodeList = selectedIds.map((id) => {
-      return currentDocument.nodesMap.get(id);
-    }).filter<IPublicModelNode>((_node: IPublicModelNode | undefined): _node is IPublicModelNode => !!_node);
+    nodeList = selectedIds
+      .map((id) => {
+        return currentDocument.nodesMap.get(id);
+      })
+      .filter<IPublicModelNode>(
+        (_node: IPublicModelNode | undefined): _node is IPublicModelNode => !!_node,
+      );
     // 1. 类型必须完全相等，并且在同一个父元素中
     if (
       nodeList.some(
@@ -121,7 +129,7 @@ export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: IPublicMo
               ...cellSnippet.props,
               ...insertPoint.schema.props,
               style: cellSnippet.props?.style,
-            }
+            },
           });
 
           preAppend
@@ -172,7 +180,7 @@ export const splitNodeByDimension = (dimension: 'v' | 'h' | 'm', node: IPublicMo
               style: cellSnippet.props?.style,
               width: undefined,
               height: undefined,
-            }
+            },
           });
           preAppend
             ? newNode && wrapNode?.insertBefore(newNode, insertPoint, false)

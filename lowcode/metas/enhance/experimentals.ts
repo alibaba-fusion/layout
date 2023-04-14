@@ -1,4 +1,4 @@
-import { IPublicModelNode } from "@alilc/lowcode-types";
+import { IPublicModelNode } from '@alilc/lowcode-types';
 import { ROW, COL } from '../../names';
 
 export const getResizingHandlers = (node: IPublicModelNode) => {
@@ -7,7 +7,7 @@ export const getResizingHandlers = (node: IPublicModelNode) => {
   const parentChildrenLength = parentNode?.children?.size;
   const parentCN = parentNode?.componentName;
   // debugger;
-  if ((parentCN === ROW || parentCN === COL) && (parentChildrenLength && parentChildrenLength > 1)) {
+  if ((parentCN === ROW || parentCN === COL) && parentChildrenLength && parentChildrenLength > 1) {
     if (parentCN === COL) {
       // 列容器，只能上下拖动
       if (node.index > 0) {

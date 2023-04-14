@@ -1,5 +1,12 @@
-import { IPublicModelNode, IPublicModelSettingPropEntry, IPublicTypeLocationChildrenDetail, IPublicTypeLocationDetail, IPublicTypeLocationDetailType, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
-import * as React from "react";
+import {
+  IPublicModelNode,
+  IPublicModelSettingPropEntry,
+  IPublicTypeLocationChildrenDetail,
+  IPublicTypeLocationDetail,
+  IPublicTypeLocationDetailType,
+  IPublicTypeComponentMetadata,
+} from '@alilc/lowcode-types';
+import * as React from 'react';
 
 import { CELL, ROW, COL, P, BLOCK } from '../names';
 import widthSetter from './setter/width';
@@ -11,7 +18,9 @@ import { onNodeReplaceSelfWithChildrenCell, onDrageResize } from './enhance/call
 import { createPSnippet, createFixedContainerSnippet } from '../default-schema';
 import { changeCellToGrid } from '../common/split/auto-cell';
 
-function isChildrenDetail(value: IPublicTypeLocationDetail | undefined): value is IPublicTypeLocationChildrenDetail {
+function isChildrenDetail(
+  value: IPublicTypeLocationDetail | undefined,
+): value is IPublicTypeLocationChildrenDetail {
   return value?.type === IPublicTypeLocationDetailType.Children;
 }
 
@@ -247,7 +256,7 @@ const config: IPublicTypeComponentMetadata = {
           ) {
             return;
           }
-  
+
           const currentDocument = draggedNode.document?.project?.currentDocument;
           const dropLocation = draggedNode.document?.dropLocation;
 
@@ -264,8 +273,8 @@ const config: IPublicTypeComponentMetadata = {
             if (isChildrenDetail(dropLocation?.detail) && dropLocation?.detail?.near?.node) {
               const insertPoint = dropLocation.detail.near.node;
               dropLocation.detail.near.pos === 'after'
-                ? (newNode && currentNode.insertAfter(newNode, insertPoint, false))
-                : (newNode && currentNode.insertBefore(newNode, insertPoint, false));
+                ? newNode && currentNode.insertAfter(newNode, insertPoint, false)
+                : newNode && currentNode.insertBefore(newNode, insertPoint, false);
             } else {
               // 粘贴进来的
               newNode && currentNode.insertAfter(newNode, currentNode, false);

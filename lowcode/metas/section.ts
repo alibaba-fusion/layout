@@ -1,11 +1,11 @@
-import { IPublicModelNode, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
+import { IPublicModelNode, IPublicTypeComponentMetadata } from '@alilc/lowcode-types';
 
 import { updateSpan } from '../common/split/auto-block';
 import { PAGE, SECTION, BLOCK, CELL } from '../names';
 import minHeight from './setter/min-height';
 import background from './setter/background';
 
-const config: IPublicTypeComponentMetadata =  {
+const config: IPublicTypeComponentMetadata = {
   componentName: SECTION,
   title: '区域',
   category: '布局容器类',
@@ -46,7 +46,10 @@ const config: IPublicTypeComponentMetadata =  {
             return true;
           }
 
-          if (testNode.componentName === 'Slot' && ['aside'].indexOf(testNode.title as string) > -1) {
+          if (
+            testNode.componentName === 'Slot' &&
+            ['aside'].indexOf(testNode.title as string) > -1
+          ) {
             return true;
           }
           return false;
@@ -160,7 +163,9 @@ const config: IPublicTypeComponentMetadata =  {
               distDragIndex -= 1;
             }
             // 只有同行可以换
-            if (flattenMap[currentDragIndex]?.groupIndex === flattenMap[distDragIndex]?.groupIndex) {
+            if (
+              flattenMap[currentDragIndex]?.groupIndex === flattenMap[distDragIndex]?.groupIndex
+            ) {
               return true;
             }
           }

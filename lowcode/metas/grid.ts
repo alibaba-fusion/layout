@@ -1,4 +1,8 @@
-import { IPublicModelNode, IPublicModelSettingPropEntry, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
+import {
+  IPublicModelNode,
+  IPublicModelSettingPropEntry,
+  IPublicTypeComponentMetadata,
+} from '@alilc/lowcode-types';
 import { CELL, GRID, BLOCK, ROW, COL } from '../names';
 import { createCellSnippet, createPSnippet } from '../default-schema';
 import widthSetter from './setter/width';
@@ -53,7 +57,10 @@ const config: IPublicTypeComponentMetadata = {
         type: 'group',
         display: 'block',
         condition: (target: IPublicModelSettingPropEntry) => {
-          return target.node?.parent?.componentName && [BLOCK, ROW].indexOf(target.node?.parent?.componentName) !== -1;
+          return (
+            target.node?.parent?.componentName &&
+            [BLOCK, ROW].indexOf(target.node?.parent?.componentName) !== -1
+          );
         },
         items: [...widthSetter],
       },
@@ -62,7 +69,10 @@ const config: IPublicTypeComponentMetadata = {
         type: 'group',
         display: 'block',
         condition: (target: IPublicModelSettingPropEntry) => {
-          return target.node?.parent?.componentName && [BLOCK, COL].indexOf(target.node?.parent?.componentName) !== -1;
+          return (
+            target.node?.parent?.componentName &&
+            [BLOCK, COL].indexOf(target.node?.parent?.componentName) !== -1
+          );
         },
         items: [...heightSetter],
       },

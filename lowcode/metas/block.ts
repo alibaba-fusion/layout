@@ -1,4 +1,8 @@
-import { IPublicModelNode, IPublicModelSettingPropEntry, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
+import {
+  IPublicModelNode,
+  IPublicModelSettingPropEntry,
+  IPublicTypeComponentMetadata,
+} from '@alilc/lowcode-types';
 import { updateSpan } from '../common/split/auto-block';
 import BLOCK_RESIZE_MAP from '../common/split/block-resize-map';
 import { CELL, ROW, COL, SECTION, BLOCK } from '../names';
@@ -240,11 +244,14 @@ const config: IPublicTypeComponentMetadata = {
       },
       callbacks: {
         onNodeRemove: onNodeRemoveSelfWhileNoChildren,
-        onResizeStart: (e: MouseEvent & {
-          trigger: string;
-          deltaX?: number;
-          deltaY?: number;
-        }, currentNode: IPublicModelNode) => {
+        onResizeStart: (
+          e: MouseEvent & {
+            trigger: string;
+            deltaX?: number;
+            deltaY?: number;
+          },
+          currentNode: IPublicModelNode,
+        ) => {
           const parent = currentNode.parent;
           if (parent) {
             const parentNode = parent.getDOMNode();
@@ -255,11 +262,14 @@ const config: IPublicTypeComponentMetadata = {
           currentNode.lastDeltaX = 0;
           currentNode.lastGroupList = '';
         },
-        onResize: (e: MouseEvent & {
-          trigger: string;
-          deltaX?: number;
-          deltaY?: number;
-        }, currentNode: IPublicModelNode) => {
+        onResize: (
+          e: MouseEvent & {
+            trigger: string;
+            deltaX?: number;
+            deltaY?: number;
+          },
+          currentNode: IPublicModelNode,
+        ) => {
           // 获取合法移动位移
           // 判断是否要变化
           // 更新鼠标开始位置，更新span信息
@@ -283,7 +293,9 @@ const config: IPublicTypeComponentMetadata = {
           //  再updateColSpan
 
           const direction = latestDeltaX > 0 ? 'r' : 'l';
-          const operation = `${trigger === 'e' ? groupInnerIndex + 1 : groupInnerIndex}${direction}`;
+          const operation = `${
+            trigger === 'e' ? groupInnerIndex + 1 : groupInnerIndex
+          }${direction}`;
           const afterGroupList =
             BLOCK_RESIZE_MAP[groupList] && BLOCK_RESIZE_MAP[groupList][operation];
           const groupAccInnerIndex = trigger === 'e' ? groupInnerIndex : groupInnerIndex - 1;
@@ -327,7 +339,7 @@ const config: IPublicTypeComponentMetadata = {
         //   console.log(e);
         // },
       },
-    }
+    },
   },
   icon: 'https://img.alicdn.com/imgextra/i2/O1CN01wBgtFK1NKP32cK57c_!!6000000001551-55-tps-128-128.svg',
 };

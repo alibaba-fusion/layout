@@ -1,4 +1,4 @@
-import { IPublicTypeFieldConfig } from "@alilc/lowcode-types";
+import { IPublicTypeFieldConfig } from '@alilc/lowcode-types';
 
 const item: IPublicTypeFieldConfig[] = [
   {
