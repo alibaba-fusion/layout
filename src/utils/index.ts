@@ -53,8 +53,8 @@ export function getMaxNumberOfColumns(breakPoints: BreakPoints = DEFAULT_BREAK_P
  * 是否为标准的预设尺寸
  * @param val
  */
-export function isPresetSize(val: string): boolean {
-  return ['small', 'medium', 'large'].indexOf(val) > -1;
+export function isPresetSize(val: any): boolean {
+  return ['small', 'medium', 'large'].includes(val);
 }
 
 /**

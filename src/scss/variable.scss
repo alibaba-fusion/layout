@@ -40,7 +40,6 @@ $fontTypes: h1, h2, h3, h4, h5, h6, body1, body2, caption, overline;
   --p-h5-font-weight: var(--font-weight-medium);
   --p-h5-line-height: var(--font-lineheight-1);
 
-  /* large */
   --p-h6-font-size: var(--font-size-subhead);
   --p-h6-icon-size: var(--font-size-subhead);
   --p-h6-font-weight: var(--font-weight-medium);
@@ -51,13 +50,11 @@ $fontTypes: h1, h2, h3, h4, h5, h6, body1, body2, caption, overline;
   --p-body1-font-weight: var(--font-weight-2);
   --p-body1-line-height: var(--font-lineheight-1);
 
-  /* medium */
   --p-body2-font-size: var(--font-size-body-1);
   --p-body2-icon-size: var(--font-size-body-1);
   --p-body2-font-weight: var(--font-weight-2);
   --p-body2-line-height: var(--font-lineheight-1);
 
-  /* small */
   --p-caption-font-size: var(--font-size-caption);
   --p-caption-icon-size: var(--font-size-caption);
   --p-caption-font-weight: var(--font-weight-light);
