@@ -1,6 +1,6 @@
 {
   "name": "@alifd/layout",
-  "version": "2.0.7",
+  "version": "2.0.10",
   "description": "基于 Fusion 设计系统的自然布局体系",
   "files": [
     "demo/",
