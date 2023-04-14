@@ -161,7 +161,7 @@ class App extends Component {
             <Breadcrumb.Item>列表页</Breadcrumb.Item>
             <Breadcrumb.Item>查询表格</Breadcrumb.Item>
           </Breadcrumb>
-          <P align="baseline" textSpacing>
+          <P align="baseline">
             <Text type="title">组件间距</Text>
             <Text type="body-1">Component Spacing</Text>
           </P>
