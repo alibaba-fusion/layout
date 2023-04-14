@@ -13,15 +13,17 @@
 
 用于快速完成页面布局体系 (低代码搭建或源码开发)，目标是不写任何布局 CSS 代码。
 
-[预览 Demo](https://g.alipay.com/@alifd/layout/build/index.html)
-[阿里低代码搭建 Demo](https://g.alipay.com/@alifd/layout/build/lowcode/index.html)
-
 **设计理念**
 
 - **初衷**：愿布局不需写 css 样式
 - **定位**：页面内容区的布局解决方案
 
 > 详细介绍：https://www.yuque.com/fusion-design/layout/yzx8g4 （需先加入 [Fusion Design](https://www.yuque.com/g/fusion-design/layout/collaborator/join?token=7bTjikyxDTAh3WwS) 语雀知识库）
+
+预览
+
+- [预览 Demo](https://g.alipay.com/@alifd/layout/build/index.html)
+- [阿里低代码搭建 Demo](https://g.alipay.com/@alifd/layout/build/lowcode/index.html)
 
 ## 安装
 
@@ -31,7 +33,7 @@
 
 ## 使用
 
-在项目中，引入一套 Fusion Design 的 [Design Token](https://fusion.design/pc/design-tokens), 如：
+在项目中，引入一套 Fusion Design 主题的 [Design Token](https://fusion.design/pc/design-tokens), 如：
 
 ```jsx
 import '@alifd/theme-3/variables.css';
