@@ -13,8 +13,8 @@
 
 用于快速完成页面布局体系 (低代码搭建或源码开发)，目标是不写任何布局 CSS 代码。
 
-[🔗 预览 Demo](https://g.alipay.com/@alifd/layout/build/index.html)
-[🔗 阿里低代码搭建 Demo](https://g.alipay.com/@alifd/layout/build/lowcode/index.html)
+[预览 Demo](https://g.alipay.com/@alifd/layout/build/index.html)
+[阿里低代码搭建 Demo](https://g.alipay.com/@alifd/layout/build/lowcode/index.html)
 
 **设计理念**
 
@@ -23,12 +23,21 @@
 
 > 详细介绍：https://www.yuque.com/fusion-design/layout/yzx8g4 （需先加入 [Fusion Design](https://www.yuque.com/g/fusion-design/layout/collaborator/join?token=7bTjikyxDTAh3WwS) 语雀知识库）
 
+## 安装
+
+```bash
+ npm install @alifd/layout --save
+```
+
 ## 使用
 
-自然布局提供的能力分为「页面布局」、「局部布局」两种。
+在项目中，引入一套 Fusion Design 的 [Design Token](https://fusion.design/pc/design-tokens), 如：
 
-- 页面布局：会用到 `Page` `Page.Header` `Page.Footer` `Page.Content` `Page.Aside` `Page.Nav` 六类组件。
-- 局部局部：会用到 `Section` `Block`, `Row`, `Col`, `Cell`, `P`, `Text`, `Space`
+```jsx
+import '@alifd/theme-3/variables.css';
+```
+
+> 注：此处是为了引入布局组件所必须得 CSS Variables, 只需要保证上述的 CSS 代码生效即可，引入方式不限。
 
 布局示例：
 
