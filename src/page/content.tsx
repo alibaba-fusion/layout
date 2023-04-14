@@ -11,8 +11,8 @@ import React, {
 import classNames from 'classnames';
 
 import Context from '@/common/context';
-import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '../types';
 import { wrapUnit } from '@/utils';
+import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
 
 export interface PageContentProps extends BaseProps, BaseBgMode {
   children?: ReactNode;

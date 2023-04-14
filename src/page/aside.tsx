@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Context from '@/common/context';
 import Block from '@/block';
 import { wrapUnit } from '@/utils';
-import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '../types';
+import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
 
 export interface PageAsideProps extends BaseProps, BaseBgMode {
   width: number | string;
@@ -14,7 +14,7 @@ export interface PageAsideProps extends BaseProps, BaseBgMode {
 export type IPageAside = FC<PageAsideProps> & TypeMark;
 
 const PageAside: IPageAside = (props: PageAsideProps) => {
-  const { className, width, mode, children, style, ...others } = props;
+  const { className, width, mode, children, style = {}, ...others } = props;
   const { prefix } = useContext<LayoutContextProps>(Context);
 
   const asideCls = classNames(className, {

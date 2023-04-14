@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Context from '@/common/context';
 import Block from '@/block';
 import { wrapUnit } from '@/utils';
-import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '../types';
+import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
 
 export interface PageNavProps extends BaseProps, BaseBgMode {
   width: number | string;
@@ -14,7 +14,7 @@ export interface PageNavProps extends BaseProps, BaseBgMode {
 export type IPageNav = FC<PageNavProps> & TypeMark;
 
 const PageNav: IPageNav = (props: PageNavProps) => {
-  const { children, className, mode, width, style, ...others } = props;
+  const { children, className, mode, width, style = {}, ...others } = props;
   const { prefix } = useContext<LayoutContextProps>(Context);
 
   const navCls = classNames(className, {

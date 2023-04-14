@@ -1,6 +1,6 @@
 import { isNumber, isString } from 'lodash-es';
 import { DEFAULT_BREAK_POINTS } from '@/common/constant';
-import { BreakPoint, BreakPoints } from '../types';
+import { BreakPoint, BreakPoints } from '@/types';
 
 /**
  * 获取当前屏幕断点

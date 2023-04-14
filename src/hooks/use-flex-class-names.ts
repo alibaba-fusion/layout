@@ -2,13 +2,13 @@ import { useContext } from 'react'
 import classNames from 'classnames';
 import { isNumber, isString } from 'lodash-es';
 
-import Context from '../common/context';
-import { LayoutContextProps } from '../types';
+import Context from '@/common/context';
+import { LayoutContextProps } from '@/types';
 
 // 通过判断容器 props 值，给容器设置class，由 class 控制容器 flex 样式
 const useFlexClassNames = (props: any) => {
   const { autoFit, width, height, style } = props
-  
+
   const { prefix } = useContext<LayoutContextProps>(Context);
   const clsPrefix = `${prefix}flex-item`;
 
