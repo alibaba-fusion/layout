@@ -1,4 +1,4 @@
-import { BreakPoints } from '../types';
+import { BreakPoints } from '@/types';
 
 // 默认断点列信息
 export const DEFAULT_BREAK_POINTS: BreakPoints = [
@@ -13,13 +13,8 @@ export const DEFAULT_BREAK_POINTS: BreakPoints = [
     numberOfColumns: 8,
   },
   {
-    width: 1200,
-    maxContentWidth: 1200,
-    numberOfColumns: 12,
-  },
-  {
     width: Infinity,
-    maxContentWidth: Infinity,
+    maxContentWidth: 1200,
     numberOfColumns: 12,
   },
 ];

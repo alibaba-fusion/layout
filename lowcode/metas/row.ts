@@ -1,4 +1,4 @@
-import { IPublicModelNode, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
+import { IPublicModelNode, IPublicTypeComponentMetadata } from '@alilc/lowcode-types';
 import { CELL, ROW } from '../names';
 import { createCellSnippet, createPSnippet } from '../default-schema';
 import {
@@ -9,7 +9,7 @@ import {
 import { getResizingHandlers } from './enhance/experimentals';
 import minHeight from './setter/min-height';
 
-const config: IPublicTypeComponentMetadata =  {
+const config: IPublicTypeComponentMetadata = {
   componentName: ROW,
   title: '行容器',
   category: '容器',

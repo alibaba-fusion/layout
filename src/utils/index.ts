@@ -1,6 +1,6 @@
 import { isNumber, isString } from 'lodash-es';
 import { DEFAULT_BREAK_POINTS } from '@/common/constant';
-import { BreakPoint, BreakPoints } from '../types';
+import { BreakPoint, BreakPoints } from '@/types';
 
 /**
  * 获取当前屏幕断点
@@ -53,8 +53,8 @@ export function getMaxNumberOfColumns(breakPoints: BreakPoints = DEFAULT_BREAK_P
  * 是否为标准的预设尺寸
  * @param val
  */
-export function isPresetSize(val: string): boolean {
-  return ['small', 'medium', 'large'].indexOf(val) > -1;
+export function isPresetSize(val: any): boolean {
+  return ['small', 'medium', 'large'].includes(val);
 }
 
 /**

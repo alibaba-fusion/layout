@@ -8,7 +8,7 @@ order: 1
 ```jsx
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Breadcrumb, Button, Divider, Balloon, Icon, Progress, Slider } from '@alifd/next';
+import { Icon } from '@alifd/next';
 import { Page, Section, Block, Row, Col, Cell, P, Text } from '@alifd/layout';
 
 import '@alifd/theme-3/variables.css';
@@ -28,30 +28,24 @@ const App = () => {
         <Section title="Section 1" extra="Section extra">
           <Block title="Block 1" span={9} divider extra={<Icon type="prompt" size="small" />}>
             <Cell>
-              <Text type="h5">Block</Text>
+              <Text>Block</Text>
             </Cell>
           </Block>
           <Block title="Block 2" span={3} divider>
             <Cell>
-              <Text type="h5">Block</Text>
+              <Text>Block</Text>
             </Cell>
           </Block>
           <Block title="Block Full" divider>
             <Cell>
-              <Text type="h5">Block</Text>
+              <Text>Block</Text>
             </Cell>
           </Block>
         </Section>
         <Section title="Section 2">
           <Block>
             <Cell>
-              <P>
-                <Text>Block</Text>
-              </P>
-              <P>
-                <Button type="primary">button</Button>
-                <Button>button</Button>
-              </P>
+              <Text>Block</Text>
             </Cell>
           </Block>
         </Section>
@@ -91,7 +85,7 @@ const App = () => {
           <Section title="Section 2">
             <Block title="Block">
               <Cell>
-                <Text type="h5">Block</Text>
+                <Text>Block</Text>
               </Cell>
             </Block>
           </Section>

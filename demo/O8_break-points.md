@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Page, Section, Block, Cell, P, Text, BreakPoints } from '@alifd/layout';
 import { Table, Tag } from '@alifd/next';
-import throttle from 'lodash.throttle';
+import { throttle } from 'lodash-es';
 
 import '@alifd/theme-3/variables.css';
 

@@ -1,6 +1,6 @@
-import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
-import React from "react";
-import TooltipLabel from "./tooltip-label";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from '@alilc/lowcode-types';
+import React from 'react';
+import TooltipLabel from './tooltip-label';
 
 export default (): IPublicTypeFieldConfig[] => [
   {

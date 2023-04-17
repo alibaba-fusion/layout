@@ -34,7 +34,7 @@ const Col: ForwardRefRenderFunction<HTMLDivElement, ColProps> = (props: ColProps
   const clsPrefix = `${prefix}col-flex`;
   const gap = getGapVal(gridGap, gapProp);
 
-  const validWidth = width || style?.width
+  const validWidth = width || style?.width;
   const newStyle = useMemo(
     () => ({
       // @ts-ignore
@@ -44,7 +44,7 @@ const Col: ForwardRefRenderFunction<HTMLDivElement, ColProps> = (props: ColProps
       ...(height ? { height: wrapUnit(height), flex: '0 0 auto' } : null),
       ...(gap ? { gap: wrapUnit(gap) } : null),
       // 有 width 或者 style.width 的时候，设置 flexBasis 宽度
-      ...(validWidth ? { flexBasis: wrapUnit(validWidth) } : null ),
+      ...(validWidth ? { flexBasis: wrapUnit(validWidth) } : null),
       ...style,
     }),
     [align, width, height, gap, style, validWidth],
@@ -53,7 +53,8 @@ const Col: ForwardRefRenderFunction<HTMLDivElement, ColProps> = (props: ColProps
 
   return (
     <div
-      {...others} ref={ref}
+      {...others}
+      ref={ref}
       className={classNames(className, clsPrefix, flexClassNames)}
       style={newStyle}
     >

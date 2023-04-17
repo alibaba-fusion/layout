@@ -1,4 +1,4 @@
-import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from '@alilc/lowcode-types';
 
 const items: IPublicTypeFieldConfig[] = [
   {
@@ -30,9 +30,10 @@ const items: IPublicTypeFieldConfig[] = [
       },
       setValue: (target: IPublicModelSettingPropEntry, value: string) => {
         if (value === 'min') {
-          target
-            .node
-            ?.setPropValue('style.minHeight', parseInt(String(target.node?.getRect()?.height)));
+          target.node?.setPropValue(
+            'style.minHeight',
+            parseInt(String(target.node?.getRect()?.height)),
+          );
         } else if (value === 'auto') {
           target.node?.setPropValue('style.minHeight', null);
         }

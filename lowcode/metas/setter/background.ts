@@ -1,6 +1,6 @@
 // const TooltipLabel = require('./tooltip-label');
 
-import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from '@alilc/lowcode-types';
 
 const items: IPublicTypeFieldConfig[] = [
   // {
@@ -49,7 +49,7 @@ const items: IPublicTypeFieldConfig[] = [
     title: '背景色',
     setter: {
       componentName: 'ColorSetter',
-      initialValue: 'rgba(255,255,255,1)'
+      initialValue: 'rgba(255,255,255,1)',
     },
   },
   {

@@ -1,4 +1,4 @@
-import { IPublicApiHotkey, IPublicApiProject } from "@alilc/lowcode-types";
+import { IPublicApiHotkey, IPublicApiProject } from '@alilc/lowcode-types';
 
 interface cbFunc {
   (node: any, e: KeyboardEvent): void;

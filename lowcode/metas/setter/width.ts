@@ -1,4 +1,4 @@
-import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from "@alilc/lowcode-types";
+import { IPublicModelSettingPropEntry, IPublicTypeFieldConfig } from '@alilc/lowcode-types';
 
 const items: IPublicTypeFieldConfig[] = [
   {
@@ -61,8 +61,7 @@ const items: IPublicTypeFieldConfig[] = [
     },
     condition: (target: IPublicModelSettingPropEntry) => {
       return (
-        target.node?.getPropValue('!widthType') === 'fixed' ||
-        !!target.node?.getPropValue('width')
+        target.node?.getPropValue('!widthType') === 'fixed' || !!target.node?.getPropValue('width')
       );
     },
   },

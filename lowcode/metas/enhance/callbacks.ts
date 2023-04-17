@@ -1,4 +1,4 @@
-import { IPublicModelNode } from "@alilc/lowcode-types";
+import { IPublicModelNode } from '@alilc/lowcode-types';
 import { CELL, ROW, COL } from '../../names';
 
 /**
@@ -52,7 +52,10 @@ export const onNodeReplaceSelfWithChildrenCell = (currentNode: IPublicModelNode,
  * @param {*} currentNode
  * @returns boolean
  */
-export const onNodeRemoveSelfWhileNoChildren = (removeNode: IPublicModelNode, currentNode: IPublicModelNode) => {
+export const onNodeRemoveSelfWhileNoChildren = (
+  removeNode: IPublicModelNode,
+  currentNode: IPublicModelNode,
+) => {
   if (!removeNode || !currentNode) {
     return false;
   }
@@ -77,11 +80,14 @@ function enableDivider() {
 }
 
 export const onDrageResize = {
-  onResizeStart(e: MouseEvent & {
-    trigger: string;
-    deltaX?: number;
-    deltaY?: number;
-  }, currentNode: IPublicModelNode) {
+  onResizeStart(
+    e: MouseEvent & {
+      trigger: string;
+      deltaX?: number;
+      deltaY?: number;
+    },
+    currentNode: IPublicModelNode,
+  ) {
     disableDivider();
 
     currentNode.startRect = currentNode.getRect();
@@ -89,11 +95,14 @@ export const onDrageResize = {
       e.trigger === 'n' || e.trigger === 'w' ? currentNode.prevSibling : currentNode.nextSibling;
     currentNode.siblingRect = currentNode.siblingNode ? currentNode.siblingNode.getRect() : null;
   },
-  onResize(e: MouseEvent & {
-    trigger: string;
-    deltaX?: number;
-    deltaY?: number;
-  }, currentNode: IPublicModelNode) {
+  onResize(
+    e: MouseEvent & {
+      trigger: string;
+      deltaX?: number;
+      deltaY?: number;
+    },
+    currentNode: IPublicModelNode,
+  ) {
     const { deltaY, deltaX } = e;
     const { height: startHeight, width: startWidth } = currentNode.startRect;
 

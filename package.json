@@ -1,6 +1,6 @@
 {
   "name": "@alifd/layout",
-  "version": "2.0.7",
+  "version": "2.0.10",
   "description": "基于 Fusion 设计系统的自然布局体系",
   "files": [
     "demo/",
@@ -68,7 +68,6 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "f2elint": "^1.2.0",
     "iceworks": "^3.4.5",
-    "lodash.throttle": "^4.1.1",
     "moment": "^2.29.4",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
@@ -76,7 +75,7 @@
   },
   "peerDependencies": {
     "@alifd/next": "1.x",
-    "react": "^16.3.0"
+    "react": ">=16"
   },
   "componentConfig": {
     "name": "Layout",

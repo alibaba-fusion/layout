@@ -27,7 +27,10 @@ const {
 
 const FUSION_UI_VIEW_PREFIX = 'fd-layout-view';
 
-const AddSection = ({ onClick, alwaysShow = false }: {
+const AddSection = ({
+  onClick,
+  alwaysShow = false,
+}: {
   onClick: MouseEventHandler;
   alwaysShow: boolean;
 }) => {
@@ -78,7 +81,9 @@ function addNewSection(_leaf?: IPublicModelNode) {
 const addNewBlock = (_leaf: IPublicModelNode | undefined) => {
   const children = _leaf?.schema?.children;
   const prevBlockSchema: IPublicTypeNodeData =
-    [...((Array.isArray(children) ? children : []) || [])].reverse().find((n) => typeof n === 'object' && (n as any).componentName === BLOCK) ||
+    [...((Array.isArray(children) ? children : []) || [])]
+      .reverse()
+      .find((n) => typeof n === 'object' && (n as any).componentName === BLOCK) ||
     createBlockSnippet();
   const prevBlockProps = { ...prevBlockSchema.props };
   delete prevBlockProps.operation;
@@ -94,10 +99,7 @@ const addNewBlock = (_leaf: IPublicModelNode | undefined) => {
   newNode && newNode.select();
 };
 
-const PageView = (props: {
-  _leaf?: IPublicModelNode;
-  [key: string]: any;
-}) => {
+const PageView = (props: { _leaf?: IPublicModelNode; [key: string]: any }) => {
   const { children, _leaf, ...others } = props;
 
   const isTab = _leaf?.props?.getPropValue('isTab');
@@ -143,10 +145,7 @@ const PageView = (props: {
   );
 };
 
-const SectionView = (props: {
-  _leaf?: IPublicModelNode;
-  [key: string]: any;
-}) => {
+const SectionView = (props: { _leaf?: IPublicModelNode; [key: string]: any }) => {
   const { children, _leaf, ...others } = props;
 
   return (
@@ -239,10 +238,7 @@ const PageContentView = (props: any) => {
   );
 };
 
-const PageNavAsideView = (props: {
-  _leaf?: IPublicModelNode;
-  [key: string]: any;
-}) => {
+const PageNavAsideView = (props: { _leaf?: IPublicModelNode; [key: string]: any }) => {
   const { children, _leaf, component: Tag, ...others } = props;
   return (
     <Tag {...others}>
@@ -281,10 +277,7 @@ const PageAsideView = (props: any) => {
   return <PageNavAsideView {...props} component={PageAside} />;
 };
 
-const FixedPointView = (props: {
-  _leaf?: IPublicModelNode;
-  [key: string]: any;
-}) => {
+const FixedPointView = (props: { _leaf?: IPublicModelNode; [key: string]: any }) => {
   const { _leaf, children, left = 0, top = 0, ...others } = props;
 
   // hack engine for mousedown
@@ -304,7 +297,8 @@ const FixedPointView = (props: {
     window.parent.AliLowCodeEngine.config.set('enableMouseEventPropagationInCanvas', true);
 
     // disable move
-    movehook.current = _leaf?.componentMeta?.getMetadata().configure?.advanced?.callbacks?.onMoveHook;
+    movehook.current =
+      _leaf?.componentMeta?.getMetadata().configure?.advanced?.callbacks?.onMoveHook;
     if (_leaf?.componentMeta?.getMetadata().configure.advanced?.callbacks) {
       _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook = () => false;
     }
@@ -313,7 +307,8 @@ const FixedPointView = (props: {
   const onDragEnd = (e: DraggableEvent, uiData: DraggableData) => {
     // window.parent.AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = enableMouseEventPropagationInCanvas.current;
     if (_leaf?.componentMeta?.getMetadata().configure.advanced?.callbacks) {
-      _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook = movehook.current;
+      _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook =
+        movehook.current;
     }
 
     _leaf?.setPropValue('left', uiData.x + left);
@@ -391,7 +386,8 @@ const FixedContainerView = (props: IFixedContainerViewProps) => {
     window.parent.AliLowCodeEngine.config.set('enableMouseEventPropagationInCanvas', true);
 
     // disable move
-    movehook.current = _leaf?.componentMeta?.getMetadata().configure.advanced?.callbacks?.onMoveHook;
+    movehook.current =
+      _leaf?.componentMeta?.getMetadata().configure.advanced?.callbacks?.onMoveHook;
     // TODO: 不一定能设置上
     if (_leaf.componentMeta?.getMetadata()?.configure.advanced?.callbacks?.onMoveHook) {
       _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook = () => false;
@@ -402,7 +398,8 @@ const FixedContainerView = (props: IFixedContainerViewProps) => {
     // window.parent.AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = enableMouseEventPropagationInCanvas.current;
     // // TODO: 不一定能设置上
     if (_leaf.componentMeta?.getMetadata()?.configure.advanced?.callbacks?.onMoveHook) {
-      _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook = movehook.current;
+      _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook =
+        movehook.current;
     }
 
     // 有节点增加

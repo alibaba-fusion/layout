@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useContext } from 'react';
 import classNames from 'classnames';
 
 import Context from '@/common/context';
-import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '../types';
+import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
 
 export interface PageFooterProps extends BaseProps, BaseBgMode {
   divider?: boolean;

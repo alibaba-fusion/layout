@@ -18,7 +18,7 @@ import classNames from 'classnames';
 import Context from '@/common/context';
 import { isPresetSize, wrapUnit } from '@/utils';
 import Text from '@/text';
-import { BaseSize, LayoutContextProps, ParagraphProps, TypeMark } from './types';
+import { LayoutContextProps, ParagraphProps, TypeMark } from './types';
 
 const getChildren = (children: any, type: ParagraphProps['type'] = 'body2') => {
   return Children.map(children, (child: ReactNode) => {
@@ -37,6 +37,7 @@ const getChildren = (children: any, type: ParagraphProps['type'] = 'body2') => {
         // @ts-ignore
       } else if (child.type.typeMark === 'Text' && !child.props.type) {
         return cloneElement(child, {
+          // @ts-ignore
           type,
         });
       }
@@ -49,7 +50,7 @@ const getChildren = (children: any, type: ParagraphProps['type'] = 'body2') => {
 type IParagraph = ForwardRefExoticComponent<ParagraphProps> & TypeMark;
 
 /**
- * 段落布局，自动为段落内元素增加横向和垂直间隙，并支持多种模式对齐
+ * 段落布局，自动为段落内元素增加水平和垂直间隙，并支持多种模式对齐
  */
 const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props, ref) => {
   const {
@@ -96,8 +97,7 @@ const P: ForwardRefRenderFunction<HTMLParagraphElement, ParagraphProps> = (props
         [`${clsPrefix}-align--${align}`]: align,
         [`${clsPrefix}-valign--${verAlign}`]: verAlign,
         [`${clsPrefix}-spacing--${align}`]: spacing && align,
-        [`${clsPrefix}-spacing--${spacing}`]:
-          ['small', 'medium', 'large'].indexOf(spacing as BaseSize) > -1,
+        [`${clsPrefix}-spacing--${spacing}`]: isPresetSize(spacing),
         [`${clsPrefix}-margin`]: hasVerSpacing,
         [`${clsPrefix}--${type}`]: type,
       })}

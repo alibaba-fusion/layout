@@ -1,4 +1,8 @@
-import { IPublicModelNode, IPublicModelSettingPropEntry, IPublicTypeComponentMetadata } from "@alilc/lowcode-types";
+import {
+  IPublicModelNode,
+  IPublicModelSettingPropEntry,
+  IPublicTypeComponentMetadata,
+} from '@alilc/lowcode-types';
 
 import {
   PAGE,
@@ -11,11 +15,7 @@ import {
   PAGE_NAV,
   PAGE_ASIDE,
 } from '../names';
-import {
-  createHeaderSnippet,
-  createFooterSnippet,
-  createSectionSnippet,
-} from '../default-schema';
+import { createHeaderSnippet, createFooterSnippet, createSectionSnippet } from '../default-schema';
 import navAside from './nav-aside';
 
 const newNavAside = navAside.map((item) => {
@@ -205,9 +205,8 @@ const config: IPublicTypeComponentMetadata = {
             extraProps: {
               display: 'plain',
               getValue(target: IPublicModelSettingPropEntry) {
-                return target
-                  ?.node
-                  ?.children?.filter((n) => n.componentName === PAGE_CONTENT)
+                return target?.node?.children
+                  ?.filter((n) => n.componentName === PAGE_CONTENT)
                   .map((child: IPublicModelNode) => {
                     const title = child.getPropValue('title');
                     const primaryKey = child.getPropValue('primaryKey');
@@ -252,9 +251,8 @@ const config: IPublicTypeComponentMetadata = {
                     const items = [];
                     // 取最新 Block 作为默然值
                     const blockProps =
-                      target
-                        .node
-                        ?.children?.find((n) => n.componentName === PAGE_CONTENT)
+                      target.node?.children
+                        ?.find((n) => n.componentName === PAGE_CONTENT)
                         ?.children?.find((n) => n.componentName === SECTION)
                         ?.children?.find((n) => n.componentName === BLOCK)?.schema?.props || {};
 
@@ -606,7 +604,9 @@ const config: IPublicTypeComponentMetadata = {
                   if (node.componentName === PAGE) {
                     return false;
                   }
-                  return typeof oldCondition === 'function' ? oldCondition(node) : Boolean(oldCondition);
+                  return typeof oldCondition === 'function'
+                    ? oldCondition(node)
+                    : Boolean(oldCondition);
                 };
               },
             );

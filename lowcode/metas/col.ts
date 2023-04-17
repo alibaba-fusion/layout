@@ -1,4 +1,4 @@
-import { IPublicModelNode } from "@alilc/lowcode-types";
+import { IPublicModelNode } from '@alilc/lowcode-types';
 import { CELL, COL } from '../names';
 import { createCellSnippet, createPSnippet } from '../default-schema';
 import { getResizingHandlers } from './enhance/experimentals';
