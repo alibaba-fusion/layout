@@ -13,8 +13,13 @@ export const DEFAULT_BREAK_POINTS: BreakPoints = [
     numberOfColumns: 8,
   },
   {
-    width: Infinity,
+    width: 1200,
     maxContentWidth: 1200,
+    numberOfColumns: 12,
+  },
+  {
+    width: Infinity,
+    maxContentWidth: Infinity,
     numberOfColumns: 12,
   },
 ];
