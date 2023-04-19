@@ -1,8 +1,0 @@
-{
-  "assets": {
-    "type": "builder",
-    "builder": {
-      "name": "@ali/builder-fie4-component"
-    }
-  }
-}

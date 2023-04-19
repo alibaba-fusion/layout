@@ -1,8 +1,0 @@
-{
-  "library": "AlifdLayout",
-  "libraryTarget": "umd",
-  "plugins": ["build-plugin-component", "build-plugin-fusion"],
-  "alias": {
-    "@": "./src"
-  }
-}
