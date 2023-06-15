@@ -10,6 +10,7 @@ tmp/
 lib/
 es/
 .tmp/
+.idea/
 
 # misc
 .idea/

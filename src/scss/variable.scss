@@ -2,10 +2,10 @@
 $biz-css-prefix: '.fd-layout-';
 // 常用背景
 $backgroundTypes: 'lining', 'surface', 'transparent';
-// 最大支持列数： 16
-$maxNumberOfColumns: 16;
+// 最大支持列数： 24
+$maxNumberOfColumns: 24;
 // 列枚举
-$columnNumEnum: 1, 2, 4, 8, 12, 16;
+$columnNumEnum: 1, 2, 4, 8, 12, 16, 24;
 // 尺寸
 $sizes: 'small', 'medium', 'large';
 // 字体类型
@@ -84,7 +84,7 @@ $fontTypes: h1, h2, h3, h4, h5, h6, body1, body2, caption, overline;
    */
   --color-lining: #f0f0f0;
 
-  //=================== 大布局 ==============
+  // =================== 大布局 ==============
 
   /* page */
   /*

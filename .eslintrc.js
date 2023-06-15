@@ -1,7 +1,7 @@
 module.exports = {
   extends: [
     'eslint-config-ali/typescript/react',
-    "prettier",
+    'prettier',
     'prettier/@typescript-eslint',
     'prettier/react',
   ],
