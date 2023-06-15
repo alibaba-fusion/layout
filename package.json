@@ -32,6 +32,15 @@
     "f2elint-scan": "f2elint scan",
     "f2elint-fix": "f2elint fix"
   },
+  "lint-staged": {
+    "@src/**/*.(ts|tsx)": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.(css|scss|less)": [
+      "stylelint --fix"
+    ]
+  },
   "keywords": [
     "layout",
     "fusion",
@@ -64,6 +73,7 @@
     "build-plugin-fusion": "^0.1.0",
     "build-plugin-jsx-plus": "^0.1.4",
     "build-plugin-moment-locales": "^0.1.0",
+    "commitlint": "^17.6.5",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "f2elint": "^1.2.0",
