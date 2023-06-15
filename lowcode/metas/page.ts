@@ -16,27 +16,28 @@ import {
   PAGE_ASIDE,
 } from '../names';
 import { createHeaderSnippet, createFooterSnippet, createSectionSnippet } from '../default-schema';
-import navAside from './nav-aside';
+// import navAside from './nav-aside';
 
-const newNavAside = navAside.map((item) => {
-  const newItem = { ...item };
-  newItem.condition = (target: IPublicModelSettingPropEntry): boolean => {
-    const isTab = target.getProps().getPropValue('isTab');
-    if (['nav', 'aside'].indexOf(String(newItem.name)) > -1) {
-      return !isTab;
-    }
-    if (['navProps.width'].indexOf(String(newItem.name)) > -1) {
-      return !isTab && !!target.getProps().getPropValue('nav');
-    }
+// Tab 功能因为依赖了Fusion的Tab，只是暂时去掉，后续会重新设计
+// const newNavAside = navAside.map((item) => {
+//   const newItem = { ...item };
+//   newItem.condition = (target: IPublicModelSettingPropEntry): boolean => {
+//     const isTab = target.getProps().getPropValue('isTab');
+//     if (['nav', 'aside'].indexOf(String(newItem.name)) > -1) {
+//       return !isTab;
+//     }
+//     if (['navProps.width'].indexOf(String(newItem.name)) > -1) {
+//       return !isTab && !!target.getProps().getPropValue('nav');
+//     }
 
-    if (['asideProps.width'].indexOf(String(newItem.name)) > -1) {
-      return !isTab && !!target.getProps().getPropValue('aside');
-    }
+//     if (['asideProps.width'].indexOf(String(newItem.name)) > -1) {
+//       return !isTab && !!target.getProps().getPropValue('aside');
+//     }
 
-    return false;
-  };
-  return newItem;
-});
+//     return false;
+//   };
+//   return newItem;
+// });
 
 const config: IPublicTypeComponentMetadata = {
   componentName: PAGE,
@@ -493,20 +494,20 @@ const config: IPublicTypeComponentMetadata = {
           },
         },
       },
-      {
-        type: 'group',
-        title: {
-          label: '拓展区域',
-        },
-        extraProps: {
-          display: 'block',
-        },
-        condition: (target: IPublicModelSettingPropEntry) => {
-          return !target.getProps().getPropValue('isTab');
-        },
-        // condition: () => false,
-        items: [...newNavAside],
-      },
+      // {
+      //   type: 'group',
+      //   title: {
+      //     label: '拓展区域',
+      //   },
+      //   extraProps: {
+      //     display: 'block',
+      //   },
+      //   condition: (target: IPublicModelSettingPropEntry) => {
+      //     return !target.getProps().getPropValue('isTab');
+      //   },
+      //   // condition: () => false,
+      //   items: [...newNavAside],
+      // },
       {
         name: 'page',
         type: 'group',
