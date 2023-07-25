@@ -28,7 +28,7 @@ interface ContentProps extends BaseBgMode {
   noPadding?: boolean;
 }
 
-export interface PageProps extends PageContentProps, BaseBgMode, BaseProps {
+export interface PageProps extends PageContentProps {
   /**
    * class 前缀
    */

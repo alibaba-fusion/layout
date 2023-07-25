@@ -9,6 +9,10 @@
       padding-bottom: 0;
     }
 
+    &--no-padding {
+      padding: 0;
+    }
+
     &--dividing {
       border-bottom: var(--line-1) solid var(--page-header-divider-color);
     }

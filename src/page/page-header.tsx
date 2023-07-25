@@ -5,10 +5,12 @@ import Context from '@/common/context';
 import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
 
 export interface PageHeaderProps extends BaseProps, BaseBgMode {
-  /**
-   * 禁用底部 padding
-   */
+  // 禁用底部 padding
   noBottomPadding?: boolean;
+  // 禁用与内容之间的间隙
+  noBottomMargin?: boolean;
+  // 禁用整体 padding
+  noPadding?: boolean;
   divider?: boolean;
   fullWidth?: boolean;
   children?: ReactNode;
@@ -17,12 +19,25 @@ export interface PageHeaderProps extends BaseProps, BaseBgMode {
 export type IPageHeader = FC<PageHeaderProps> & TypeMark;
 
 const PageHeader: IPageHeader = (props: PageHeaderProps) => {
-  const { className, children, mode, noBottomPadding, divider, fullWidth, ...others } = props;
+  const {
+    className,
+    children,
+    noPadding,
+    noBottomMargin,
+    mode,
+    noBottomPadding,
+    divider,
+    fullWidth,
+    ...others
+  } = props;
   const { prefix } = useContext<LayoutContextProps>(Context);
   const clsPrefix = `${prefix}page-header`;
 
   const headerCls = classNames(className, clsPrefix, {
     [`${clsPrefix}--dividing`]: divider,
+    [`${clsPrefix}--no-bottom-padding`]: noBottomPadding,
+    [`${clsPrefix}--no-margin`]: noBottomMargin,
+    [`${clsPrefix}--no-padding`]: noPadding,
     [`${clsPrefix}--fullwidth`]: fullWidth,
     [`${prefix}bg--${mode}`]: !!mode,
   });

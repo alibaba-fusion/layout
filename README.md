@@ -180,7 +180,9 @@ interface BreakPoint {
 | 参数            | 含义                                          | 类型      | 默认值 |
 | --------------- | --------------------------------------------- | --------- | ------ |
 | mode            | 背景色 'lining' / 'surface' / 'transparent'   | Enum      | -      |
-| noBottomPadding | 隐藏默认底部内边距                            | Boolean   | -      |
+| noPadding       | 移除内边距                                    | Boolean   | false  |
+| noBottomPadding | 隐藏默认底部内边距                            | Boolean   | false  |
+| noBottomMargin  | 隐藏与内容部分的间隙(外边距)                  | Boolean   | false  |
 | divider         | 展示分割线                                    | Boolean   | -      |
 | fullWidth       | 保持全屏宽（不受断点 `maxContentWidth` 限制） | Boolean   | false  |
 | children        | 子元素                                        | ReactNode | -      |

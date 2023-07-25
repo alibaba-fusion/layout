@@ -6,7 +6,12 @@
 
   &-head {
     padding: var(--page-block-padding-tb) var(--page-block-padding-lr);
+
+    &--no-padding {
+      padding: 0;
+    }
   }
+
 
   &--headless {
     padding: var(--page-block-padding-tb) var(--page-block-padding-lr);
@@ -41,6 +46,7 @@
     #{$biz-css-prefix}block-head {
       border-bottom: var(--line-1) solid var(--color-line1-1);
     }
+
     #{$biz-css-prefix}block-content {
       padding-top: var(--page-block-padding-tb);
     }

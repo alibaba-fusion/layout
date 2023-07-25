@@ -1,6 +1,6 @@
 {
   "name": "@alifd/layout",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "基于 Fusion 设计系统的自然布局体系",
   "files": [
     "demo/",
@@ -17,7 +17,6 @@
     "email": "406400939@qq.com"
   },
   "contributors": [],
-  "stylePath": "style.js",
   "scripts": {
     "start": "build-scripts start",
     "build": "build-scripts build",

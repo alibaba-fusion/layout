@@ -66,6 +66,7 @@ const Block: ForwardRefRenderFunction<any, BlockProps> = (props, ref: ForwardedR
 
   const headCls = classNames({
     [`${clsPrefix}-head`]: true,
+    [`${clsPrefix}-head--no-padding`]: noPadding,
   });
 
   const blockContentCls = classNames(contentClassName, {

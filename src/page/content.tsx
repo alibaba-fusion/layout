@@ -16,7 +16,8 @@ import { BaseBgMode, BaseProps, LayoutContextProps, TypeMark } from '@/types';
 
 export interface PageContentProps extends BaseProps, BaseBgMode {
   children?: ReactNode;
-  minHeight?: number | string; // string 指的是 calc(100vh - 52px) 这种，而不是 30px
+  // string 指的是 calc(100vh - 52px) 这种，而不是 30px
+  minHeight?: number | string;
   noPadding?: boolean;
 }
 
