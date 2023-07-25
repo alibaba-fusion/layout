@@ -22,7 +22,7 @@ const PageFooter: IPageFooter = (props: PageFooterProps) => {
   const footerCls = classNames(className, {
     [`${clsPrefix}--dividing`]: divider,
     [`${prefix}page-footer`]: true,
-    [`${prefix}page-footer-fixed`]: fixed,
+    [`${prefix}page-footer--fixed`]: fixed,
     [`${clsPrefix}--no-top-padding`]: noTopPadding,
     [`${clsPrefix}--fullwidth`]: fullWidth,
     [`${prefix}bg--${mode}`]: !!mode,
