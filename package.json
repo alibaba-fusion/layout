@@ -96,7 +96,7 @@
     "access": "public"
   },
   "license": "MIT",
-  "homepage": "https://unpkg.com/@alifd/layout@2.1.0/build/index.html",
+  "homepage": "https://unpkg.com/@alifd/layout@2.1.1/build/index.html",
   "bugs": "https://gitlab.alibaba-inc.com/fusion-design/layout/issues",
   "repository": "https://github.com/alibaba-fusion/layout.git",
   "resolutions": {
