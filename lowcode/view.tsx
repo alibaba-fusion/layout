@@ -7,7 +7,7 @@ import { initSingletonDivider } from './common/divider';
 import { registHotKeys } from './common/hotkeys';
 import { SECTION, BLOCK, CELL } from './names';
 import { createBlockSnippet, createSectionSnippet } from './default-schema';
-import * as ProLayout from '../src';
+import * as ProLayout from '@/index';
 import './index.scss';
 import { IPublicModelNode, IPublicTypeNodeData } from '@alilc/lowcode-types';
 
