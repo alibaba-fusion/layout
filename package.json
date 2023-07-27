@@ -1,6 +1,6 @@
 {
   "name": "@alifd/layout",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "基于 Fusion 设计系统的自然布局体系",
   "files": [
     "demo/",
@@ -31,7 +31,9 @@
     "stylelint": "stylelint \"**/*.{css,scss,less}\"",
     "lint": "npm run eslint && npm run stylelint",
     "f2elint-scan": "f2elint scan",
-    "f2elint-fix": "f2elint fix"
+    "f2elint-fix": "f2elint fix",
+    "release": "standard-version && npm publish",
+    "release:beta": "standard-version --release-as minor --prerelease beta && npm publish --tag beta"
   },
   "lint-staged": {
     "@src/**/*.(ts|tsx)": [
