@@ -7,7 +7,9 @@
     "es/",
     "lib/",
     "build/",
-    "dist/"
+    "dist/",
+    "lowcode_lib/",
+    "lowcode_es/"
   ],
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -55,11 +57,12 @@
     "is-valid-array": "^1.0.1",
     "lodash-es": "^4.17.21",
     "resize-observer-polyfill": "^1.5.1",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "@babel/runtime": "^7.0.0"
   },
   "devDependencies": {
     "@alib/build-scripts": "^0.1.32",
-    "@alifd/build-plugin-lowcode": "^0.3.0",
+    "@alifd/build-plugin-lowcode": "^0.4.2",
     "@alifd/next": "1.x",
     "@alifd/theme-3": "^0.5.3",
     "@alilc/lowcode-types": "^1.1.3-beta.2",
@@ -80,7 +83,8 @@
     "moment": "^2.29.4",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
-    "react-draggable": "^4.4.4"
+    "react-draggable": "^4.4.4",
+    "standard-version": "^9.5.0"
   },
   "peerDependencies": {
     "@alifd/next": "1.x",
@@ -90,7 +94,7 @@
     "name": "Layout",
     "title": "自然布局",
     "category": "Information",
-    "materialSchema": "https://unpkg.alibaba-inc.com/@alifd/layout@2.1.0-beta.1/build/lowcode/assets-daily.json"
+    "materialSchema": "https://unpkg.alibaba-inc.com/@alifd/layout@2.1.1/build/lowcode/assets-prod.json"
   },
   "publishConfig": {
     "access": "public"
@@ -101,5 +105,23 @@
   "repository": "https://github.com/alibaba-fusion/layout.git",
   "resolutions": {
     "sass": "1.35.x"
+  },
+  "exports": {
+    "./prototype": {
+      "require": "./lowcode_lib/meta_entry.js",
+      "import": "./lowcode_es/meta_entry.js"
+    },
+    "./prototypeView": {
+      "require": "./lowcode_lib/view_entry.js",
+      "import": "./lowcode_es/view_entry.js"
+    },
+    "./*": "./*",
+    ".": {
+      "import": "./es/index.js",
+      "require": "./lib/index.js"
+    }
+  },
+  "lcMeta": {
+    "type": "component"
   }
 }
