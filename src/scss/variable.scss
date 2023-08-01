@@ -15,55 +15,55 @@ $fontTypes: h1, h2, h3, h4, h5, h6, body1, body2, caption, overline;
 :root,
 :host {
   /* 段落 & 字体 */
-  --p-h1-font-size: var(--font-size-display-3);
-  --p-h1-icon-size: var(--font-size-display-3);
-  --p-h1-font-weight: var(--font-weight-3);
-  --p-h1-line-height: var(--font-lineheight-2);
+  --p-h1-font-size: var(--font-size-display-3, 56px);
+  --p-h1-icon-size: var(--font-size-display-3, 56px);
+  --p-h1-font-weight: var(--font-weight-3, bold);
+  --p-h1-line-height: var(--font-lineheight-2, 1.7);
 
-  --p-h2-font-size: var(--font-size-display-2);
-  --p-h2-icon-size: var(--font-size-display-2);
-  --p-h2-font-weight: var(--font-weight-3);
-  --p-h2-line-height: var(--font-lineheight-2);
+  --p-h2-font-size: var(--font-size-display-2, 48px);
+  --p-h2-icon-size: var(--font-size-display-2, 48px);
+  --p-h2-font-weight: var(--font-weight-3, bold);
+  --p-h2-line-height: var(--font-lineheight-2, 1.7);
 
-  --p-h3-font-size: var(--font-size-display-1);
-  --p-h3-icon-size: var(--font-size-display-1);
-  --p-h3-font-weight: var(--font-weight-3);
-  --p-h3-line-height: var(--font-lineheight-2);
+  --p-h3-font-size: var(--font-size-display-1, 36px);
+  --p-h3-icon-size: var(--font-size-display-1, 36px);
+  --p-h3-font-weight: var(--font-weight-3, bold);
+  --p-h3-line-height: var(--font-lineheight-2, 1.7);
 
-  --p-h4-font-size: var(--font-size-headline);
-  --p-h4-icon-size: var(--font-size-headline);
-  --p-h4-font-weight: var(--font-weight-semi-bold);
-  --p-h4-line-height: var(--font-lineheight-1);
+  --p-h4-font-size: var(--font-size-headline, 24px);
+  --p-h4-icon-size: var(--font-size-headline, 24px);
+  --p-h4-font-weight: var(--font-weight-semi-bold, 600);
+  --p-h4-line-height: var(--font-lineheight-1, 1.5);
 
-  --p-h5-font-size: var(--font-size-title);
-  --p-h5-icon-size: var(--font-size-title);
-  --p-h5-font-weight: var(--font-weight-medium);
-  --p-h5-line-height: var(--font-lineheight-1);
+  --p-h5-font-size: var(--font-size-title, 20px);
+  --p-h5-icon-size: var(--font-size-title, 20px);
+  --p-h5-font-weight: var(--font-weight-medium, 500);
+  --p-h5-line-height: var(--font-lineheight-1, 1.5);
 
-  --p-h6-font-size: var(--font-size-subhead);
-  --p-h6-icon-size: var(--font-size-subhead);
-  --p-h6-font-weight: var(--font-weight-medium);
-  --p-h6-line-height: var(--font-lineheight-1);
+  --p-h6-font-size: var(--font-size-subhead, 16px);
+  --p-h6-icon-size: var(--font-size-subhead, 16px);
+  --p-h6-font-weight: var(--font-weight-medium, 500);
+  --p-h6-line-height: var(--font-lineheight-1, 1.5);
 
-  --p-body1-font-size: var(--font-size-body-2);
-  --p-body1-icon-size: var(--font-size-body-2);
-  --p-body1-font-weight: var(--font-weight-2);
-  --p-body1-line-height: var(--font-lineheight-1);
+  --p-body1-font-size: var(--font-size-body-2, 14px);
+  --p-body1-icon-size: var(--font-size-body-2, 14px);
+  --p-body1-font-weight: var(--font-weight-2, normal);
+  --p-body1-line-height: var(--font-lineheight-1, 1.5);
 
-  --p-body2-font-size: var(--font-size-body-1);
-  --p-body2-icon-size: var(--font-size-body-1);
-  --p-body2-font-weight: var(--font-weight-2);
-  --p-body2-line-height: var(--font-lineheight-1);
+  --p-body2-font-size: var(--font-size-body-1, 12px);
+  --p-body2-icon-size: var(--font-size-body-1, 12px);
+  --p-body2-font-weight: var(--font-weight-2, normal);
+  --p-body2-line-height: var(--font-lineheight-1, 1.5);
 
-  --p-caption-font-size: var(--font-size-caption);
-  --p-caption-icon-size: var(--font-size-caption);
-  --p-caption-font-weight: var(--font-weight-light);
-  --p-caption-line-height: var(--font-lineheight-1);
+  --p-caption-font-size: var(--font-size-caption, 10px);
+  --p-caption-icon-size: var(--font-size-caption, 10px);
+  --p-caption-font-weight: var(--font-weight-light, 300);
+  --p-caption-line-height: var(--font-lineheight-1, 1.5);
 
-  --p-overline-font-size: var(--font-size-caption);
-  --p-overline-icon-size: var(--font-size-caption);
-  --p-overline-font-weight: var(--font-weight-thin);
-  --p-overline-line-height: var(--font-lineheight-1);
+  --p-overline-font-size: var(--font-size-caption, 10px);
+  --p-overline-icon-size: var(--font-size-caption, 10px);
+  --p-overline-font-weight: var(--font-weight-thin, 200);
+  --p-overline-line-height: var(--font-lineheight-1, 1.5);
 
   /*
     @desc color-surface
@@ -92,13 +92,13 @@ $fontTypes: h1, h2, h3, h4, h5, h6, body1, body2, caption, overline;
     @namespace style/common
     @semantic 页面左右内边距
    */
-  --page-padding-lr: var(--s-5);
+  --page-padding-lr: var(--s-5, 20px);
   /*
     @desc padding-tb
     @namespace style/common
     @semantic 页面上下内边距
    */
-  --page-padding-tb: var(--s-5);
+  --page-padding-tb: var(--s-5, 20px);
 
   /*
     @desc header-padding-lr
@@ -124,7 +124,7 @@ $fontTypes: h1, h2, h3, h4, h5, h6, body1, body2, caption, overline;
     @namespace style/header
     @semantic header 分割线颜色
    */
-  --page-header-divider-color: var(--color-line1-2);
+  --page-header-divider-color: var(--color-line1-2, rgb(230, 235, 241));
 
   /*
     @desc footer-padding-lr
@@ -150,19 +150,19 @@ $fontTypes: h1, h2, h3, h4, h5, h6, body1, body2, caption, overline;
     @namespace size/block
     @semantic 区块圆角尺寸
    */
-  --page-block-corner: var(--corner-2);
+  --page-block-corner: var(--corner-2, 8px);
   /*
     @desc block-padding-lr
     @namespace size/block
     @semantic 区块左右内边距
    */
-  --page-block-padding-lr: var(--s-4);
+  --page-block-padding-lr: var(--s-4, 16px);
   /*
     @desc block-padding-tb
     @namespace size/block
     @semantic 区块上下内边距
    */
-  --page-block-padding-tb: var(--s-4);
+  --page-block-padding-tb: var(--s-4, 16px);
   /**
     @desc block-padding-content
     @namespace size/block
@@ -175,51 +175,51 @@ $fontTypes: h1, h2, h3, h4, h5, h6, body1, body2, caption, overline;
    @namespace style/section
    @semantic 章节标题颜色
   */
-  --page-section-title-font-color: var(--color-text1-4);
+  --page-section-title-font-color: var(--color-text1-4, rgb(17, 23, 32));
   /*
     @desc section-extra-font-color
     @namespace style/section
     @semantic 章节附加内容文本颜色
    */
-  --page-section-extra-font-color: var(--color-text1-2);
+  --page-section-extra-font-color: var(--color-text1-2, rgb(143, 154, 169));
 
   /*
     @desc block-title-font-color
     @namespace style/block
     @semantic 区块标题颜色
    */
-  --page-block-title-font-color: var(--color-text1-4);
+  --page-block-title-font-color: var(--color-text1-4, rgb(17, 23, 32));
   /*
     @desc block-extra-font-color
     @namespace style/block
     @semantic 区块附加内容文本颜色
    */
-  --page-block-extra-font-color: var(--color-text1-2);
+  --page-block-extra-font-color: var(--color-text1-2, rgb(143, 154, 169));
 
   /*
       @desc section-gap
       @namespace size/gap
       @semantic 章间隙
      */
-  --page-section-gap: var(--s-5);
+  --page-section-gap: var(--s-5, 20px);
   /*
    @desc block-gap
    @namespace size/gap
    @semantic 区块间隙
   */
-  --page-block-gap: var(--s-4);
+  --page-block-gap: var(--s-4, 16px);
   /*
    @desc block-border-width
    @namespace style/block
    @semantic 区块边框宽度
   */
-  --page-block-border-width: var(--line-1);
+  --page-block-border-width: var(--line-1, 1px);
   /*
    @desc block-border-color
    @namespace style/block
    @semantic 区块边框颜色
   */
-  --page-block-border-color: var(--color-line1-2);
+  --page-block-border-color: var(--color-line1-2, rgb(230, 235, 241));
 
   //  =================== 小布局 ==============
 
@@ -228,55 +228,55 @@ $fontTypes: h1, h2, h3, h4, h5, h6, body1, body2, caption, overline;
     @namespace size/gap
     @semantic 小布局间隙
    */
-  --page-grid-gap: var(--s-2);
+  --page-grid-gap: var(--s-2, 8px);
 
   /*
    * 段落元素的左右间距
    */
-  --page-p-small-spacing: var(--s-1);
-  --page-p-medium-spacing: var(--s-2);
-  --page-p-large-spacing: var(--s-4);
+  --page-p-small-spacing: var(--s-1, 4px);
+  --page-p-medium-spacing: var(--s-2, 8px);
+  --page-p-large-spacing: var(--s-4, 16px);
   /*
    * 段落元素的上下间距
    */
-  --page-p-el-margin: var(--s-1);
+  --page-p-el-margin: var(--s-1, 4px);
   /*
     @desc p-font-color
     @namespace style/p
     @semantic 段落默认字体色
    */
-  --page-p-font-color: var(--color-text1-4);
+  --page-p-font-color: var(--color-text1-4, rgb(17, 23, 32));
 
   /**
     预置字颜色
    */
-  --page-h1-font-color: var(--color-text1-4);
-  --page-h2-font-color: var(--color-text1-4);
-  --page-h3-font-color: var(--color-text1-4);
-  --page-h4-font-color: var(--color-text1-4);
-  --page-h5-font-color: var(--color-text1-4);
-  --page-h6-font-color: var(--color-text1-4);
-  --page-body1-font-color: var(--color-text1-4);
-  --page-body2-font-color: var(--color-text1-3);
-  --page-caption-font-color: var(--color-text1-3);
-  --page-overline-font-color: var(--color-text1-3);
+  --page-h1-font-color: var(--color-text1-4, rgb(17, 23, 32));
+  --page-h2-font-color: var(--color-text1-4, rgb(17, 23, 32));
+  --page-h3-font-color: var(--color-text1-4, rgb(17, 23, 32));
+  --page-h4-font-color: var(--color-text1-4, rgb(17, 23, 32));
+  --page-h5-font-color: var(--color-text1-4, rgb(17, 23, 32));
+  --page-h6-font-color: var(--color-text1-4, rgb(17, 23, 32));
+  --page-body1-font-color: var(--color-text1-4, rgb(17, 23, 32));
+  --page-body2-font-color: var(--color-text1-3, rgb(62, 73, 92));
+  --page-caption-font-color: var(--color-text1-3, rgb(62, 73, 92));
+  --page-overline-font-color: var(--color-text1-3, rgb(62, 73, 92));
 
   /*
     @desc small-space-size
     @namespace size/space
     @semantic 默认小号间距尺寸
   */
-  --page-space-small-size: var(--s-2);
+  --page-space-small-size: var(--s-2, 8px);
   /*
     @desc medium-space-size
     @namespace size/space
     @semantic 默认中号间距尺寸
   */
-  --page-space-medium-size: var(--s-4);
+  --page-space-medium-size: var(--s-4, 16px);
   /*
     @desc large-space-size
     @namespace size/space
     @semantic 默认大号间距尺寸
   */
-  --page-space-large-size: var(--s-6);
+  --page-space-large-size: var(--s-6, 24px);
 }
