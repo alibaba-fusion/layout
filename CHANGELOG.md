@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/alibaba-fusion/layout/compare/v2.2.4...v2.3.0) (2023-08-01)
+
+
+### Features
+
+* 补齐css 变量默认值 ([75ccc12](https://github.com/alibaba-fusion/layout/commit/75ccc129c6a5db8684a6ee9e69ba572225df0575))
+
 ### [2.2.4](https://github.com/alibaba-fusion/layout/compare/v2.2.3...v2.2.4) (2023-07-28)
 
 ### [2.2.3](https://github.com/alibaba-fusion/layout/compare/v2.2.2...v2.2.3) (2023-07-28)
