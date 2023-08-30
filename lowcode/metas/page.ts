@@ -41,7 +41,7 @@ import { createHeaderSnippet, createFooterSnippet, createSectionSnippet } from '
 
 const config: IPublicTypeComponentMetadata = {
   componentName: PAGE,
-  title: '页面',
+  title: '自然布局',
   category: '布局容器类',
   group: '精选组件',
   icon: 'https://img.alicdn.com/imgextra/i1/O1CN01Yzdr431hx8rjT6PuR_!!6000000004343-55-tps-128-128.svg',
@@ -87,7 +87,7 @@ const config: IPublicTypeComponentMetadata = {
     component: {
       isContainer: true,
       isMinimalRenderUnit: true,
-      disableBehaviors: '*',
+      // disableBehaviors: '*',
       nestingRule: {
         parentWhitelist: (dropTargetNode: IPublicModelNode) => {
           let targetNodeNextPageNum = 0;
@@ -635,7 +635,7 @@ const config: IPublicTypeComponentMetadata = {
         'https://img.alicdn.com/imgextra/i4/O1CN01NkB89W1dav8vtrAoc_!!6000000003753-55-tps-56-56.svg',
       schema: {
         componentName: PAGE,
-        title: '页面',
+        title: '自然布局',
         props: {},
         children: [
           {
