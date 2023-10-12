@@ -371,8 +371,8 @@ const FixedContainerView = (props: IFixedContainerViewProps) => {
   const { _leaf, children, items = [], ...others } = props;
 
   // hack engine for mousedown
-  if (_leaf.parent) {
-    _leaf.parent.isRGLContainer = true;
+  if (_leaf?.parent) {
+    _leaf.parent.isRGLContainerNode = true;
   }
 
   // const enableMouseEventPropagationInCanvas = useRef();
@@ -389,7 +389,7 @@ const FixedContainerView = (props: IFixedContainerViewProps) => {
     movehook.current =
       _leaf?.componentMeta?.getMetadata().configure.advanced?.callbacks?.onMoveHook;
     // TODO: 不一定能设置上
-    if (_leaf.componentMeta?.getMetadata()?.configure.advanced?.callbacks?.onMoveHook) {
+    if (_leaf?.componentMeta?.getMetadata()?.configure.advanced?.callbacks?.onMoveHook) {
       _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook = () => false;
     }
     setDraging(true);
@@ -397,14 +397,14 @@ const FixedContainerView = (props: IFixedContainerViewProps) => {
   const onDragEnd = (uiData: DraggableData, idx: number) => {
     // window.parent.AliLowCodeEngine.editorCabin.engineConfig.config.enableMouseEventPropagationInCanvas = enableMouseEventPropagationInCanvas.current;
     // // TODO: 不一定能设置上
-    if (_leaf.componentMeta?.getMetadata()?.configure.advanced?.callbacks?.onMoveHook) {
+    if (_leaf?.componentMeta?.getMetadata()?.configure.advanced?.callbacks?.onMoveHook) {
       _leaf.componentMeta.getMetadata().configure.advanced!.callbacks!.onMoveHook =
         movehook.current;
     }
 
     // 有节点增加
-    const newItems = [..._leaf.schema.children].map((child, index) => {
-      const item = items.find((i) => i.primaryKey === child.id) || {
+    const newItems = (_leaf?.schema.children ? Array.isArray(_leaf?.schema.children) ? _leaf?.schema.children : [_leaf?.schema.children] : []).map((child, index) => {
+      const item = items.find((i: any) => i.primaryKey === child.id) || {
         primaryKey: child.id,
         top: 0,
         left: 0,
@@ -419,7 +419,7 @@ const FixedContainerView = (props: IFixedContainerViewProps) => {
       return item;
     });
 
-    _leaf.setPropValue('items', newItems);
+    _leaf?.setPropValue('items', newItems);
     setDraging(false);
   };
 

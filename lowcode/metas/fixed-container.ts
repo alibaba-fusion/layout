@@ -69,6 +69,7 @@ const config: IPublicTypeComponentMetadata = {
       style: true,
       loop: false,
     },
+    advanced: {}
   },
   icon: 'https://alifd.oss-cn-hangzhou.aliyuncs.com/fusion-cool/icons/icon-light/ic_light_table.png',
   snippets: [],

@@ -164,6 +164,7 @@ export interface CellProps extends BaseProps {
    * 孩子节点
    */
   children?: ReactNode;
+  [prop: string]: any;
 }
 
 /**

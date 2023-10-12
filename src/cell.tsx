@@ -33,6 +33,9 @@ const Cell: ForwardRefRenderFunction<HTMLDivElement, CellProps> = (props, ref) =
     // 父级元素处理 autoFit 的相关布局
     autoFit,
     gap,
+    __designMode,
+    componentId,
+    _componentName,
     ...others
   } = props;
   const { prefix } = useContext<LayoutContextProps>(Context);

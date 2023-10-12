@@ -34,6 +34,7 @@ const config: IPublicTypeComponentMetadata = {
       style: true,
       loop: false,
     },
+    advanced: {}
   },
   experimental: {
     callbacks: {},
